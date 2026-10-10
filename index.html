@@ -746,7 +746,7 @@ const ADMIN_EMAIL = "kauue.neves@gmail.com";           // admin master
 const SIM_URL = "https://kauesn.github.io/boitel-analytics-pro/";
 const PLANS = {
   mensal:      { label: 'Stratum Acess (mensal)', link: 'https://buy.stripe.com/test_14A4gy69P3kO9dqd7hcbC00', dias: 30 },
-  anual:       { label: 'Stratum Pro (anual)',    link: '' /* preencher no admin quando criar o link */, dias: 365 },
+  anual:       { label: 'Stratum Pro (anual)',    link: 'https://buy.stripe.com/test_5kQcN4dCh7B4dtGd7hcbC01', dias: 365 },
   consultoria: { label: 'Consultoria Asset',      link: '' } /* contato */
 };
 
@@ -761,7 +761,7 @@ try {
 } catch (e) { console.warn('Firebase indisponível — modo demonstração.', e); }
 
 let currentUserData = null;
-let siteConfig = { pagamentoHabilitado: true, linkMensal: PLANS.mensal.link, linkAnual: '' };
+let siteConfig = { pagamentoHabilitado: true, linkMensal: PLANS.mensal.link, linkAnual: PLANS.anual.link };
 const CONTENT_DEFAULTS = { recursosTitulo: '', recursosSub: '', precoMensal: '9,99', precoAnual: '99,90' };
 let siteContent = { ...CONTENT_DEFAULTS };
 
