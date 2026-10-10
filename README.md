@@ -4,24 +4,23 @@ Planejamento e Controle Estratégico Agro
 
 ## 🚀 Como Configurar
 
-### 1. Criar Repositório no GitHub
+### 1. Criar Repositório no GitHub (IMPORTANTE!)
 
 1. Acesse: https://github.com/new
 2. Nome do repositório: `stratum-agro`
 3. Descrição: `Planejamento e Controle Estratégico Agro`
 4. Public/Private: Public (para GitHub Pages gratuito)
-5. Clique em "Create repository"
+5. ⚠️ NÃO marque: "Add a README file"
+6. ⚠️ NÃO marque: "Add .gitignore"
+7. ⚠️ NÃO marque: "Choose a license"
+8. Clique em "Create repository"
 
-### 2. Inicializar Git Local
+### 2. Conectar com GitHub
 
-Execute na pasta `D:\Devin projetos\stratum-agro`:
+Depois de criar o repositório, execute na pasta `D:\Devin projetos\stratum-agro`:
 
 ```bash
-git init
-git add .
-git commit -m "Commit inicial - Stratum Agro"
-git branch -M main
-git remote add origin https://github.com/KaueSn/stratum-agro.git
+git remote set-url origin https://github.com/KaueSn/stratum-agro.git
 git push -u origin main
 ```
 
