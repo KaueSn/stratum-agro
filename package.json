@@ -1,0 +1,10 @@
+{
+  "name": "stratum-agro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Stratum Agro — site de vendas + API de assinaturas (Stripe).",
+  "dependencies": {
+    "stripe": "^16.9.0"
+  }
+}

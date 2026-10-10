@@ -705,9 +705,10 @@
           <div class="stat"><div class="l">Válido até</div><div class="v" id="statValidade">—</div></div>
         </div>
         <div class="cta-row">
-          <a class="btn btn-primary btn-lg" href="https://kauesn.github.io/boitel-analytics-pro/" target="_blank" rel="noopener">Abrir o Simulador →</a>
+          <a class="btn btn-primary btn-lg" id="btnSim" href="https://kauesn.github.io/boitel-analytics-pro/" target="_blank" rel="noopener">Abrir o Simulador →</a>
           <button class="btn btn-outline btn-lg" onclick="goPanel('assinatura')">Gerenciar assinatura</button>
         </div>
+        <p class="hint" id="simLockMsg" style="display:none;color:#fcd34d">🔒 O simulador é liberado com uma assinatura ativa. Escolha um plano na aba <b>Assinatura</b>.</p>
         <p class="hint">O simulador abre em uma aba dedicada com todos os indicadores, gráficos e relatórios.</p>
       </section>
 
@@ -733,8 +734,9 @@
         <div class="cta-row">
           <button class="btn btn-primary btn-lg" data-plan="mensal">Assinar / renovar — R$ 9,99/mês</button>
           <button class="btn btn-outline btn-lg" data-plan="anual">Plano Pro anual</button>
+          <button class="btn btn-outline btn-lg" onclick="manageSubscription()">Gerenciar / cancelar</button>
         </div>
-        <p class="hint" id="assinaturaHint">Após o pagamento, sua assinatura é ativada automaticamente.</p>
+        <p class="hint" id="assinaturaHint">Após o pagamento, a assinatura é confirmada automaticamente pelo Stripe.</p>
       </section>
 
       <!-- ADMIN MASTER -->
@@ -834,8 +836,10 @@ const firebaseConfig = {
   messagingSenderId: "644965055666",
   appId: "1:644965055666:web:4a4712f99a178d7eda5dab"
 };
-const ADMIN_EMAIL = "kauue.neves@gmail.com";           // admin master
+const ADMIN_EMAIL = "kauue.neves@gmail.com";   // admin master
 const SIM_URL = "https://kauesn.github.io/boitel-analytics-pro/";
+const API_BASE = "";   // URL da API (Vercel). Ex.: "https://stratum-agro.vercel.app"
+const RETORNO = new URLSearchParams(location.search).get('assinatura');   // sucesso | cancelada | null
 const PLANS = {
   mensal:      { label: 'Stratum Acess (mensal)', link: 'https://buy.stripe.com/test_14A4gy69P3kO9dqd7hcbC00', dias: 30 },
   anual:       { label: 'Stratum Pro (anual)',    link: 'https://buy.stripe.com/test_5kQcN4dCh7B4dtGd7hcbC01', dias: 365 },
@@ -1050,6 +1054,10 @@ function showApp(){
   renderIdentity();
   goPanel('inicio');
   loadSiteConfig(); loadSiteContent();
+  applyAccess();
+  if (RETORNO === 'sucesso'){ toast('Pagamento aprovado! Confirmando sua assinatura…', 'ok'); history.replaceState({}, '', location.pathname); }
+  else if (RETORNO === 'cancelada'){ toast('Pagamento cancelado.', 'err'); history.replaceState({}, '', location.pathname); }
+  refreshSubscription();
 }
 function renderIdentity(){
   const d = currentUserData || {};
@@ -1153,7 +1161,7 @@ $('btnSalvarPerfil').addEventListener('click', async function(){
    ASSINATURA / PAGAMENTO (Stripe Payment Link)
    ============================================================ */
 document.querySelectorAll('[data-plan]').forEach(btn => btn.addEventListener('click', () => assinar(btn)));
-function assinar(btn){
+async function assinar(btn){
   if (siteConfig.pagamentoHabilitado === false) return toast('Pagamentos desabilitados pelo administrador.', 'err');
   const plan = btn.getAttribute('data-plan');
   if (plan === 'consultoria'){
@@ -1162,26 +1170,88 @@ function assinar(btn){
     window.location.href = to; return;
   }
   if (!currentUserData){ toast('Faça login para assinar.', 'err'); return openAuth('login'); }
+
+  // 1) Caminho seguro: API (Stripe Checkout criado no servidor)
+  if (API_BASE){
+    setLoading(btn, true, 'Abrindo…');
+    try {
+      const r = await fetch(API_BASE.replace(/\/$/, '') + '/api/create-checkout', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan, email: currentUserData.email || '', uid: (auth && auth.currentUser && auth.currentUser.uid) || '', idToken: await getIdToken() })
+      });
+      const data = await r.json();
+      if (data && data.url){ window.location.href = data.url; return; }
+      toast((data && data.error) || 'Não foi possível abrir o pagamento.', 'err');
+    } catch(e){
+      toast('Falha ao contatar o servidor de pagamento. Tentando link direto…', 'err');
+    } finally { setLoading(btn, false); }
+  }
+
+  // 2) Fallback: Payment Link (quando a API ainda não está configurada)
   let link = plan === 'anual' ? (siteConfig.linkAnual || PLANS.anual.link) : (siteConfig.linkMensal || PLANS.mensal.link);
   if (!link) return toast('Este plano ainda não está disponível. Fale com o suporte.', 'err');
   if (auth && auth.currentUser && auth.currentUser.email) link += (link.includes('?') ? '&' : '?') + 'prefilled_email=' + encodeURIComponent(auth.currentUser.email);
   window.open(link, '_blank');
   toast('Abrindo o pagamento seguro…', 'ok');
 }
-// Retorno do Stripe (?assinatura=sucesso)
-(function checkReturn(){
-  const p = new URLSearchParams(location.search);
-  if (p.get('assinatura') === 'sucesso'){
-    toast('Pagamento recebido! Sua assinatura será confirmada.', 'ok');
-    setTimeout(() => { if (currentUserData) activateLocalSubscription(30); }, 1500);
-    history.replaceState({}, '', location.pathname);
+
+/* ============================================================
+   VERIFICAÇÃO DE ASSINATURA (servidor) + ACESSO
+   ============================================================ */
+async function getIdToken(){ try { return (auth && auth.currentUser) ? await auth.currentUser.getIdToken() : null; } catch(e){ return null; } }
+
+async function refreshSubscription(){
+  if (!currentUserData) return;
+  if (API_BASE && currentUserData.email){
+    try {
+      const r = await fetch(API_BASE.replace(/\/$/, '') + '/api/subscription', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: currentUserData.email, idToken: await getIdToken() })
+      });
+      const info = await r.json();
+      if (info && !info.error){
+        currentUserData.stripe = info;
+        if (info.active){
+          currentUserData.subscription = 'premium';
+          if (info.currentPeriodEnd) currentUserData.subscriptionEnd = info.currentPeriodEnd;
+        }
+      }
+    } catch(e){ /* mantém os dados locais */ }
   }
-})();
-async function activateLocalSubscription(dias){
-  const end = new Date(Date.now() + dias*86400000).toISOString();
-  currentUserData.subscription = 'premium'; currentUserData.subscriptionEnd = end;
-  if (db && auth && auth.currentUser){ try { await db.collection('users').doc(auth.currentUser.uid).update({ subscription:'premium', subscriptionEnd:end, updatedAt:new Date().toISOString() }); } catch(e){} }
-  renderIdentity();
+  renderIdentity(); applyAccess();
+}
+
+function isActiveSubscriber(){
+  const d = currentUserData || {};
+  if (isAdminMaster(d)) return true;
+  if (d.stripe && d.stripe.active) return true;
+  if (d.subscription === 'premium'){
+    const end = d.subscriptionEnd ? new Date(d.subscriptionEnd).getTime() : null;
+    return !end || end > Date.now();
+  }
+  return false;
+}
+
+function applyAccess(){
+  const active = isActiveSubscriber();
+  const btn = $('btnSim'), msg = $('simLockMsg');
+  if (btn){ btn.style.pointerEvents = active ? '' : 'none'; btn.style.opacity = active ? '' : '.45'; }
+  if (msg) msg.style.display = active ? 'none' : '';
+  const st = $('subStatus'); if (st && currentUserData) st.textContent = active ? 'Ativo' : 'Inativo';
+}
+
+async function manageSubscription(){
+  if (!currentUserData) return openAuth('login');
+  if (!API_BASE) return toast('Portal de cobrança indisponível (API não configurada).', 'err');
+  try {
+    const r = await fetch(API_BASE.replace(/\/$/, '') + '/api/portal', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: currentUserData.email })
+    });
+    const data = await r.json();
+    if (data && data.url){ window.location.href = data.url; return; }
+    toast((data && data.hint) || 'Não foi possível abrir o portal de cobrança.', 'err');
+  } catch(e){ toast('Falha ao abrir o portal de cobrança.', 'err'); }
 }
 
 /* ============================================================

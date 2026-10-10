@@ -1,0 +1,56 @@
+rules_version = '2';
+
+// =====================================================================
+// Stratum Agro — Regras de segurança do Firestore
+// Cole em: Firebase Console → Firestore Database → Regras → Publicar
+// =====================================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn()   { return request.auth != null; }
+    function email()      { return signedIn() ? request.auth.token.email : ''; }
+    function isMaster()   { return signedIn() && email() == 'kauue.neves@gmail.com'; }
+    function myData()     { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
+    function isAdmin()    { return isMaster() || (signedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && myData().role == 'admin'); }
+    function isDev()      { return signedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && myData().role == 'dev'; }
+
+    // Perfis de usuário
+    match /users/{uid} {
+      // Cada um lê o próprio perfil; admins leem todos
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+
+      // Criação do próprio documento. Cargo só pode nascer 'user'
+      // (ou 'admin' se for o admin master). Assinatura sempre nasce 'trial'.
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.role == (isMaster() ? 'admin' : 'user')
+        && request.resource.data.subscription == 'trial';
+
+      // O dono pode editar apenas dados do perfil (nome, telefone, etc.).
+      // NÃO pode mudar cargo nem assinatura. Admin pode tudo.
+      allow update: if isAdmin() || (
+        signedIn() && request.auth.uid == uid
+        && request.resource.data.role == resource.data.role
+        && request.resource.data.subscription == resource.data.subscription
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // Configurações públicas da plataforma (ex.: habilitar pagamentos)
+    match /config/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Conteúdo editável do site (via painel do dev/admin)
+    match /site/{doc} {
+      allow read: if true;
+      allow write: if isAdmin() || isDev();
+    }
+
+    // Qualquer outro caminho: bloqueado
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
