@@ -652,6 +652,92 @@
     .mat-quiz-res{padding:14px 15px}
     .mat-quiz-refazer{width:100%;justify-content:center}
   }
+  /* ---------- EDITOR DO SITE ---------- */
+  #editorOverlay{position:fixed;inset:0;z-index:150;display:none;background:rgba(5,8,14,.96);
+    backdrop-filter:blur(10px);overflow-y:auto}
+  #editorOverlay.active{display:block;animation:fadeIn .25s ease}
+  .ed-shell{max-width:1080px;margin:0 auto;padding:26px 22px 90px}
+  .ed-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(99,102,241,.10));
+    border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:16px}
+  .ed-head-l{display:flex;align-items:center;gap:13px}
+  .ed-head-ico{width:46px;height:46px;flex:0 0 auto;border-radius:13px;display:flex;align-items:center;justify-content:center;
+    background:var(--grad);color:#04140f;box-shadow:0 8px 18px -8px rgba(16,185,129,.7)}
+  .ed-head-ico svg.ic{width:24px;height:24px}
+  .ed-head h2{font-size:1.25rem;font-weight:800}
+  .ed-head p{color:var(--muted);font-size:.83rem;margin-top:3px}
+  .ed-head-r{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .ed-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 15px;border-radius:11px;font-weight:600;
+    font-size:.85rem;border:1px solid var(--border);background:var(--card);color:var(--text);transition:var(--smooth)}
+  .ed-btn svg.ic{width:16px;height:16px}
+  .ed-btn:hover{border-color:var(--border-2)}
+  .ed-btn.primary{background:var(--grad);border-color:transparent;color:#04140f}
+  .ed-btn.danger{border-color:rgba(239,68,68,.45);color:#fca5a5}
+  .ed-btn.danger:hover{background:rgba(239,68,68,.15)}
+  .ed-btn.ghost{background:transparent}
+  .ed-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .ed-tab{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:11px;font-size:.86rem;
+    font-weight:600;background:var(--card);border:1px solid var(--border);color:var(--muted);transition:var(--smooth)}
+  .ed-tab svg.ic{width:17px;height:17px}
+  .ed-tab.active{background:var(--grad);border-color:transparent;color:#04140f}
+  .ed-pane{display:none}
+  .ed-pane.active{display:block;animation:fadeIn .2s ease}
+  .ed-note{display:flex;gap:10px;align-items:flex-start;background:rgba(16,185,129,.08);
+    border:1px solid rgba(16,185,129,.28);border-radius:12px;padding:13px 15px;font-size:.84rem;
+    color:var(--muted);line-height:1.6;margin-bottom:16px}
+  .ed-note svg.ic{width:17px;height:17px;color:var(--primary-2);flex:0 0 auto;margin-top:2px}
+  .ed-note b{color:var(--text)}
+  .ed-note.warn{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3)}
+  .ed-note.warn svg.ic{color:var(--warn)}
+  .ed-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .ed-list{display:flex;flex-direction:column;gap:10px}
+  .ed-item{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--card);
+    border:1px solid var(--border);border-radius:12px;padding:12px 14px}
+  .ed-item-info{flex:0 0 auto;min-width:150px}
+  .ed-item-info strong{display:block;font-size:.82rem;color:var(--primary-2);text-transform:uppercase;letter-spacing:.06em}
+  .ed-item-info span{display:block;font-size:.72rem;color:var(--muted-2);word-break:break-all;max-width:280px}
+  .ed-item-acts{display:flex;gap:6px;flex-wrap:wrap}
+  .ed-input{flex:1 1 220px;min-width:180px;background:var(--card-2);border:1px solid var(--border);
+    border-radius:9px;padding:9px 12px;color:var(--text);font-size:.87rem}
+  .ed-input:focus{outline:none;border-color:var(--primary)}
+  .ed-mini{padding:7px 11px;border-radius:8px;font-size:.78rem;font-weight:600;background:var(--card-2);
+    border:1px solid var(--border);color:var(--muted);transition:var(--smooth)}
+  .ed-mini:hover{color:var(--text);border-color:var(--border-2)}
+  .ed-mini:disabled{opacity:.35;cursor:not-allowed}
+  .ed-mini.danger{border-color:rgba(239,68,68,.45);color:#fca5a5}
+  .ed-empty{text-align:center;padding:34px 18px;color:var(--muted);border:1px dashed var(--border);border-radius:12px}
+  .ed-colors{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
+  .ed-color{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);
+    border-radius:12px;padding:11px 13px}
+  .ed-color input[type=color]{width:42px;height:42px;flex:0 0 auto;border:1px solid var(--border);
+    border-radius:10px;background:none;padding:2px;cursor:pointer}
+  .ed-color-info{flex:1;min-width:0}
+  .ed-color-info strong{display:block;font-size:.86rem}
+  .ed-color-info span{font-size:.72rem;color:var(--muted-2)}
+  .ed-block{margin-bottom:16px}
+  .ed-block-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:7px}
+  .ed-block-head label{font-size:.85rem;font-weight:700}
+  .ed-hint{font-size:.74rem;color:var(--muted-2)}
+  .ed-code{width:100%;background:var(--card);border:1px solid var(--border);border-radius:11px;
+    padding:12px 13px;color:var(--text);font-size:.82rem;line-height:1.55;
+    font-family:'JetBrains Mono',ui-monospace,Consolas,monospace;resize:vertical}
+  .ed-code:focus{outline:none;border-color:var(--primary)}
+  body.ed-picking #publicSite{cursor:crosshair}
+  body.ed-picking #publicSite a,body.ed-picking #publicSite button{pointer-events:none}
+  #edPickHint{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:200;
+    background:var(--grad);color:#04140f;font-size:.85rem;font-weight:700;padding:12px 20px;border-radius:999px;
+    box-shadow:var(--shadow);max-width:92vw;text-align:center}
+
+  @media(max-width:760px){
+    .ed-shell{padding:16px 14px 80px}
+    .ed-head{padding:15px 16px}
+    .ed-head h2{font-size:1.05rem}
+    .ed-head-r{width:100%}
+    .ed-head-r .ed-btn{flex:1 1 auto;justify-content:center}
+    .ed-item-info{min-width:0;flex:1 1 100%}
+    .ed-input{flex:1 1 100%}
+    .ed-colors{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
@@ -697,6 +783,7 @@
   <symbol id="i-money" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="3"/></symbol>
   <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3 6 0 11-5 11-13 0-.4.2-.8.5-1 .4-.2.7 0 1 .3.5-.1 1.2-.3 3-2.3z"/></symbol>
   <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.5h6V4"/><path d="M9 10h6M9 14h6M9 18h4"/></symbol>
+  <symbol id="i-brush" viewBox="0 0 24 24"><path d="M4 20c0-2 1.2-3 2.8-3.2"/><path d="M6.8 16.8l9.4-9.4a2.3 2.3 0 0 1 3.3 3.3l-9.4 9.4a3.4 3.4 0 0 1-2.5 1c-1.6 0-2.9-.5-3.6-1.2.9-.3 1.4-1 1.4-2z"/></symbol>
 </svg>
 
 <!-- ================= NAV ================= -->
@@ -724,6 +811,8 @@
 
 <!-- ================= HERO ================= -->
 <main id="publicSite">
+<!-- Área livre para HTML personalizado (topo) — preenchida pelo Editor do site -->
+<div id="slot-top"></div>
 <section class="hero" id="inicio">
   <div class="wrap hero-grid">
     <div>
@@ -832,7 +921,7 @@
 </section>
 
 <!-- ================= GARANTIA ================= -->
-<section class="block" style="padding-top:0">
+<section class="block" id="garantia" style="padding-top:0">
   <div class="wrap">
     <div class="band reveal">
       <div class="big"><svg class="ic"><use href="#i-shield"></use></svg></div>
@@ -968,7 +1057,7 @@
 </section>
 
 <!-- ================= CTA FINAL ================= -->
-<section class="block" style="padding-bottom:0">
+<section class="block" id="cta-final" style="padding-bottom:0">
   <div class="wrap">
     <div class="cta-band reveal">
       <h2>Pronto para decidir como um profissional?</h2>
@@ -981,8 +1070,11 @@
   </div>
 </section>
 
+<!-- Área livre para HTML personalizado (antes do rodapé) — preenchida pelo Editor do site -->
+<div id="slot-bottom"></div>
+
 <!-- ================= FOOTER ================= -->
-<footer>
+<footer id="rodape">
   <div class="wrap">
     <div class="foot-grid">
       <div>
@@ -1014,7 +1106,9 @@
     <aside class="app-side">
       <div class="app-user">
         <div class="avatar" id="appAvatar">U</div>
-        <div><div class="n" id="appName">Usuário</div><div class="e" id="appEmail">—</div></div>
+        <div><div class="n" id="appName">Usuário</div><div class="e" id="appEmail">—</div>
+          <span class="badge g" id="appRoleBadge" style="display:none;margin-top:5px">admin master</span>
+        </div>
       </div>
       <nav class="app-nav">
         <button class="active" data-panel="inicio"><svg class="ic"><use href="#i-home"></use></svg> Início</button>
@@ -1094,19 +1188,133 @@
             <tbody id="admBody"><tr><td colspan="6" style="text-align:center;padding:26px">Carregando usuários…</td></tr></tbody>
           </table>
         </div>
+        <p class="hint">E-mail do admin master: <b id="admMasterEmail">—</b> · o acesso de admin master é concedido por esse e-mail e também pelo cargo no Firestore.</p>
         <p class="hint">Cargos: <span class="badge m">user</span> cliente · <span class="badge b">dev</span> pode editar o site · <span class="badge g">admin</span> admin master.</p>
       </section>
 
       <!-- DEV / EDITOR -->
       <section class="panel" id="panel-dev">
         <h3><svg class="ic"><use href="#i-puzzle"></use></svg> Editor do site</h3>
-        <p class="sub">Edite os textos da página inicial. As mudanças aparecem para todos os visitantes.</p>
-        <div class="field"><label>Título da seção Recursos</label><input id="ctRecTitulo"></div>
-        <div class="field"><label>Subtítulo da seção Recursos</label><input id="ctRecSub"></div>
-        <div class="field"><label>Preço do plano mensal (exibição)</label><input id="ctPrecoMensal" placeholder="9,99"></div>
-        <div class="field"><label>Preço do plano anual (exibição)</label><input id="ctPrecoAnual" placeholder="99,90"></div>
-        <button class="btn btn-primary" id="btnSalvarConteudo">Salvar alterações</button>
-        <p class="hint">Somente usuários com cargo <span class="badge b">dev</span> ou <span class="badge g">admin</span> podem editar.</p>
+        <p class="sub">Área exclusiva do admin master e dos devs. Edite textos, cores, a ordem das seções e adicione código — tudo aparece para todos os visitantes depois de publicar.</p>
+        <div class="stat-row">
+          <div class="stat"><div class="l">Seu cargo</div><div class="v" id="edCargoAtual">—</div></div>
+          <div class="stat"><div class="l">Textos alterados</div><div class="v" id="edQtdTextos">0</div></div>
+          <div class="stat"><div class="l">Última publicação</div><div class="v" id="edUltima">—</div></div>
+        </div>
+        <div class="cta-row">
+          <button class="btn btn-primary btn-lg" onclick="abrirEditor()">Abrir o editor</button>
+          <button class="btn btn-outline btn-lg" onclick="showPublic()">Ver o site</button>
+        </div>
+        <p class="hint">Cargos com acesso: <span class="badge g">admin master</span> e <span class="badge b">dev</span>.</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ================= EDITOR DO SITE (exclusivo admin master / dev) ================= -->
+<div id="editorOverlay">
+  <div class="ed-shell">
+    <header class="ed-head">
+      <div class="ed-head-l">
+        <span class="ed-head-ico"><svg class="ic"><use href="#i-puzzle"></use></svg></span>
+        <div>
+          <h2>Editor do site</h2>
+          <p id="edHeadSub">Altere textos, cores, ordem das seções e adicione código.</p>
+        </div>
+      </div>
+      <div class="ed-head-r">
+        <span class="badge g" id="edBadge">admin master</span>
+        <button class="ed-btn ghost" onclick="edDesfazerTudo()">Desfazer alterações</button>
+        <button class="ed-btn primary" id="edSalvar" onclick="edSalvar()">Publicar</button>
+        <button class="ed-btn danger" onclick="fecharEditor()"><svg class="ic"><use href="#i-close"></use></svg> Fechar</button>
+      </div>
+    </header>
+
+    <nav class="ed-tabs">
+      <button class="ed-tab active" data-ed="textos" onclick="edAba('textos')"><svg class="ic"><use href="#i-doc"></use></svg> Textos</button>
+      <button class="ed-tab" data-ed="cores" onclick="edAba('cores')"><svg class="ic"><use href="#i-brush"></use></svg> Cores</button>
+      <button class="ed-tab" data-ed="secoes" onclick="edAba('secoes')"><svg class="ic"><use href="#i-level"></use></svg> Seções</button>
+      <button class="ed-tab" data-ed="codigo" onclick="edAba('codigo')"><svg class="ic"><use href="#i-cpu"></use></svg> Código</button>
+      <button class="ed-tab" data-ed="backup" onclick="edAba('backup')"><svg class="ic"><use href="#i-shield"></use></svg> Backup</button>
+    </nav>
+
+    <div class="ed-body">
+      <section class="ed-pane active" data-edp="textos">
+        <div class="ed-note">
+          <svg class="ic"><use href="#i-bulb"></use></svg>
+          <div>Clique em <b>Selecionar na página</b>, depois clique no texto que quer mudar. Funciona em qualquer texto visível do site — o próprio editor guarda a referência.</div>
+        </div>
+        <div class="ed-row">
+          <button class="ed-btn primary" id="edBtnPick" onclick="edIniciarPick()"><svg class="ic"><use href="#i-search"></use></svg> Selecionar na página</button>
+          <button class="ed-btn ghost" onclick="edLimparTextos()">Remover todas as edições de texto</button>
+        </div>
+        <div id="edTextosLista" class="ed-list"></div>
+      </section>
+
+      <section class="ed-pane" data-edp="cores">
+        <div class="ed-note">
+          <svg class="ic"><use href="#i-brush"></use></svg>
+          <div>Ajuste a paleta do site. O <b>gradiente</b> usado em botões e destaques é gerado automaticamente a partir das cores principal e secundária.</div>
+        </div>
+        <div class="ed-row" id="edPresets">
+          <button class="ed-btn ghost" onclick="edPreset('atual')">Verde atual</button>
+          <button class="ed-btn ghost" onclick="edPreset('oceano')">Oceano</button>
+          <button class="ed-btn ghost" onclick="edPreset('dourado')">Dourado</button>
+          <button class="ed-btn ghost" onclick="edPreset('grafite')">Grafite</button>
+          <button class="ed-btn ghost" onclick="edPreset('roxo')">Roxo</button>
+        </div>
+        <div id="edCoresGrid" class="ed-colors"></div>
+      </section>
+
+      <section class="ed-pane" data-edp="secoes">
+        <div class="ed-note">
+          <svg class="ic"><use href="#i-level"></use></svg>
+          <div>Use as setas para mudar a ordem das seções na página. O olho mostra ou esconde uma seção (sem apagar o conteúdo).</div>
+        </div>
+        <div id="edSecoesLista" class="ed-list"></div>
+      </section>
+
+      <section class="ed-pane" data-edp="codigo">
+        <div class="ed-note warn">
+          <svg class="ic"><use href="#i-warning"></use></svg>
+          <div><b>Atenção:</b> o código aqui roda no navegador de todos os visitantes. Só use código que você entende. Se algo der erro, desative o bloco e o site volta ao normal — nenhum bloco quebra o site.</div>
+        </div>
+        <div class="ed-block">
+          <div class="ed-block-head"><label>CSS personalizado</label><span class="ed-hint">Aplicado em todas as páginas</span></div>
+          <textarea id="edCss" class="ed-code" rows="8" spellcheck="false" placeholder="/* ex.: .hero h1 { letter-spacing: -.04em } */"></textarea>
+        </div>
+        <div class="ed-block">
+          <div class="ed-block-head"><label>HTML — topo da página</label><span class="ed-hint">Aparece logo abaixo do menu</span></div>
+          <textarea id="edHtmlTop" class="ed-code" rows="6" spellcheck="false" placeholder="&lt;div class=&quot;aviso&quot;&gt;Frete grátis para todo o Brasil&lt;/div&gt;"></textarea>
+        </div>
+        <div class="ed-block">
+          <div class="ed-block-head"><label>HTML — antes do rodapé</label><span class="ed-hint">Aparece no fim da página</span></div>
+          <textarea id="edHtmlBottom" class="ed-code" rows="6" spellcheck="false" placeholder="&lt;div&gt;Fale com a gente no WhatsApp&lt;/div&gt;"></textarea>
+        </div>
+        <div class="ed-block">
+          <div class="ed-block-head"><label>JavaScript personalizado</label><span class="ed-hint">Executa depois do site carregar</span></div>
+          <textarea id="edJs" class="ed-code" rows="8" spellcheck="false" placeholder="// console.log('olá');"></textarea>
+        </div>
+        <div class="ed-row">
+          <button class="ed-btn ghost" onclick="edAplicarCodigo()">Aplicar agora (pré-visualizar)</button>
+          <button class="ed-btn ghost" onclick="edLimparCodigo()">Limpar todo o código</button>
+        </div>
+      </section>
+
+      <section class="ed-pane" data-edp="backup">
+        <div class="ed-note">
+          <svg class="ic"><use href="#i-shield"></use></svg>
+          <div>Guarde uma cópia das suas personalizações. Se algo der errado, basta colar o conteúdo de volta e publicar.</div>
+        </div>
+        <div class="ed-block">
+          <div class="ed-block-head"><label>Backup das personalizações (JSON)</label></div>
+          <textarea id="edBackup" class="ed-code" rows="10" spellcheck="false" placeholder="Clique em Exportar para gerar o conteúdo aqui..."></textarea>
+        </div>
+        <div class="ed-row">
+          <button class="ed-btn primary" onclick="edExportar()">Exportar</button>
+          <button class="ed-btn ghost" onclick="edImportar()">Importar do campo acima</button>
+          <button class="ed-btn danger" onclick="edRestaurarPadrao()">Restaurar padrão</button>
+        </div>
       </section>
     </div>
   </div>
@@ -1202,8 +1410,18 @@ try {
 
 let currentUserData = null;
 let siteConfig = { pagamentoHabilitado: true, linkMensal: PLANS.mensal.link, linkAnual: PLANS.anual.link };
-const CONTENT_DEFAULTS = { recursosTitulo: '', recursosSub: '', precoMensal: '9,99', precoAnual: '99,90' };
-let siteContent = { ...CONTENT_DEFAULTS };
+/* Conteúdo editável do site (persistido em site/conteudo e aplicado a todos os visitantes) */
+const SITE_DEFAULTS = {
+  textos: {},        // [{ path, tag, valor, html }] -> guardado como array
+  cores: {},         // variáveis CSS do tema
+  ordem: [],         // ordem das seções
+  ocultas: [],       // seções ocultas
+  css: '',           // CSS personalizado
+  htmlTop: '',       // HTML no topo (abaixo do menu)
+  htmlBottom: '',    // HTML antes do rodapé
+  js: ''             // JavaScript personalizado
+};
+let siteContent = { ...SITE_DEFAULTS };
 
 /* ============================================================
    UTILITÁRIOS
@@ -1223,8 +1441,33 @@ function setLoading(btn, on, label){
 }
 function fmtDate(iso){ if(!iso) return '—'; try { return new Date(iso).toLocaleDateString('pt-BR'); } catch { return '—'; } }
 function initials(email){ return (email||'U').charAt(0).toUpperCase(); }
-function isAdminMaster(data){ return !!(data && (data.role === 'admin' || (data.email||'').toLowerCase() === ADMIN_EMAIL)); }
-function canEditSite(data){ return !!(data && (data.role === 'admin' || data.role === 'dev' || (data.email||'').toLowerCase() === ADMIN_EMAIL)); }
+
+// Cargo efetivo: o e-mail master é SEMPRE admin master, mesmo que o documento
+// no Firestore esteja desatualizado. Depois vêm os cargos gravados.
+function effectiveRole(data){
+  if (!data) return 'user';
+  const email = (data.email || '').toLowerCase();
+  if (email && email === ADMIN_EMAIL) return 'admin';
+  if (data.role === 'master' || data.role === 'admin') return 'admin';
+  if (data.role === 'dev') return 'dev';
+  return 'user';
+}
+function isAdminMaster(data){ return effectiveRole(data) === 'admin'; }
+function canEditSite(data){ const r = effectiveRole(data); return r === 'admin' || r === 'dev'; }
+
+// Autocorreção: grava o cargo de master no Firestore quando o e-mail confere
+async function ensureMasterRole(){
+  if (!db || !auth || !auth.currentUser || !currentUserData) return;
+  const email = (currentUserData.email || '').toLowerCase();
+  if (email !== ADMIN_EMAIL) return;
+  if (currentUserData.role === 'admin' && currentUserData.master === true) return;
+  currentUserData.role = 'admin';
+  currentUserData.master = true;
+  try {
+    await db.collection('users').doc(auth.currentUser.uid)
+      .set({ role: 'admin', master: true, updatedAt: new Date().toISOString() }, { merge: true });
+  } catch(e){ /* regras podem bloquear; o cargo por e-mail continua valendo */ }
+}
 
 function authError(btn, msg){ showAuthError(msg); setLoading(btn, false); }
 function showAuthError(msg){ const e=$('authError'); e.textContent=msg; e.classList.add('show'); $('authOk').classList.remove('show'); }
@@ -1307,6 +1550,7 @@ async function loadSession(user){
   if (!currentUserData){
     currentUserData = { email: user.email || '', name: (user.email||'').split('@')[0], role: ((user.email||'').toLowerCase()===ADMIN_EMAIL?'admin':'user'), status:'active', subscription:'trial' };
   }
+  await ensureMasterRole();
   showApp();
 }
 if (isFirebaseConfigured){
@@ -1416,8 +1660,16 @@ function renderIdentity(){
   $('pfNome').value = d.name || '';
   $('pfEmail').value = d.email || '';
   $('pfTel').value = d.phone || '';
-  const badge = (d.role || 'user');
-  $('statCargo').innerHTML = badge === 'admin' ? '<span class="badge g">admin master</span>' : (badge === 'dev' ? '<span class="badge b">dev</span>' : '<span class="badge m">user</span>');
+  const role = effectiveRole(d);
+  $('statCargo').innerHTML = role === 'admin' ? '<span class="badge g">admin master</span>' : (role === 'dev' ? '<span class="badge b">dev</span>' : '<span class="badge m">user</span>');
+  const badgeSide = $('appRoleBadge');
+  const elMaster = $('admMasterEmail');
+  if (elMaster) elMaster.textContent = ADMIN_EMAIL;
+  if (badgeSide){
+    if (role === 'admin'){ badgeSide.textContent = 'admin master'; badgeSide.className = 'badge g'; badgeSide.style.display = ''; }
+    else if (role === 'dev'){ badgeSide.textContent = 'dev'; badgeSide.className = 'badge b'; badgeSide.style.display = ''; }
+    else { badgeSide.style.display = 'none'; }
+  }
   $('statPlano').textContent = (d.subscription || 'trial').replace('premium','Pro').replace('trial','Trial');
   $('statValidade').textContent = fmtDate(d.subscriptionEnd);
   $('subStatus').textContent = (d.subscription || '—');
@@ -1431,7 +1683,7 @@ function goPanel(name){
   const el = $('panel-' + name); if (el) el.classList.add('active');
   document.querySelectorAll('.app-nav button[data-panel]').forEach(b => b.classList.toggle('active', b.dataset.panel === name));
   if (name === 'admin') loadAdmin();
-  if (name === 'dev') fillDevForm();
+  if (name === 'dev') edRenderResumo();
 }
 document.querySelectorAll('.app-nav button[data-panel]').forEach(b => b.addEventListener('click', () => goPanel(b.dataset.panel)));
 
@@ -1452,43 +1704,555 @@ function applyPayments(){
   document.querySelectorAll('[data-plan]').forEach(btn => { btn.disabled = !on; });
   const sw = $('paySwitch'); if (sw) sw.classList.toggle('on', on);
 }
+/* ============================================================
+   CONTEÚDO DO SITE — carregado e aplicado para TODOS os visitantes
+   ============================================================ */
+/* Ordem original das seções (capturada no carregamento, para poder restaurar) */
+let ED_ORDEM_ORIGINAL = [];
+/* Valor original de cada texto já publicado (para poder restaurar) */
+const ED_TEXTOS_ORIGINAIS = {};
+
 async function loadSiteContent(){
   if (!db) return;
   try {
     const snap = await db.doc('site/conteudo').get();
-    if (snap.exists) siteContent = { ...siteContent, ...snap.data() };
+    if (snap.exists) siteContent = { ...SITE_DEFAULTS, ...snap.data() };
   } catch(e){ return; }
-  applyContent();
+  edCapturarOriginais();
+  applyAll(siteContent);
 }
-function applyContent(){
-  document.querySelectorAll('[data-c]').forEach(el => {
-    const key = el.getAttribute('data-c');
-    if (siteContent[key]) el.textContent = siteContent[key];
+
+/* Guarda como os textos estavam no HTML antes de aplicarmos o conteúdo salvo */
+function edCapturarOriginais(){
+  const lista = Array.isArray(siteContent.textos) ? siteContent.textos : [];
+  lista.forEach(t => {
+    if (!t || !t.path || ED_TEXTOS_ORIGINAIS[t.path]) return;
+    let el = null;
+    try { el = document.querySelector(t.path); } catch(e){ el = null; }
+    if (!el) return;
+    if (t.tag && el.tagName !== t.tag) return;
+    ED_TEXTOS_ORIGINAIS[t.path] = { tag: t.tag, valor: t.html ? el.innerHTML : el.textContent, html: !!t.html };
   });
 }
-function fillDevForm(){
-  $('ctRecTitulo').value = siteContent.recursosTitulo || '';
-  $('ctRecSub').value = siteContent.recursosSub || '';
-  $('ctPrecoMensal').value = siteContent.precoMensal || '9,99';
-  $('ctPrecoAnual').value = siteContent.precoAnual || '99,90';
+
+function applyAll(cfg){
+  const c = cfg || siteContent;
+  applyContent(c);   // compatibilidade: textos antigos marcados com data-c
+  applyTextos(c);
+  applyCores(c);
+  applySecoes(c);
+  applyCodigo(c);
 }
-$('btnSalvarConteudo').addEventListener('click', async function(){
-  const btn = this;
-  if (!canEditSite(currentUserData)) return toast('Sem permissão para editar.', 'err');
+
+/* ---- textos antigos ([data-c]) ---- */
+function applyContent(cfg){
+  const c = cfg || siteContent;
+  document.querySelectorAll('[data-c]').forEach(el => {
+    const key = el.getAttribute('data-c');
+    const v = (c.textos && c.textos[key]) || c[key];
+    if (v) el.textContent = v;
+  });
+}
+
+/* ---- textos escolhidos no editor (caminho + tag) ---- */
+function applyTextos(cfg){
+  const c = cfg || siteContent;
+  const lista = Array.isArray(c.textos) ? c.textos : [];
+  const usados = {};
+  lista.forEach(t => { if (t && t.path) usados[t.path] = true; });
+
+  // Restaura o valor original dos textos que saíram da configuração
+  Object.keys(ED_TEXTOS_ORIGINAIS).forEach(p => {
+    if (usados[p]) return;
+    const o = ED_TEXTOS_ORIGINAIS[p];
+    let el = null;
+    try { el = document.querySelector(p); } catch(e){ el = null; }
+    if (!el || (o.tag && el.tagName !== o.tag)) return;
+    try { if (o.html) el.innerHTML = o.valor; else el.textContent = o.valor; } catch(e){}
+  });
+
+  lista.forEach(t => {
+    if (!t || !t.path || typeof t.valor !== 'string') return;
+    let el = null;
+    try { el = document.querySelector(t.path); } catch(e){ el = null; }
+    if (!el) return;
+    if (t.tag && el.tagName !== t.tag) return;   // estrutura mudou: não escreve no lugar errado
+    try { if (t.html) el.innerHTML = t.valor; else el.textContent = t.valor; } catch(e){}
+  });
+}
+
+/* ---- cores do tema ---- */
+const ED_CORES = [
+  { k: '--primary',   nome: 'Cor principal' },
+  { k: '--primary-2', nome: 'Cor secundária' },
+  { k: '--primary-d', nome: 'Cor escura' },
+  { k: '--accent',    nome: 'Destaque' },
+  { k: '--bg',        nome: 'Fundo da página' },
+  { k: '--bg-2',      nome: 'Fundo alternativo' },
+  { k: '--card',      nome: 'Cartões' },
+  { k: '--card-2',    nome: 'Cartões (2)' },
+  { k: '--border',    nome: 'Bordas' },
+  { k: '--text',      nome: 'Texto principal' },
+  { k: '--muted',     nome: 'Texto secundário' }
+];
+
+function edGradiente(a, b){ return 'linear-gradient(135deg,' + a + ' 0%,' + b + ' 100%)'; }
+
+function applyCores(cfg){
+  const c = cfg || siteContent;
+  const cores = c.cores || {};
+  // limpa antes de aplicar, para o "desfazer" voltar ao padrão corretamente
+  ED_CORES.forEach(x => document.documentElement.style.removeProperty(x.k));
+  ED_CORES.forEach(x => { if (cores[x.k]) document.documentElement.style.setProperty(x.k, cores[x.k]); });
+  if (cores['--primary'] || cores['--primary-2']){
+    const a = cores['--primary']   || (getComputedStyle(document.documentElement).getPropertyValue('--primary')   || '#10b981').trim();
+    const b = cores['--primary-2'] || (getComputedStyle(document.documentElement).getPropertyValue('--primary-2') || '#14b8a6').trim();
+    document.documentElement.style.setProperty('--grad', edGradiente(a, b));
+  } else {
+    document.documentElement.style.removeProperty('--grad');
+  }
+}
+
+/* ---- ordem e visibilidade das seções ---- */
+const ED_SECOES_META = {
+  inicio: 'Topo (Início)', recursos: 'Recursos', como: 'Como funciona',
+  beneficios: 'Benefícios', garantia: 'Garantia', planos: 'Planos',
+  comparacao: 'Comparativo', materiais: 'Materiais de apoio',
+  faq: 'Perguntas frequentes', 'cta-final': 'Chamada final', rodape: 'Rodapé'
+};
+
+function edSecoesNoDom(){
+  return [...document.querySelectorAll('#publicSite > section, #publicSite > footer')]
+    .map(s => s.id).filter(id => id && ED_SECOES_META[id]);
+}
+
+function applySecoes(cfg){
+  const c = cfg || siteContent;
+  const pub = $('publicSite'); if (!pub) return;
+  const tail = document.getElementById('slot-bottom');
+  const ordem = (Array.isArray(c.ordem) && c.ordem.length) ? c.ordem : ED_ORDEM_ORIGINAL;
+  ordem.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.parentElement === pub && tail) pub.insertBefore(el, tail);
+  });
+  const ocultas = Array.isArray(c.ocultas) ? c.ocultas : [];
+  Object.keys(ED_SECOES_META).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = (ocultas.indexOf(id) !== -1) ? 'none' : '';
+  });
+}
+
+/* ---- código personalizado (CSS, HTML e JS) ---- */
+function applyCodigo(cfg){
+  const c = cfg || siteContent;
+  let st = document.getElementById('edCustomCss');
+  if (!st){ st = document.createElement('style'); st.id = 'edCustomCss'; document.head.appendChild(st); }
+  st.textContent = c.css || '';
+
+  const porHtml = (id, html) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.getAttribute('data-html') !== (html || '')){ el.innerHTML = html || ''; el.setAttribute('data-html', html || ''); }
+  };
+  porHtml('slot-top', c.htmlTop);
+  porHtml('slot-bottom', c.htmlBottom);
+
+  const antigo = document.getElementById('edCustomJs');
+  if (antigo) antigo.remove();
+  const js = (c.js || '').trim();
+  if (js){
+    const s = document.createElement('script');
+    s.id = 'edCustomJs';
+    s.textContent = 'try{\n' + js + '\n}catch(err){console.error("[Editor do site] erro no código personalizado:",err);}';
+    document.body.appendChild(s);
+  }
+}
+
+/* ============================================================
+   EDITOR DO SITE (exclusivo admin master / dev)
+   ============================================================ */
+let edRascunho = null;
+let edPickAtivo = false;
+let edHover = null;
+let edNaoPublicado = false;
+
+function edPodeEditar(){ return canEditSite(currentUserData); }
+function edCopia(o){ return JSON.parse(JSON.stringify(o)); }
+
+function edNormalizarRascunho(){
+  if (!edRascunho) edRascunho = edCopia(siteContent);
+  if (!Array.isArray(edRascunho.textos)) edRascunho.textos = [];
+  if (!edRascunho.cores || typeof edRascunho.cores !== 'object') edRascunho.cores = {};
+  if (!Array.isArray(edRascunho.ordem)) edRascunho.ordem = [];
+  if (!Array.isArray(edRascunho.ocultas)) edRascunho.ocultas = [];
+  ['css','htmlTop','htmlBottom','js'].forEach(k => { if (typeof edRascunho[k] !== 'string') edRascunho[k] = ''; });
+}
+
+function abrirEditor(){
+  if (!edPodeEditar()){ toast('Acesso restrito ao admin master e aos devs.', 'err'); return; }
+  edNormalizarRascunho();
+  const r = effectiveRole(currentUserData);
+  const badge = $('edBadge');
+  if (badge){ badge.textContent = r === 'admin' ? 'admin master' : 'dev'; badge.className = 'badge ' + (r === 'admin' ? 'g' : 'b'); }
+  $('editorOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  edRenderTudo();
+}
+
+function aplicarRascunho(){
+  // aplica o RASCUNHO na página sem mexer no que já está publicado
+  applyAll(edRascunho);
+}
+
+function fecharEditor(){
+  $('editorOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+  edFimPick();
+  if (edNaoPublicado){
+    aplicarRascunho();
+    toast('Pré-visualização aplicada. Clique em Publicar para valer para todos.', 'ok');
+  }
+  edRenderResumo();
+}
+
+function edAba(nome){
+  document.querySelectorAll('.ed-tab').forEach(t => t.classList.toggle('active', t.dataset.ed === nome));
+  document.querySelectorAll('.ed-pane').forEach(p => p.classList.toggle('active', p.dataset.edp === nome));
+}
+
+function edRenderTudo(){
+  edRenderTextos();
+  edRenderCores();
+  edRenderSecoes();
+  $('edCss').value = edRascunho.css || '';
+  $('edHtmlTop').value = edRascunho.htmlTop || '';
+  $('edHtmlBottom').value = edRascunho.htmlBottom || '';
+  $('edJs').value = edRascunho.js || '';
+}
+
+/* ---- escolher texto na página ---- */
+function edPath(el){
+  const partes = [];
+  let node = el;
+  while (node && node.nodeType === 1 && node.tagName !== 'BODY'){
+    if (node.id){ partes.unshift('#' + node.id); break; }
+    let sel = node.tagName.toLowerCase();
+    const pai = node.parentElement;
+    if (pai){
+      const irmaos = [...pai.children].filter(c => c.tagName === node.tagName);
+      if (irmaos.length > 1) sel += ':nth-of-type(' + (irmaos.indexOf(node) + 1) + ')';
+    }
+    partes.unshift(sel);
+    node = node.parentElement;
+  }
+  return partes.join(' > ');
+}
+
+function edIniciarPick(){
+  if (!edPodeEditar()) return;
+  edRascunho = edRascunho || edCopia(siteContent);
+  edPickAtivo = true;
+  $('editorOverlay').classList.remove('active');
+  document.body.classList.add('ed-picking');
+  if (!document.getElementById('edPickHint')){
+    const h = document.createElement('div');
+    h.id = 'edPickHint';
+    h.innerHTML = 'Modo seleção: clique no texto que você quer mudar &nbsp;·&nbsp; <b>ESC</b> para sair';
+    document.body.appendChild(h);
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  toast('Clique no texto que você quer editar (ESC para sair).', 'ok');
+}
+
+function edFimPick(){
+  edPickAtivo = false;
+  edLimparHover();
+  document.body.classList.remove('ed-picking');
+  const h = document.getElementById('edPickHint');
+  if (h) h.remove();
+}
+
+function edLimparHover(){
+  if (edHover){ edHover.style.outline = ''; edHover.style.outlineOffset = ''; edHover.style.cursor = ''; edHover = null; }
+}
+
+document.addEventListener('mouseover', function(e){
+  if (!edPickAtivo) return;
+  const el = e.target && e.target.closest ? e.target.closest('#publicSite *') : null;
+  const pub = $('publicSite');
+  if (!el || el === pub) return;
+  if (edHover !== el){ edLimparHover(); edHover = el; el.style.outline = '2px dashed #10b981'; el.style.outlineOffset = '3px'; el.style.cursor = 'crosshair'; }
+});
+
+document.addEventListener('mouseout', function(){ if (edPickAtivo) edLimparHover(); });
+
+document.addEventListener('click', function(e){
+  if (!edPickAtivo) return;
+  const el = e.target && e.target.closest ? e.target.closest('#publicSite *') : null;
+  if (!el) return;
+  e.preventDefault(); e.stopPropagation();
+  edFimPick();
+  edEscolherTexto(el);
+}, true);
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && edPickAtivo){
+    edFimPick();
+    abrirEditor();
+  }
+});
+
+function edEscolherTexto(el){
+  edFimPick();
+  const folha = el.children.length === 0;
+  const path = edPath(el);
+
+  // guarda o valor original (antes de qualquer alteração) para poder restaurar
+  const jaPublicado = Array.isArray(siteContent.textos) && siteContent.textos.some(t => t && t.path === path);
+  if (!ED_TEXTOS_ORIGINAIS[path] && !jaPublicado){
+    ED_TEXTOS_ORIGINAIS[path] = { tag: el.tagName, valor: folha ? el.textContent : el.innerHTML, html: !folha };
+  }
+
+  const atual = folha ? el.textContent.trim() : el.innerHTML.trim();
+  const entrada = { path: path, tag: el.tagName, valor: atual, html: !folha };
+  let i = edRascunho.textos.findIndex(t => t.path === path);
+  if (i >= 0) edRascunho.textos[i] = entrada; else { edRascunho.textos.push(entrada); i = edRascunho.textos.length - 1; }
+
+  edNaoPublicado = true;
+  abrirEditor();
+  edAba('textos');
+  edRenderTextos();
+
+  const campo = document.querySelectorAll('#edTextosLista .ed-input')[i];
+  if (campo){
+    campo.scrollIntoView({ block: 'center' });
+    campo.focus();
+    campo.select();
+  }
+  toast('Edite o texto no campo destacado e clique em Publicar.', 'ok');
+}
+
+function edRenderTextos(){
+  const box = $('edTextosLista');
+  const lista = edRascunho.textos || [];
+  if (!lista.length){
+    box.innerHTML = '<div class="ed-empty">Nenhum texto alterado ainda. Clique em <b>Selecionar na página</b> e depois no texto que quer mudar.</div>';
+    return;
+  }
+  box.innerHTML = lista.map((t, i) =>
+    '<div class="ed-item">' +
+      '<div class="ed-item-info"><strong>' + (t.tag || 'texto').toLowerCase() + '</strong><span>' + esc(t.path) + '</span></div>' +
+      '<input class="ed-input" value="' + esc(t.valor) + '" oninput="edMudarTexto(' + i + ', this.value)">' +
+      '<button class="ed-mini danger" onclick="edRemoverTexto(' + i + ')">remover</button>' +
+    '</div>'
+  ).join('');
+}
+
+function edMudarTexto(i, v){
+  const t = edRascunho.textos[i]; if (!t) return;
+  t.valor = v;
+  edNaoPublicado = true;
+  let el = null;
+  try { el = document.querySelector(t.path); } catch(e){}
+  if (el && (!t.tag || el.tagName === t.tag)){ try { if (t.html) el.innerHTML = v; else el.textContent = v; } catch(e){} }
+}
+
+function edRemoverTexto(i){ edRascunho.textos.splice(i, 1); edNaoPublicado = true; aplicarRascunho(); edRenderTextos(); }
+function edLimparTextos(){ edRascunho.textos = []; edNaoPublicado = true; aplicarRascunho(); edRenderTextos(); toast('Edições de texto removidas.'); }
+
+/* ---- cores ---- */
+function edRenderCores(){
+  const box = $('edCoresGrid');
+  box.innerHTML = ED_CORES.map(c => {
+    let v = (edRascunho.cores || {})[c.k] || getComputedStyle(document.documentElement).getPropertyValue(c.k).trim();
+    if (!/^#[0-9a-fA-F]{6}$/.test(v)) v = '#000000';
+    return '<div class="ed-color">' +
+      '<input type="color" value="' + v + '" oninput="edMudarCor(\'' + c.k + '\', this.value)">' +
+      '<div class="ed-color-info"><strong>' + c.nome + '</strong><span>' + c.k + '</span></div>' +
+      '<button class="ed-mini" onclick="edLimparCor(\'' + c.k + '\')">padrão</button>' +
+    '</div>';
+  }).join('');
+}
+
+function edAplicarCoresRascunho(){
+  const cores = edRascunho.cores || {};
+  ED_CORES.forEach(c => {
+    if (cores[c.k]) document.documentElement.style.setProperty(c.k, cores[c.k]);
+    else document.documentElement.style.removeProperty(c.k);
+  });
+  if (cores['--primary'] || cores['--primary-2']){
+    const a = cores['--primary']   || getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+    const b = cores['--primary-2'] || getComputedStyle(document.documentElement).getPropertyValue('--primary-2').trim();
+    document.documentElement.style.setProperty('--grad', edGradiente(a, b));
+  } else {
+    document.documentElement.style.removeProperty('--grad');
+  }
+}
+
+function edMudarCor(k, v){ edRascunho.cores[k] = v; edNaoPublicado = true; edAplicarCoresRascunho(); }
+function edLimparCor(k){ delete edRascunho.cores[k]; edNaoPublicado = true; edAplicarCoresRascunho(); edRenderCores(); }
+
+function edPreset(nome){
+  const P = {
+    atual:   { '--primary': '#10b981', '--primary-2': '#14b8a6', '--primary-d': '#0d9488', '--accent': '#6366f1' },
+    oceano:  { '--primary': '#2563eb', '--primary-2': '#0ea5e9', '--primary-d': '#1d4ed8', '--accent': '#06b6d4' },
+    dourado: { '--primary': '#d4af37', '--primary-2': '#f0b429', '--primary-d': '#b8860b', '--accent': '#10b981' },
+    grafite: { '--primary': '#64748b', '--primary-2': '#94a3b8', '--primary-d': '#475569', '--accent': '#6366f1' },
+    roxo:    { '--primary': '#7c3aed', '--primary-2': '#a855f7', '--primary-d': '#6d28d9', '--accent': '#ec4899' }
+  };
+  edRascunho.cores = { ...(edRascunho.cores || {}), ...(P[nome] || P.atual) };
+  edNaoPublicado = true;
+  edAplicarCoresRascunho();
+  edRenderCores();
+  toast('Paleta aplicada (pré-visualização).');
+}
+
+/* ---- seções ---- */
+function edOrdemAtual(){
+  const doDom = edSecoesNoDom();
+  const salva = Array.isArray(edRascunho.ordem) ? edRascunho.ordem : [];
+  const out = [];
+  salva.forEach(id => { if (doDom.indexOf(id) !== -1 && out.indexOf(id) === -1) out.push(id); });
+  doDom.forEach(id => { if (out.indexOf(id) === -1) out.push(id); });
+  return out;
+}
+
+function edRenderSecoes(){
+  const box = $('edSecoesLista');
+  const ordem = edOrdemAtual();
+  if (!ordem.length){ box.innerHTML = '<div class="ed-empty">Nenhuma seção encontrada.</div>'; return; }
+  box.innerHTML = ordem.map((id, i) =>
+    '<div class="ed-item">' +
+      '<div class="ed-item-info"><strong>' + (ED_SECOES_META[id] || id) + '</strong><span>#' + id + '</span></div>' +
+      '<div class="ed-item-acts">' +
+        '<button class="ed-mini" onclick="edMoverSecao(' + i + ',-1)"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
+        '<button class="ed-mini" onclick="edMoverSecao(' + i + ',1)"' + (i === ordem.length - 1 ? ' disabled' : '') + '>↓</button>' +
+        '<button class="ed-mini' + ((edRascunho.ocultas || []).indexOf(id) !== -1 ? ' danger' : '') + '" onclick="edAlternarSecao(\'' + id + '\')">' +
+          ((edRascunho.ocultas || []).indexOf(id) !== -1 ? 'mostrar' : 'ocultar') +
+        '</button>' +
+      '</div>' +
+    '</div>'
+  ).join('');
+}
+
+function edMoverSecao(i, dir){
+  const ordem = edOrdemAtual();
+  const j = i + dir;
+  if (j < 0 || j >= ordem.length) return;
+  const tmp = ordem[i]; ordem[i] = ordem[j]; ordem[j] = tmp;
+  edRascunho.ordem = ordem;
+  edNaoPublicado = true;
+  aplicarRascunho();
+  edRenderSecoes();
+}
+
+function edAlternarSecao(id){
+  edRascunho.ocultas = edRascunho.ocultas || [];
+  const i = edRascunho.ocultas.indexOf(id);
+  if (i === -1) edRascunho.ocultas.push(id); else edRascunho.ocultas.splice(i, 1);
+  edNaoPublicado = true;
+  aplicarRascunho();
+  edRenderSecoes();
+}
+
+/* ---- código ---- */
+function edLerCodigo(){
+  edRascunho.css = $('edCss').value;
+  edRascunho.htmlTop = $('edHtmlTop').value;
+  edRascunho.htmlBottom = $('edHtmlBottom').value;
+  edRascunho.js = $('edJs').value;
+  edNaoPublicado = true;
+}
+function edAplicarCodigo(){ edLerCodigo(); aplicarRascunho(); toast('Código aplicado na pré-visualização.', 'ok'); }
+function edLimparCodigo(){ ['edCss','edHtmlTop','edHtmlBottom','edJs'].forEach(id => { $(id).value = ''; }); edLerCodigo(); aplicarRascunho(); toast('Código limpo.'); }
+
+/* ---- backup ---- */
+function edExportar(){
+  $('edBackup').value = JSON.stringify(edRascunho, null, 2);
+  toast('Backup gerado no campo abaixo. Copie e guarde.', 'ok');
+}
+function edImportar(){
+  try {
+    const obj = JSON.parse($('edBackup').value);
+    if (!obj || typeof obj !== 'object') throw new Error('formato');
+    edRascunho = { ...SITE_DEFAULTS, ...obj };
+    edNormalizarRascunho();
+    edNaoPublicado = true;
+    aplicarRascunho();
+    edRenderTudo();
+    toast('Backup importado. Clique em Publicar para valer para todos.', 'ok');
+  } catch(e){ toast('JSON inválido. Confira o conteúdo do campo.', 'err'); }
+}
+function edRestaurarPadrao(){
+  if (!window.confirm('Isto remove TODAS as personalizações (textos, cores, ordem, código). Continuar?')) return;
+  edRascunho = edCopia(SITE_DEFAULTS);
+  edNormalizarRascunho();
+  edNaoPublicado = true;
+  aplicarRascunho();
+  edRenderTudo();
+  toast('Personalizações restauradas ao padrão. Clique em Publicar para confirmar.', 'ok');
+}
+
+function edDesfazerTudo(){
+  if (!edPodeEditar()) return;
+  edRascunho = edCopia(siteContent);
+  edNormalizarRascunho();
+  edNaoPublicado = false;
+  applyAll(siteContent);
+  edRenderTudo();
+  toast('Alterações não publicadas foram descartadas.');
+}
+
+/* ---- publicar ---- */
+async function edSalvar(){
+  if (!edPodeEditar()) return toast('Sem permissão para publicar.', 'err');
+  edLerCodigo();
   const payload = {
-    recursosTitulo: $('ctRecTitulo').value.trim(),
-    recursosSub: $('ctRecSub').value.trim(),
-    precoMensal: $('ctPrecoMensal').value.trim(),
-    precoAnual: $('ctPrecoAnual').value.trim(),
+    textos: edRascunho.textos,
+    cores: edRascunho.cores,
+    ordem: edRascunho.ordem,
+    ocultas: edRascunho.ocultas,
+    css: edRascunho.css,
+    htmlTop: edRascunho.htmlTop,
+    htmlBottom: edRascunho.htmlBottom,
+    js: edRascunho.js,
     updatedAt: new Date().toISOString(),
     updatedBy: currentUserData.email || ''
   };
-  if (!db) { siteContent = { ...siteContent, ...payload }; applyContent(); return toast('Conteúdo salvo (local/demo).', 'ok'); }
-  setLoading(btn, true, 'Salvando…');
-  try { await db.doc('site/conteudo').set(payload, { merge: true }); siteContent = { ...siteContent, ...payload }; applyContent(); toast('Conteúdo do site atualizado!', 'ok'); }
-  catch(e){ toast('Não foi possível salvar (verifique as regras do Firestore).', 'err'); }
-  finally { setLoading(btn, false); }
-});
+  siteContent = { ...SITE_DEFAULTS, ...siteContent, ...payload };
+  applyAll(siteContent);
+  if (!db){ edNaoPublicado = false; edRascunho = edCopia(siteContent); edRenderResumo(); return toast('Salvo localmente (modo demonstração).', 'ok'); }
+  const btn = $('edSalvar');
+  setLoading(btn, true, 'Publicando…');
+  try {
+    await db.doc('site/conteudo').set(payload, { merge: true });
+    edNaoPublicado = false;
+    edRascunho = edCopia(siteContent);
+    edRenderResumo();
+    toast('Site publicado! As mudanças já valem para todos.', 'ok');
+  } catch(e){
+    toast('Não foi possível publicar. Confira as regras do Firestore.', 'err');
+  } finally { setLoading(btn, false); }
+}
+
+function edRenderResumo(){
+  const cargo = $('edCargoAtual');
+  if (cargo){
+    const r = effectiveRole(currentUserData);
+    cargo.innerHTML = r === 'admin' ? '<span class="badge g">admin master</span>' : (r === 'dev' ? '<span class="badge b">dev</span>' : '<span class="badge m">user</span>');
+  }
+  const q = $('edQtdTextos');
+  if (q) q.textContent = (Array.isArray(siteContent.textos) ? siteContent.textos.length : 0);
+  const u = $('edUltima');
+  if (u) u.textContent = siteContent.updatedAt ? new Date(siteContent.updatedAt).toLocaleString('pt-BR') : '—';
+}
+
+/* Guarda a ordem original das seções (para poder restaurar depois) */
+ED_ORDEM_ORIGINAL = edSecoesNoDom();
+
+/* Aplica o conteúdo para quem visita o site (inclusive sem login) */
+loadSiteContent();
+
 
 /* ============================================================
    PERFIL
