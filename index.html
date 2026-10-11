@@ -579,6 +579,60 @@
   .mat-ctext p{color:var(--muted);font-size:.9rem;line-height:1.75;margin-bottom:12px}
   .mat-ctext p:last-child{margin-bottom:0}
 
+  /* ---------- QUIZ ---------- */
+  .mat-quiz-top{display:flex;align-items:center;gap:15px;background:linear-gradient(135deg,rgba(16,185,129,.14),rgba(99,102,241,.08));
+    border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:18px}
+  .mat-quiz-ico{width:46px;height:46px;flex:0 0 auto;border-radius:13px;display:flex;align-items:center;justify-content:center;
+    background:var(--grad);color:#04140f;box-shadow:0 8px 18px -8px rgba(16,185,129,.7)}
+  .mat-quiz-ico svg.ic{width:24px;height:24px}
+  .mat-quiz-top-txt{flex:1;min-width:0}
+  .mat-quiz-top-txt h3{font-size:1.05rem;font-weight:800}
+  .mat-quiz-top-txt p{color:var(--muted);font-size:.84rem;margin-top:3px;line-height:1.5}
+  .mat-quiz-top-txt b{color:var(--primary-2)}
+  .mat-quiz-placar{flex:0 0 auto;font-weight:800;font-size:.9rem;color:var(--primary-2);
+    background:rgba(16,185,129,.16);border-radius:10px;padding:8px 13px}
+  .mat-quiz-res{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-radius:14px;padding:16px 18px;
+    margin-bottom:18px;border:1px solid var(--border);background:var(--card)}
+  .mat-quiz-res.bom{border-color:rgba(16,185,129,.45);background:rgba(16,185,129,.10)}
+  .mat-quiz-res.medio{border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.10)}
+  .mat-quiz-res.baixo{border-color:rgba(239,68,68,.45);background:rgba(239,68,68,.10)}
+  .mat-quiz-res-num{font-size:1.5rem;font-weight:800}
+  .mat-quiz-res.bom .mat-quiz-res-num{color:#34d399}
+  .mat-quiz-res.medio .mat-quiz-res-num{color:#fbbf24}
+  .mat-quiz-res.baixo .mat-quiz-res-num{color:#f87171}
+  .mat-quiz-res-txt{flex:1;min-width:180px;font-size:.87rem;color:var(--muted);line-height:1.55}
+  .mat-quiz-res-txt b{color:var(--text)}
+  .mat-quiz-refazer{display:inline-flex;align-items:center;gap:7px;background:var(--card-2);border:1px solid var(--border);
+    color:var(--text);padding:9px 15px;border-radius:10px;font-weight:600;font-size:.82rem;transition:var(--smooth)}
+  .mat-quiz-refazer svg.ic{width:15px;height:15px}
+  .mat-quiz-refazer:hover{border-color:var(--border-2)}
+  .mat-quiz-list{display:flex;flex-direction:column;gap:14px}
+  .mat-q{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:17px 18px}
+  .mat-q-top{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+  .mat-q-num{width:28px;height:28px;flex:0 0 auto;border-radius:9px;background:rgba(99,102,241,.16);color:#a5b4fc;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem}
+  .mat-q-text{font-size:.94rem;font-weight:700;line-height:1.5;color:var(--text)}
+  .mat-q-opts{display:flex;flex-direction:column;gap:8px}
+  .mat-opt{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:var(--card-2);
+    border:1px solid var(--border);color:var(--muted);border-radius:11px;padding:12px 14px;font-size:.88rem;transition:var(--smooth)}
+  .mat-opt:hover:not(:disabled){border-color:var(--border-2);color:var(--text)}
+  .mat-opt:disabled{cursor:default}
+  .mat-opt-letra{width:22px;height:22px;flex:0 0 auto;border-radius:6px;background:rgba(255,255,255,.06);
+    border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800}
+  .mat-opt-txt{flex:1;line-height:1.45}
+  .mat-opt-ico{display:inline-flex;color:#34d399;flex:0 0 auto}
+  .mat-opt-ico svg.ic{width:16px;height:16px}
+  .mat-opt.certa{border-color:rgba(16,185,129,.6);background:rgba(16,185,129,.12);color:var(--text)}
+  .mat-opt.certa .mat-opt-letra{background:var(--primary);border-color:var(--primary);color:#04140f}
+  .mat-opt.errada{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.12);color:var(--text)}
+  .mat-opt.errada .mat-opt-letra{background:var(--danger);border-color:var(--danger);color:#fff}
+  .mat-opt.neutra{opacity:.5}
+  .mat-q-exp{margin-top:13px;border-radius:11px;padding:12px 14px;font-size:.85rem;line-height:1.6;color:var(--muted)}
+  .mat-q-exp.ok{background:rgba(16,185,129,.10);border:1px solid rgba(16,185,129,.3)}
+  .mat-q-exp.ok b{color:#34d399}
+  .mat-q-exp.nao{background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.3)}
+  .mat-q-exp.nao b{color:#fbbf24}
+
   @media(max-width:760px){
     .mat-grid{grid-template-columns:1fr}
     .mat-ov-body{padding:20px 16px 70px}
@@ -590,6 +644,13 @@
     .mat-doc-info{padding:16px 15px 14px}
     .mat-doc-info h3{font-size:1.16rem}
     .mat-chapter{padding:13px 14px;gap:11px}
+    .mat-quiz-top{flex-wrap:wrap;padding:15px 16px}
+    .mat-quiz-placar{order:3}
+    .mat-q{padding:15px 15px}
+    .mat-q-text{font-size:.9rem}
+    .mat-opt{padding:11px 12px;font-size:.85rem}
+    .mat-quiz-res{padding:14px 15px}
+    .mat-quiz-refazer{width:100%;justify-content:center}
   }
 </style>
 </head>
@@ -873,7 +934,7 @@
     <div class="sec-head reveal">
       <div class="sec-tag">Aprenda grátis</div>
       <h2>Materiais de apoio</h2>
-      <p>Cursos completos sobre o agro, escritos para você aprender e aplicar no seu próprio negócio. Cada curso traz aulas em formato de ensino e um documentário narrado em capítulos. Aberto a qualquer pessoa — estude no seu ritmo.</p>
+      <p>Cursos completos sobre o agro, escritos para você aprender e aplicar no seu próprio negócio. Cada curso traz aulas em formato de ensino, um documentário narrado em capítulos e um quiz para testar o conhecimento. Aberto a qualquer pessoa — estude no seu ritmo.</p>
     </div>
     <div data-mat-root>
       <div class="mat-toolbar">

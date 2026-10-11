@@ -169,6 +169,13 @@ const MATERIAIS = [
         ],
         pratica: 'Abra o simulador, preencha seus números reais e anote os cinco indicadores. Depois compare o ROIC com o CDI e escreva em uma frase se a operação compensa o risco. Essa frase é a sua tese de investimento.'
       }
+    ],
+    quiz: [
+      { p: 'Qual é a principal vantagem de gerir o confinamento com previsibilidade?', opcoes: ['Elimina totalmente o risco de mercado', 'Permite controlar a alimentação e programar a venda do lote', 'Dispensa a mão de obra do curral', 'Reduz o preço pago pelo boi magro'], correta: 1, explicacao: 'Confinar dá controle sobre o que o animal come e quando ele sai, o que permite programar a venda e atender contratos. O risco de mercado continua existindo.' },
+      { p: 'No modelo de boitel, quem assume o risco de mercado (preço de compra e de venda)?', opcoes: ['O boitel', 'O frigorífico', 'O investidor, dono do gado', 'É dividido igualmente entre as partes'], correta: 2, explicacao: 'O investidor assume o risco de mercado; o boitel assume o risco operacional: estrutura, dieta, manejo e sanidade.' },
+      { p: 'Uma conversão alimentar de 6 significa que:', opcoes: ['O animal ganha 6 kg por dia', 'São necessários 6 kg de alimento (matéria seca) para cada 1 kg de ganho', 'A dieta tem 6% de proteína', 'O lote pesa 6 arrobas a mais por cabeça'], correta: 1, explicacao: 'Conversão alimentar é a razão entre alimento consumido e ganho de peso. Quanto menor, mais eficiente é a dieta.' },
+      { p: 'Em qual fase do ciclo de 106 dias a eficiência (conversão alimentar) costuma ser melhor?', opcoes: ['Adaptação', 'Crescimento', 'Terminação', 'As três fases são equivalentes'], correta: 1, explicacao: 'No crescimento o animal come bem e ganha peso de forma econômica. A terminação é a fase mais cara por dia.' },
+      { p: 'Por que o animal com menos de 30 meses costuma valer mais na venda?', opcoes: ['Porque ganha mais peso por dia', 'Porque sempre tem rendimento de carcaça maior', 'Porque é elegível a protocolos de exportação, como o Boi China', 'Porque consome menos ração'], correta: 2, explicacao: 'A idade abaixo de 30 meses é um dos requisitos do protocolo chinês, que paga bonificação adicional por arroba.' }
     ]
   },
 
@@ -307,6 +314,13 @@ const MATERIAIS = [
         ],
         pratica: 'Rode o simulador com três cenários de arroba (pessimista, base e otimista) e anote ROIC, VPL e TIR de cada um. Decida em qual cenário você dormiria tranquilo e que preço mínimo aceitaria firmar a operação.'
       }
+    ],
+    quiz: [
+      { p: 'Qual bloco de custo costuma ser o maior desembolso do confinamento?', opcoes: ['A alimentação', 'A compra do boi magro', 'O frete', 'A hospedagem'], correta: 1, explicacao: 'O boi magro é o maior desembolso e o que menos se pode corrigir depois. A alimentação é o bloco mais volátil, não necessariamente o maior.' },
+      { p: 'Como se calcula o custo da arroba produzida?', opcoes: ['Preço de venda dividido pelo número de cabeças', 'Custo total do lote dividido pelo total de arrobas geradas', 'Custo da ração dividido pelo ganho de peso', 'Diária multiplicada pelos dias de cocho'], correta: 1, explicacao: 'Custo da arroba produzida é o custo total dividido pelas arrobas geradas (peso vivo final × rendimento de carcaça ÷ 15).' },
+      { p: 'Melhorar o rendimento de carcaça tem qual efeito sobre o custo da arroba produzida?', opcoes: ['Nenhum, é só um detalhe do frigorífico', 'Aumenta o custo, porque o animal fica mais tempo no cocho', 'Reduz o custo da arroba produzida sem exigir mais ração', 'Só importa para quem exporta'], correta: 2, explicacao: 'Com o mesmo consumo de ração é possível gerar mais arrobas — e mais arrobas sobre o mesmo custo reduzem o custo por arroba.' },
+      { p: 'O que é o ponto de equilíbrio num projeto de confinamento?', opcoes: ['O lucro por cabeça igual à média do setor', 'O preço mínimo da arroba que zera o resultado', 'O lote mínimo para o boitel aceitar o contrato', 'O dia em que o animal atinge o peso ideal'], correta: 1, explicacao: 'É o preço (ou a quantidade) em que receita e custo se igualam. Abaixo dele, cada arroba vendida amplia o prejuízo.' },
+      { p: 'Se a TIR do projeto é 14% ao ano e o CDI é 10,75%, a leitura correta é:', opcoes: ['O projeto não compensa, pois não supera 20%', 'O prêmio pelo risco é de cerca de 3,25 pontos percentuais', 'A TIR não deve ser comparada ao CDI', 'O projeto é livre de risco'], correta: 1, explicacao: 'A TIR menos o CDI é o prêmio de risco. Comparar o retorno com a alternativa livre de risco é obrigatório para saber se o risco vale a pena.' }
     ]
   },
 
@@ -468,6 +482,13 @@ const MATERIAIS = [
         ],
         pratica: 'Compare duas dietas no papel: custo por quilo de matéria seca e conversão esperada. Calcule o custo do quilo de ganho de cada uma e escolha a menor. Repita o exercício a cada mudança de preço do milho.'
       }
+    ],
+    quiz: [
+      { p: 'Qual faixa de pH indica um rúmen saudável?', opcoes: ['Entre 4,5 e 5,5', 'Entre 6,0 e 7,0', 'Entre 7,5 e 8,5', 'O pH do rúmen não importa'], correta: 1, explicacao: 'Abaixo de 6,0 já existe perda de desempenho por acidose subclínica, que é silenciosa e reduz consumo e conversão.' },
+      { p: 'Para que serve a fibra "fisicamente efetiva" na dieta?', opcoes: ['Aumentar a energia da ração', 'Estimular a ruminação e, com ela, a produção de saliva que tampona a acidez', 'Substituir a proteína', 'Reduzir o custo da dieta'], correta: 1, explicacao: 'A fibra longa estimula a ruminação; a saliva é rica em bicarbonato e funciona como tampão natural contra a acidose.' },
+      { p: 'Por que a adaptação da dieta é feita em degraus?', opcoes: ['Para economizar ração na primeira semana', 'Para permitir que a população microbiana do rúmen se ajuste sem colapsar', 'Por exigência do frigorífico', 'Para o animal ganhar mais peso já no início'], correta: 1, explicacao: 'Cada degrau aumenta o concentrado aos poucos. Subir rápido demais provoca acidose, queda de consumo e dias perdidos.' },
+      { p: 'Como se calcula o custo do quilo de ganho?', opcoes: ['Preço da ração dividido pelo número de animais', 'Custo da matéria seca multiplicado pela conversão alimentar', 'Diária dividida pelo ganho médio diário', 'Custo total dividido pelos dias de confinamento'], correta: 1, explicacao: 'É o indicador que orienta a formulação: combina o custo da dieta e a eficiência com que o animal a converte em peso.' },
+      { p: 'A dieta mais barata por quilo de matéria seca é sempre a mais lucrativa?', opcoes: ['Sim, porque reduz o custo total', 'Não, o que importa é o menor custo por quilo de ganho', 'Sim, desde que tenha bastante volumoso', 'Depende apenas do preço do milho'], correta: 1, explicacao: 'Uma dieta um pouco mais cara que melhora a conversão pode entregar o quilo de ganho mais barato, que é o que interessa.' }
     ]
   },
 
@@ -625,6 +646,13 @@ const MATERIAIS = [
         ],
         pratica: 'Confirme quem emite a GTA no seu fluxo e se todos os registros sanitários ficam arquivados por, no mínimo, o prazo legal. Pergunte ao frigorífico quais documentos ele exige para pagar bonificação.'
       }
+    ],
+    quiz: [
+      { p: 'Nas primeiras horas após o desembarque, o correto é oferecer:', opcoes: ['Concentrado à vontade para recuperar peso rápido', 'Água limpa e volumoso, deixando o concentrado para depois', 'Apenas sal mineral', 'Nada, para o animal descansar'], correta: 1, explicacao: 'O rúmen ainda está adaptado a pasto. Concentrado na chegada é uma das causas clássicas de acidose e queda de consumo.' },
+      { p: 'Qual é a ferramenta mais precoce para detectar um animal doente?', opcoes: ['Medir a temperatura de todo o lote', 'Observar a queda de consumo', 'Esperar aparecer tosse', 'Pesar o lote uma vez por semana'], correta: 1, explicacao: 'A queda de consumo antecede os sinais clínicos — muitas vezes em cerca de 24 horas. Tratar cedo é muito mais barato.' },
+      { p: 'Laminite (inflamação das lâminas do casco) tem origem principalmente ligada a:', opcoes: ['Excesso de fibra na dieta', 'Acidose ruminal', 'Falta de sombra', 'Baixa densidade de animais'], correta: 1, explicacao: 'Acidose é fator causal. A outra metade vem do ambiente: piso úmido, lama ou superfícies muito duras.' },
+      { p: 'Por que a mortalidade deve ser tratada como perda de capital e não apenas contábil?', opcoes: ['Porque o frigorífico devolve o valor do animal', 'Porque se perde a compra, a ração já consumida, a diária paga e a receita futura', 'Porque o seguro cobre integralmente', 'Porque o imposto compensa a perda'], correta: 1, explicacao: 'Morreu o boi, morreu todo o investimento feito nele e a arroba que ele produziria. É a razão de a sanidade ser o seguro mais barato.' },
+      { p: 'Sobre a Guia de Trânsito Animal (GTA):', opcoes: ['Em São Paulo exige comparecer presencialmente ao órgão', 'A emissão digital agiliza o trânsito e evita multas e retenções', 'Só é necessária para exportação', 'Pode ser preenchida com dados aproximados'], correta: 1, explicacao: 'A GTA digital dispensa a ida ao órgão, mas os dados devem ser precisos: erro de documento gera retenção e prejuízo no trajeto.' }
     ]
   },
 
@@ -784,6 +812,13 @@ const MATERIAIS = [
         ],
         pratica: 'No simulador, projete três cenários variando preço de venda e mortalidade. Escreva uma frase para cada: o que você faz se ele se concretizar.'
       }
+    ],
+    quiz: [
+      { p: 'O que é o "risco de base" no confinamento?', opcoes: ['O risco de o animal não ganhar peso', 'A diferença entre o preço da sua praça e o preço de referência do mercado futuro', 'O risco de o boitel romper o contrato', 'A variação do custo da ração'], correta: 1, explicacao: 'O hedge atua sobre a referência do mercado futuro. Se a sua região tem prêmio ou desconto estrutural, essa diferença permanece.' },
+      { p: 'Fazer hedge na B3 elimina todo o risco de preço?', opcoes: ['Sim, é garantia absoluta', 'Não: trata o risco de preço de referência, mas não elimina o risco de base', 'Sim, desde que cubra 100% do rebanho', 'Não, porque a B3 não negocia boi'], correta: 1, explicacao: 'O contrato a termo com preço fixado é o instrumento que elimina a incerteza completa, porque o preço vai na nota fiscal.' },
+      { p: 'Qual exigência prática o hedge na B3 impõe ao produtor?', opcoes: ['Nada além de pagar a corretagem', 'Ter caixa de reserva para os ajustes diários de margem', 'Vender o gado no mesmo dia', 'Registrar o rebanho na bolsa'], correta: 1, explicacao: 'Se o mercado se mover contra a posição, é preciso aportar recursos. Sem reserva, a proteção vira um problema de fluxo de caixa.' },
+      { p: 'Qual cenário deve orientar a decisão de investir?', opcoes: ['O otimista, para medir o potencial', 'O base, porque é o mais provável', 'O pessimista, porque é o critério de decisão', 'A média dos três'], correta: 2, explicacao: 'Monte o pessimista primeiro. Se a operação não compromete o caixa nele, é aceitável. Decidir pelo otimista é o erro mais caro.' },
+      { p: 'Se o projeto dá lucro positivo, mas o ROIC fica abaixo do CDI no mesmo período:', opcoes: ['Está ótimo, lucro é lucro', 'O projeto destrói valor frente à alternativa livre de risco', 'O CDI não deve ser considerado', 'Basta aumentar o lote para resolver'], correta: 1, explicacao: 'Lucro contábil e criação de valor são coisas diferentes. O confinamento precisa superar o CDI para justificar o risco adicional.' }
     ]
   },
 
@@ -937,6 +972,13 @@ const MATERIAIS = [
         ],
         pratica: 'Elabore um roteiro de visita técnica com dez itens objetivos e uma escala de conformidade. Use o mesmo roteiro em todos os candidatos a parceiro para comparar de forma justa.'
       }
+    ],
+    quiz: [
+      { p: 'Na cobrança por diária, quem absorve o risco do tempo de permanência no cocho?', opcoes: ['O boitel', 'O investidor', 'O frigorífico', 'É dividido meio a meio'], correta: 1, explicacao: 'Como cada dia extra custa dinheiro, o investidor absorve o risco do tempo — o que, por outro lado, incentiva eficiência.' },
+      { p: 'A modalidade de acerto no gancho tende a alinhar o interesse do boitel com:', opcoes: ['A redução da dieta para economizar', 'O desempenho e o ganho de peso do lote', 'A permanência mais longa do animal', 'A compra de bois mais leves'], correta: 1, explicacao: 'Como o boitel é remunerado no abate, ele ganha mais quando o lote performa melhor. É a lógica de alinhar incentivos.' },
+      { p: 'Para que serve a franquia de mortalidade no contrato?', opcoes: ['Esconder o número real de mortes', 'Repartir as perdas de forma justa: o investidor absorve o risco normal e o boitel responde pelo excedente', 'Transferir toda a perda para o boitel', 'Anular o contrato em caso de morte'], correta: 1, explicacao: 'A franquia equilibra incentivos: o investidor aceita o risco do negócio e o boitel cuida para não haver perdas evitáveis.' },
+      { p: 'Antes de comprometer capital grande com um boitel, o recomendado é:', opcoes: ['Assinar logo o contrato anual com desconto', 'Fazer um lote-piloto e visitar a estrutura em dia normal de trabalho', 'Confiar apenas na proposta comercial', 'Aceitar a indicação do próprio boitel'], correta: 1, explicacao: 'Um ciclo completo com o parceiro revela mais do que qualquer proposta. A visita sem aviso mostra a operação real, não a de apresentação.' },
+      { p: 'Um contrato profissional de boitel precisa prever obrigatoriamente:', opcoes: ['Apenas o valor da diária', 'Relatórios periódicos com peso, consumo, custos e ocorrências, além do direito de visita', 'Somente o prazo de saída dos animais', 'A dieta exata a ser usada'], correta: 1, explicacao: 'Transparência é cláusula, não favor. Sem informação e sem acesso ao curral, o investidor delega o controle do próprio dinheiro.' }
     ]
   },
 
@@ -1095,6 +1137,13 @@ const MATERIAIS = [
         ],
         pratica: 'Liste todos os fretes que a operação envolve e quanto cada um representa do custo total. Verifique se há oportunidade de reduzir distância de compra ou de agrupar cargas.'
       }
+    ],
+    quiz: [
+      { p: 'Qual fator costuma ter maior impacto na formação do preço da arroba no Brasil?', opcoes: ['O consumo interno, que é estável', 'A exportação, cujo ritmo de compra pressiona os preços internos', 'O preço do milho', 'A quantidade de confinamentos na região'], correta: 1, explicacao: 'O mercado interno absorve volume, mas a exportação forma preço. Quando o principal importador acelera as compras, a arroba sobe.' },
+      { p: 'Quais são requisitos típicos do protocolo Boi China?', opcoes: ['Peso acima de 600 kg e raça europeia', 'Idade inferior a 30 meses, rastreabilidade e ausência de certos hormônios', 'Apenas vacinação em dia', 'Produção exclusivamente a pasto'], correta: 1, explicacao: 'A idade é verificada por dentição. Como o prêmio varia com o tempo, confirme sempre as condições vigentes com o frigorífico.' },
+      { p: 'A tipificação de carcaça avalia principalmente:', opcoes: ['A raça do animal e a cor do pelo', 'Acabamento de gordura, conformação e peso', 'O preço pago pelo boi magro', 'A distância percorrida no transporte'], correta: 1, explicacao: 'Acabamento insuficiente e peso fora da faixa geram desconto. Dois produtores podem vender no mesmo dia e receber valores bem diferentes.' },
+      { p: 'O que aumenta o poder de barganha na venda ao frigorífico?', opcoes: ['Vender sempre o menor lote possível', 'Volume, regularidade de entrega e informação de mercado', 'Aceitar o primeiro preço oferecido', 'Evitar formalizar acordos por escrito'], correta: 1, explicacao: 'Lote homogêneo, no prazo e com documentação em ordem cria fornecedor preferencial. E fornecedor preferencial negocia em outra condição.' },
+      { p: 'Sobre acordos verbais de bonificação com o frigorífico:', opcoes: ['Costumam ser respeitados e dispensam papel', 'Na prática não existem: tudo deve ser formalizado por escrito', 'Valem mais que o contrato', 'Só precisam ser registrados se houver exportação'], correta: 1, explicacao: 'Acordo verbal sobre bonificação é o tipo de acordo que desaparece na hora da nota fiscal. Preço, descontos e prazos devem constar por escrito.' }
     ]
   },
 
@@ -1254,6 +1303,13 @@ const MATERIAIS = [
         ],
         pratica: 'Escolha uma tecnologia que você considera promissora e calcule, no papel, em quanto tempo ela se pagaria na sua operação. Se não conseguir estimar, provavelmente ainda não é o momento.'
       }
+    ],
+    quiz: [
+      { p: 'Qual dado explica melhor o desempenho do lote?', opcoes: ['A cor do pelame', 'O consumo de matéria seca', 'O número de tratadores', 'A marca da balança'], correta: 1, explicacao: 'Consumo é o dado mais valioso: animais que comem abaixo do esperado ganham menos, e a queda de consumo é o primeiro sinal de problema.' },
+      { p: 'Com quanta antecedência a queda de consumo costuma anteceder os sinais clínicos de doença?', opcoes: ['Cerca de 5 minutos', 'Cerca de 24 horas', 'Cerca de 1 semana', 'Não há relação entre consumo e doença'], correta: 1, explicacao: 'Detectar 24 horas antes pode significar a diferença entre um tratamento barato e a perda do animal.' },
+      { p: 'Qual periodicidade de pesagem já permite uma gestão eficaz do lote?', opcoes: ['Todos os dias', 'A cada 21 a 28 dias', 'Somente no abate', 'A cada 6 meses'], correta: 1, explicacao: 'Pesagens periódicas detectam desvios durante o ciclo, quando ainda dá tempo de corrigir dieta, sanidade ou manejo.' },
+      { p: 'Para que serve principalmente a modelagem financeira de cenários?', opcoes: ['Prever o futuro com exatidão', 'Entender a sensibilidade do resultado às variáveis', 'Substituir o médico veterinário', 'Eliminar o risco do negócio'], correta: 1, explicacao: 'Modelar mostra quanto o lucro cai se a arroba recuar, se o milho subir ou se a mortalidade dobrar. Decide-se por análise, não por otimismo.' },
+      { p: 'Sobre dados na gestão do confinamento, é correto afirmar:', opcoes: ['Quanto mais dados coletados sem uso, melhor', 'A integração entre peso, consumo, clima e custos gera mais valor do que dados isolados', 'Planilha manual é sempre superior a um sistema', 'Tecnologia só se paga em operações pequenas'], correta: 1, explicacao: 'Dados isolados valem pouco; integrados, sustentam decisões que nenhum dado sozinho permitiria. E a régua é sempre o retorno mensurável.' }
     ]
   }
 ];

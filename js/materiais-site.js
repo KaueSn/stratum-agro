@@ -93,6 +93,7 @@ function matRenderRoot(root) {
           '<div class="mat-meta">' +
             '<span>' + mIcon('level') + c.aulas.length + ' aulas</span>' +
             '<span>' + mIcon('video') + 'Documentário</span>' +
+            '<span>' + mIcon('cert') + 'Quiz' + (matQuizScores()[c.id] ? ' · ' + matQuizScores()[c.id].acertos + '/' + matQuizScores()[c.id].total : '') + '</span>' +
           '</div>' +
           '<span class="mat-cta">' + mIcon('play') + (feitas ? 'Continuar estudando' : 'Abrir curso') + '</span>' +
         '</div>' +
@@ -210,8 +211,11 @@ function matShellHTML(c) {
     '<div class="mat-tabs">' +
       '<button class="mat-tab' + (matAba === 'aulas' ? ' active' : '') + '" onclick="matAbrir(\'' + c.id + '\',\'aulas\')">' + mIcon('book') + ' Aulas escritas</button>' +
       '<button class="mat-tab' + (matAba === 'documentario' ? ' active' : '') + '" onclick="matAbrir(\'' + c.id + '\',\'documentario\')">' + mIcon('video') + ' Documentário</button>' +
+      '<button class="mat-tab' + (matAba === 'quiz' ? ' active' : '') + '" onclick="matAbrir(\'' + c.id + '\',\'quiz\')">' + mIcon('cert') + ' Quiz</button>' +
     '</div>' +
-    (matAba === 'documentario' ? matDocHTML(c) : matAulasHTML(c))
+    (matAba === 'documentario' ? matDocHTML(c)
+      : matAba === 'quiz' ? '<div id="matQuizWrap">' + matQuizHTML(c) + '</div>'
+      : matAulasHTML(c))
   );
 }
 
@@ -288,6 +292,114 @@ function matDone(i) {
   const el = document.getElementById('sl' + i);
   const btn = el && el.querySelector('.mat-check');
   if (btn) btn.classList.toggle('on', l.indexOf(i) !== -1);
+}
+
+// ---------- QUIZ ----------
+const MAT_QUIZ_KEY = 'stratum_materiais_quiz_v1';
+let matQuizResp = {};
+let matQuizCursoId = null;
+
+function matQuizScores() {
+  try { return JSON.parse(localStorage.getItem(MAT_QUIZ_KEY) || '{}') || {}; } catch (e) { return {}; }
+}
+
+function matQuizScoresSalvar(obj) {
+  try { localStorage.setItem(MAT_QUIZ_KEY, JSON.stringify(obj)); } catch (e) {}
+}
+
+function matQuizSalvarScore(curso) {
+  if (!curso || !curso.quiz) return;
+  const total = curso.quiz.length;
+  const acertos = curso.quiz.reduce((s, q, i) => s + (matQuizResp[i] === q.correta ? 1 : 0), 0);
+  const scores = matQuizScores();
+  const atual = scores[curso.id];
+  if (!atual || acertos > atual.acertos) {
+    scores[curso.id] = { acertos: acertos, total: total };
+    matQuizScoresSalvar(scores);
+  }
+}
+
+function matQuizHTML(curso) {
+  const perguntas = (curso && curso.quiz) || [];
+  if (!perguntas.length) return '<div class="mat-empty">Quiz indisponível para este curso.</div>';
+
+  if (matQuizCursoId !== curso.id) { matQuizResp = {}; matQuizCursoId = curso.id; }
+
+  const respondidas = Object.keys(matQuizResp).length;
+  const total = perguntas.length;
+  const acertos = perguntas.reduce((s, q, i) => s + (matQuizResp[i] === q.correta ? 1 : 0), 0);
+  const melhor = matQuizScores()[curso.id];
+  const fim = respondidas === total;
+
+  let html = '<div class="mat-quiz-top">' +
+      '<div class="mat-quiz-ico">' + mIcon('cert') + '</div>' +
+      '<div class="mat-quiz-top-txt">' +
+        '<h3>Teste seu conhecimento</h3>' +
+        '<p>' + total + ' perguntas sobre este curso. Responda e veja a explicação de cada resposta.' +
+        (melhor ? ' <b>Melhor resultado: ' + melhor.acertos + '/' + melhor.total + '.</b>' : '') +
+        '</p>' +
+      '</div>' +
+      '<div class="mat-quiz-placar">' + respondidas + '/' + total + '</div>' +
+    '</div>';
+
+  if (fim) {
+    const pct = Math.round((acertos / total) * 100);
+    const msg = pct === 100 ? 'Excelente! Você domina o assunto.'
+      : pct >= 70 ? 'Muito bom! Vale revisar os pontos que escaparam.'
+      : pct >= 50 ? 'Bom começo. Releia as aulas e tente de novo.'
+      : 'Vale voltar às aulas com calma antes de investir de verdade.';
+    html += '<div class="mat-quiz-res ' + (pct >= 70 ? 'bom' : pct >= 50 ? 'medio' : 'baixo') + '">' +
+        '<span class="mat-quiz-res-num">' + acertos + '/' + total + '</span>' +
+        '<span class="mat-quiz-res-txt"><b>' + pct + '% de acerto.</b> ' + msg + '</span>' +
+        '<button class="mat-quiz-refazer" onclick="matRefazerQuiz()">' + mIcon('arrow') + ' Refazer</button>' +
+      '</div>';
+  }
+
+  const questoes = perguntas.map((q, i) => {
+    const resp = matQuizResp[i];
+    const respondida = resp !== undefined;
+    const opts = q.opcoes.map((o, oi) => {
+      let cls = 'mat-opt';
+      if (respondida) {
+        if (oi === q.correta) cls += ' certa';
+        else if (oi === resp) cls += ' errada';
+        else cls += ' neutra';
+      }
+      return '<button class="' + cls + '"' + (respondida ? ' disabled' : '') +
+          ' onclick="matResponder(' + i + ',' + oi + ')">' +
+          '<span class="mat-opt-letra">' + String.fromCharCode(65 + oi) + '</span>' +
+          '<span class="mat-opt-txt">' + esc(o) + '</span>' +
+          (respondida && oi === q.correta ? '<span class="mat-opt-ico">' + mIcon('check') + '</span>' : '') +
+        '</button>';
+    }).join('');
+
+    return '<div class="mat-q">' +
+        '<div class="mat-q-top">' +
+          '<span class="mat-q-num">' + (i + 1) + '</span>' +
+          '<p class="mat-q-text">' + esc(q.p) + '</p>' +
+        '</div>' +
+        '<div class="mat-q-opts">' + opts + '</div>' +
+        (respondida ? '<div class="mat-q-exp ' + (resp === q.correta ? 'ok' : 'nao') + '">' +
+            '<b>' + (resp === q.correta ? 'Resposta correta!' : 'Resposta incorreta.') + '</b> ' +
+            esc(q.explicacao) + '</div>' : '') +
+      '</div>';
+  }).join('');
+
+  return html + '<div class="mat-quiz-list">' + questoes + '</div>';
+}
+
+function matResponder(i, oi) {
+  if (matQuizResp[i] !== undefined) return;
+  matQuizResp[i] = oi;
+  matQuizSalvarScore(matCurso);
+  const wrap = document.getElementById('matQuizWrap');
+  if (wrap) wrap.innerHTML = matQuizHTML(matCurso);
+}
+
+function matRefazerQuiz() {
+  matQuizResp = {};
+  const wrap = document.getElementById('matQuizWrap');
+  if (wrap) wrap.innerHTML = matQuizHTML(matCurso);
 }
 
 document.addEventListener('keydown', function (e) {
