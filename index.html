@@ -416,28 +416,247 @@
     .mock-kpi .v{font-size:1.1rem}
     .step{padding:20px}
   }
+  /* ---------- ÍCONES SVG (evita emojis "bugados") ---------- */
+  svg.ic{width:20px;height:20px;flex:0 0 auto;display:block;fill:none;stroke:currentColor;
+    stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .logo{display:flex}
+  .logo .mark svg.ic{width:19px;height:19px;stroke:#fff}
+  .auth-head .mark svg.ic{width:26px;height:26px;stroke:#fff}
+  .card .ico svg.ic{width:23px;height:23px;color:var(--primary-2)}
+  .trust svg.ic{width:15px;height:15px;color:var(--primary-2)}
+  .menu-toggle svg.ic{width:22px;height:22px}
+  .band .big svg.ic{width:40px;height:40px;color:var(--primary-2)}
+  .app-nav button svg.ic{width:18px;height:18px}
+  .panel h3{display:flex;align-items:center;gap:9px}
+  .panel h3 svg.ic{width:20px;height:20px;color:var(--primary-2)}
+  .hint svg.ic{width:15px;height:15px;display:inline-block;vertical-align:-2px;margin-right:4px;color:#fcd34d}
+
+  /* ---------- MATERIAIS DE APOIO ---------- */
+  .mat-toolbar{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .mat-search{display:flex;align-items:center;gap:9px;flex:1 1 280px;max-width:430px;
+    background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 14px}
+  .mat-search svg.ic{width:18px;height:18px;color:var(--muted-2)}
+  .mat-search input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:.92rem}
+  .mat-filters{display:flex;gap:8px;flex-wrap:wrap}
+  .mat-chip{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:8px 15px;
+    border-radius:999px;font-size:.8rem;font-weight:600;transition:var(--smooth)}
+  .mat-chip:hover{border-color:var(--border-2);color:var(--text)}
+  .mat-chip.active{background:var(--grad);border-color:transparent;color:#04140f}
+  .mat-progresso{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--card);
+    border:1px solid var(--border);border-radius:12px;padding:13px 16px;font-size:.82rem;color:var(--muted);margin-bottom:24px}
+  .mat-progresso svg.ic{width:15px;height:15px;display:inline-block;vertical-align:-2px;margin-right:5px;color:var(--primary-2)}
+  .mat-track{flex:1 1 160px;height:8px;border-radius:999px;background:rgba(255,255,255,.06);
+    border:1px solid var(--border);overflow:hidden;min-width:130px}
+  .mat-fill{display:block;height:100%;width:0;border-radius:999px;background:var(--grad);transition:width .4s ease}
+
+  .mat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+  .mat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+    display:flex;flex-direction:column;cursor:pointer;transition:var(--smooth)}
+  .mat-card:hover{transform:translateY(-5px);border-color:var(--border-2);box-shadow:var(--shadow)}
+  .mat-cover{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#0d9488,#1e3a5f);overflow:hidden}
+  .mat-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .mat-cover::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,11,18,0) 42%,rgba(8,11,18,.78) 100%)}
+  .mat-tag{position:absolute;top:11px;left:11px;z-index:2;background:rgba(8,11,18,.72);backdrop-filter:blur(4px);
+    color:#dbe7f5;font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.14)}
+  .mat-lvl{position:absolute;top:11px;right:11px;z-index:2;background:rgba(13,148,136,.88);color:#fff;
+    font-size:.66rem;font-weight:700;padding:5px 11px;border-radius:999px}
+  .mat-done{position:absolute;bottom:11px;right:11px;z-index:2;display:inline-flex;align-items:center;gap:5px;
+    background:rgba(16,185,129,.92);color:#04140f;font-size:.66rem;font-weight:800;padding:5px 11px;border-radius:999px}
+  .mat-done svg.ic{width:13px;height:13px}
+  .mat-body-card{padding:18px 20px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .mat-body-card h3{font-size:1.04rem;font-weight:700;line-height:1.35}
+  .mat-body-card p{color:var(--muted);font-size:.85rem;line-height:1.6;flex:1}
+  .mat-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:.74rem;color:var(--muted-2);
+    border-top:1px solid var(--border);padding-top:12px}
+  .mat-meta span{display:inline-flex;align-items:center;gap:5px}
+  .mat-meta svg.ic{width:14px;height:14px}
+  .mat-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--grad);
+    color:#04140f;border-radius:11px;padding:11px 15px;font-weight:700;font-size:.86rem;margin-top:3px}
+  .mat-cta svg.ic{width:16px;height:16px}
+  .mat-card:hover .mat-cta{filter:brightness(1.08)}
+  .mat-empty{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--muted);
+    border:1px dashed var(--border);border-radius:var(--r)}
+
+  /* ---------- LEITOR (overlay) ---------- */
+  #matOverlay{position:fixed;inset:0;z-index:140;display:none;background:rgba(5,8,14,.96);
+    backdrop-filter:blur(10px);overflow-y:auto}
+  #matOverlay.active{display:block;animation:fadeIn .25s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .mat-ov-head{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:16px 24px;background:rgba(8,11,18,.94);border-bottom:1px solid var(--border);
+    backdrop-filter:blur(12px)}
+  .mat-ov-title{display:flex;align-items:center;gap:9px;font-weight:700}
+  .mat-ov-title svg.ic{width:20px;height:20px;color:var(--primary-2)}
+  .mat-x{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--border-2);color:var(--muted);
+    padding:9px 15px;border-radius:11px;font-size:.85rem;font-weight:600;transition:var(--smooth)}
+  .mat-x svg.ic{width:15px;height:15px}
+  .mat-x:hover{color:var(--text);border-color:var(--danger)}
+  .mat-ov-body{max-width:1000px;margin:0 auto;padding:26px 24px 80px}
+  .mat-ov-h2{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;margin:4px 0 8px}
+  .mat-ov-p{color:var(--muted);font-size:.94rem;line-height:1.65;margin-bottom:24px;max-width:760px}
+  .mat-back{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--border);
+    color:var(--muted);padding:9px 15px;border-radius:11px;font-size:.83rem;font-weight:600;margin-bottom:20px;transition:var(--smooth)}
+  .mat-back svg.ic{width:15px;height:15px}
+  .mat-back:hover{color:var(--text);border-color:var(--border-2)}
+  .mat-reader-head{display:flex;gap:22px;flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid var(--border);margin-bottom:20px}
+  .mat-reader-cover{width:250px;flex:0 0 auto;aspect-ratio:16/10;border-radius:14px;overflow:hidden;
+    border:1px solid var(--border);background:linear-gradient(135deg,#0d9488,#1e3a5f)}
+  .mat-reader-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  .mat-reader-info{flex:1 1 320px;min-width:250px}
+  .mat-reader-info h2{font-size:1.55rem;line-height:1.28;margin-bottom:9px}
+  .mat-reader-info p{color:var(--muted);font-size:.92rem;line-height:1.65}
+  .mat-pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+  .mat-pill{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:600;color:var(--muted);
+    background:var(--card);border:1px solid var(--border);padding:6px 13px;border-radius:999px}
+  .mat-pill svg.ic{width:14px;height:14px}
+  .mat-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
+  .mat-tab{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);
+    color:var(--muted);padding:11px 17px;border-radius:12px;font-size:.87rem;font-weight:600;transition:var(--smooth)}
+  .mat-tab svg.ic{width:17px;height:17px}
+  .mat-tab.active{background:var(--grad);border-color:transparent;color:#04140f}
+  .mat-lesson{background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:var(--smooth)}
+  .mat-lesson.open{border-color:var(--primary-d)}
+  .mat-lhead{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer;user-select:none}
+  .mat-lnum{width:35px;height:35px;flex:0 0 auto;border-radius:10px;background:rgba(16,185,129,.14);
+    color:var(--primary-2);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.86rem}
+  .mat-lesson.open .mat-lnum{background:var(--grad);color:#04140f}
+  .mat-ltitles{flex:1;min-width:0}
+  .mat-ltitles h3{font-size:1rem;font-weight:700}
+  .mat-ltitles span{font-size:.75rem;color:var(--muted-2);display:block;margin-top:2px}
+  .mat-lright{display:flex;align-items:center;gap:11px;flex:0 0 auto}
+  .mat-len{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;color:var(--muted-2)}
+  .mat-len svg.ic{width:13px;height:13px}
+  .mat-check{width:27px;height:27px;border-radius:8px;border:1.5px solid var(--border-2);display:inline-flex;
+    align-items:center;justify-content:center;color:transparent;transition:var(--smooth);padding:0}
+  .mat-check svg.ic{width:15px;height:15px}
+  .mat-check.on{background:var(--primary);border-color:var(--primary);color:#04140f}
+  .mat-chev{color:var(--muted-2);display:inline-flex;transition:transform .2s ease}
+  .mat-chev svg.ic{width:16px;height:16px}
+  .mat-lesson.open .mat-chev,.mat-chapter.open .mat-chev{transform:rotate(90deg)}
+  .mat-lbody{display:none;padding:2px 20px 22px}
+  .mat-lesson.open .mat-lbody{display:block;animation:fadeIn .2s ease}
+  .mat-obj{background:rgba(99,102,241,.10);border-left:3px solid var(--accent);border-radius:9px;padding:12px 15px;
+    font-size:.85rem;color:var(--muted);margin-bottom:16px}
+  .mat-obj b{color:var(--text)}
+  .mat-lbody p{color:var(--muted);font-size:.91rem;line-height:1.75;margin-bottom:13px}
+  .mat-sub{display:flex;align-items:center;gap:8px;font-size:.76rem;font-weight:800;text-transform:uppercase;
+    letter-spacing:.07em;color:var(--muted-2);margin:20px 0 11px}
+  .mat-sub svg.ic{width:15px;height:15px;color:var(--primary-2)}
+  .mat-points{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .mat-points li{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;line-height:1.6;color:var(--muted);
+    background:var(--card-2);border:1px solid var(--border);border-radius:11px;padding:12px 14px}
+  .mat-points svg.ic{width:16px;height:16px;color:var(--primary-2);margin-top:3px}
+  .mat-pratica{background:rgba(16,185,129,.10);border:1px solid rgba(16,185,129,.3);border-radius:12px;
+    padding:15px 17px;margin-top:18px;font-size:.87rem;line-height:1.65;color:var(--muted)}
+  .mat-pratica-t{display:flex;align-items:center;gap:7px;font-weight:800;color:var(--primary-2);
+    font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+  .mat-pratica-t svg.ic{width:15px;height:15px}
+  .mat-doc-hero{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-bottom:18px}
+  .mat-doc-hero img{width:100%;aspect-ratio:21/9;object-fit:cover;display:block;opacity:.6}
+  .mat-doc-info{position:absolute;inset:auto 0 0 0;padding:26px 24px 20px;
+    background:linear-gradient(180deg,rgba(5,8,14,0) 0%,rgba(5,8,14,.94) 80%)}
+  .mat-doc-tag{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:800;
+    text-transform:uppercase;letter-spacing:.1em;color:#04140f;background:var(--grad);padding:5px 12px;border-radius:999px;margin-bottom:10px}
+  .mat-doc-tag svg.ic{width:13px;height:13px}
+  .mat-doc-info h3{font-size:1.5rem;color:#fff;line-height:1.28}
+  .mat-doc-info p{color:#c8d6e8;font-size:.88rem;margin-top:8px;max-width:720px;line-height:1.62}
+  .mat-note{display:flex;gap:10px;align-items:flex-start;background:rgba(245,158,11,.10);
+    border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:14px 16px;font-size:.83rem;
+    color:var(--muted);line-height:1.62;margin-bottom:18px}
+  .mat-note svg.ic{width:17px;height:17px;color:var(--warn);flex:0 0 auto;margin-top:2px}
+  .mat-chapter{display:flex;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:16px 18px;margin-bottom:12px;transition:var(--smooth)}
+  .mat-chapter.open{border-color:var(--primary-d)}
+  .mat-ctime{flex:0 0 auto;font-weight:800;font-size:.78rem;color:var(--primary-2);background:rgba(16,185,129,.13);
+    border-radius:8px;padding:6px 10px;height:fit-content;font-variant-numeric:tabular-nums}
+  .mat-cbody{flex:1;min-width:0}
+  .mat-chead{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;user-select:none}
+  .mat-chead h4{font-size:.97rem;font-weight:700}
+  .mat-ctext{display:none;margin-top:12px}
+  .mat-chapter.open .mat-ctext{display:block;animation:fadeIn .2s ease}
+  .mat-ctext p{color:var(--muted);font-size:.9rem;line-height:1.75;margin-bottom:12px}
+  .mat-ctext p:last-child{margin-bottom:0}
+
+  @media(max-width:760px){
+    .mat-grid{grid-template-columns:1fr}
+    .mat-ov-body{padding:20px 16px 70px}
+    .mat-ov-head{padding:14px 16px}
+    .mat-reader-cover{width:100%}
+    .mat-reader-info h2{font-size:1.22rem}
+    .mat-lhead{padding:13px 14px;gap:10px}
+    .mat-lbody{padding:2px 15px 18px}
+    .mat-doc-info{padding:16px 15px 14px}
+    .mat-doc-info h3{font-size:1.16rem}
+    .mat-chapter{padding:13px 14px;gap:11px}
+  }
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     SPRITE DE ÍCONES (SVG) — substitui emojis que "bugam" em alguns sistemas
+     Uso: <svg class="ic"><use href="#i-nome"></use></svg>
+     ============================================================ -->
+<svg width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true" focusable="false">
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7h-4M21 7v4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-5A8 8 0 1 1 21 12z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C9.8 5 7.4 4.5 4 4.5v13c3.4 0 5.8.5 8 2 2.2-1.5 4.6-2 8-2v-13c-3.4 0-5.8.5-8 2z"/><path d="M12 6.5v13"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.1 2.7 2 6 2s6-.9 6-2v-5"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-6M4 11V3M12 21v-9M12 8V3M20 21v-4M20 13V3"/><path d="M1.5 15h5M9.5 12h5M17.5 17h5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10.5" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.5.4.8 1 .9 1.7h5.4c.1-.7.4-1.3.9-1.7A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-wheat" viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M12 9c0-3 1.5-5 3-6-1 0-2 .5-3 1.5C11 3.5 10 3 9 3c1.5 1 3 3 3 6z"/><path d="M12 13c-2.5 0-4-1.5-4.5-3.5 2 .3 4 1.5 4.5 3.5zM12 13c2.5 0 4-1.5 4.5-3.5-2 .3-4 1.5-4.5 3.5z"/><path d="M12 17.5c-2.5 0-4-1.5-4.5-3.5 2 .3 4 1.5 4.5 3.5zM12 17.5c2.5 0 4-1.5 4.5-3.5-2 .3-4 1.5-4.5 3.5z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5l12 7.5-12 7.5z" fill="currentColor"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="M15.5 10.5l6-3v9l-6-3z"/></symbol>
+  <symbol id="i-time" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-level" viewBox="0 0 24 24"><path d="M4 20h4v-6H4zM10 20h4V9h-4zM16 20h4V4h-4z"/></symbol>
+  <symbol id="i-warning" viewBox="0 0 24 24"><path d="M12 3.5L21.5 20h-19z"/><path d="M12 9.5v4M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6.5L9.5 17 4 11.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-cert" viewBox="0 0 24 24"><circle cx="12" cy="9.5" r="5.5"/><path d="M8.5 14.5L7 21l5-2.5L17 21l-1.5-6.5"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/><rect x="10" y="10" width="4" height="4" rx="1"/><path d="M9.5 3v3.5M14.5 3v3.5M9.5 17.5V21M14.5 17.5V21M3 9.5h3.5M3 14.5h3.5M17.5 9.5H21M17.5 14.5H21"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.4L19 10l-5.2 1.6L12 17l-1.8-5.4L5 10l5.2-1.6z"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5L12 3.5l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/><path d="M6 15h4"/></symbol>
+  <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M10 4.5h4v2.2a1.8 1.8 0 1 0 3.6 0V4.5H20v6h-2.2a1.8 1.8 0 1 0 0 3.6H20v5.4h-5.4v-2.2a1.8 1.8 0 1 0-3.6 0V19.5H5.6v-5.4H7.8a1.8 1.8 0 1 0 0-3.6H5.6V4.5z"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4.5H6a1.5 1.5 0 0 0-1.5 1.5v12A1.5 1.5 0 0 0 6 19.5h4"/><path d="M15.5 8L20 12l-4.5 4"/><path d="M20 12H9.5"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9.5H18l3 3v3h-7.5z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-cow" viewBox="0 0 24 24"><path d="M4 8.5c0-2 1.5-3.5 3.5-3.5h9c2 0 3.5 1.5 3.5 3.5v5c0 3-2.5 5.5-5.5 5.5h-5C7 19 4 16.5 4 13.5z"/><path d="M4 8.5C3 8 2.5 6.8 2.8 5.5M20 8.5c1-.5 1.5-1.7 1.2-3"/><path d="M9.5 12h.01M14.5 12h.01"/></symbol>
+  <symbol id="i-money" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3 6 0 11-5 11-13 0-.4.2-.8.5-1 .4-.2.7 0 1 .3.5-.1 1.2-.3 3-2.3z"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.5h6V4"/><path d="M9 10h6M9 14h6M9 18h4"/></symbol>
+</svg>
 
 <!-- ================= NAV ================= -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a href="#inicio" class="logo" id="logoLink">
-      <span class="mark">🌾</span> Stratum <span class="grad-text">Agro</span>
+      <span class="mark"><svg class="ic"><use href="#i-wheat"></use></svg></span> Stratum <span class="grad-text">Agro</span>
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="#recursos">Recursos</a>
       <a href="#como">Como funciona</a>
       <a href="#beneficios">Benefícios</a>
       <a href="#comparacao">Comparativo</a>
+      <a href="#materiais">Materiais</a>
       <a href="#planos">Planos</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-actions">
       <button class="btn btn-ghost desk" id="navLogin">Entrar</button>
       <button class="btn btn-primary" id="navStart">Começar grátis</button>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg class="ic"><use href="#i-menu"></use></svg></button>
     </div>
   </div>
 </header>
@@ -458,7 +677,7 @@
         <span class="trust"><span class="ic">✓</span> <b>7 dias grátis</b></span>
         <span class="trust"><span class="ic">✓</span> Cancele quando quiser</span>
         <span class="trust"><span class="ic">✓</span> Dados ICBC/CEPEA</span>
-        <span class="trust"><span class="ic">🔒</span> Pagamento seguro via Stripe</span>
+        <span class="trust"><span class="ic"><svg class="ic"><use href="#i-lock"></use></svg></span> Pagamento seguro via Stripe</span>
       </div>
     </div>
     <div class="hero-visual">
@@ -498,12 +717,12 @@
       <p data-c="recursosSub">Ferramentas construídas com quem vive a pecuária, unindo análise financeira de verdade e o dia a dia do confinamento.</p>
     </div>
     <div class="cards">
-      <div class="card reveal"><div class="ico">📊</div><h3>Simulações em tempo real</h3><p>Compare 5 estados instantaneamente: preço da arroba, custo do boi magro, frete e lucro por cabeça e por lote.</p></div>
-      <div class="card reveal"><div class="ico">🛡️</div><h3>Gestão de risco profissional</h3><p>Mortalidade, CDI, impostos e análise de cenários otimista/pessimista para você não ser pego de surpresa.</p></div>
-      <div class="card reveal"><div class="ico">🎯</div><h3>Estratégia personalizada</h3><p>Descreva seu objetivo — lucro, segurança, prazo — e receba um plano de ação sob medida.</p></div>
-      <div class="card reveal"><div class="ico">📈</div><h3>Indicadores de verdade</h3><p>ROIC, VPL, TIR, payback descontado, ponto de equilíbrio e spread vs CDI no mesmo painel.</p></div>
-      <div class="card reveal"><div class="ico">📄</div><h3>Relatórios para investidores</h3><p>Exporte apresentações profissionais (PPT/PDF) prontas para levar ao seu sócio ou fundo.</p></div>
-      <div class="card reveal"><div class="ico">🚚</div><h3>Contratos e logística</h3><p>Checklists de frete, GTA digital, trava de preço e hedge na B3 — tudo no mesmo lugar.</p></div>
+      <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-chart"></use></svg></div><h3>Simulações em tempo real</h3><p>Compare 5 estados instantaneamente: preço da arroba, custo do boi magro, frete e lucro por cabeça e por lote.</p></div>
+      <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-shield"></use></svg></div><h3>Gestão de risco profissional</h3><p>Mortalidade, CDI, impostos e análise de cenários otimista/pessimista para você não ser pego de surpresa.</p></div>
+      <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-target"></use></svg></div><h3>Estratégia personalizada</h3><p>Descreva seu objetivo — lucro, segurança, prazo — e receba um plano de ação sob medida.</p></div>
+      <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-money"></use></svg></div><h3>Indicadores de verdade</h3><p>ROIC, VPL, TIR, payback descontado, ponto de equilíbrio e spread vs CDI no mesmo painel.</p></div>
+      <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-doc"></use></svg></div><h3>Relatórios para investidores</h3><p>Exporte apresentações profissionais (PPT/PDF) prontas para levar ao seu sócio ou fundo.</p></div>
+      <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-truck"></use></svg></div><h3>Contratos e logística</h3><p>Checklists de frete, GTA digital, trava de preço e hedge na B3 — tudo no mesmo lugar.</p></div>
     </div>
   </div>
 </section>
@@ -555,7 +774,7 @@
 <section class="block" style="padding-top:0">
   <div class="wrap">
     <div class="band reveal">
-      <div class="big">🛡️</div>
+      <div class="big"><svg class="ic"><use href="#i-shield"></use></svg></div>
       <div>
         <h3>Teste sem risco por 7 dias</h3>
         <p>Comece grátis, use todas as simulações e cancele com um clique se não fizer sentido para a sua operação. Sem fidelidade e sem letras miúdas.</p>
@@ -648,6 +867,28 @@
   </div>
 </section>
 
+<!-- ================= MATERIAIS DE APOIO ================= -->
+<section class="block" id="materiais">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag">Aprenda grátis</div>
+      <h2>Materiais de apoio</h2>
+      <p>Cursos completos sobre o agro, escritos para você aprender e aplicar no seu próprio negócio. Cada curso traz aulas em formato de ensino e um documentário narrado em capítulos. Aberto a qualquer pessoa — estude no seu ritmo.</p>
+    </div>
+    <div data-mat-root>
+      <div class="mat-toolbar">
+        <label class="mat-search">
+          <svg class="ic"><use href="#i-search"></use></svg>
+          <input type="text" placeholder="Buscar curso, tema ou palavra-chave..." oninput="matBuscar(this.value)">
+        </label>
+        <div class="mat-filters" data-mat-filtros></div>
+      </div>
+      <div class="mat-progresso" data-mat-progresso></div>
+      <div class="mat-grid" data-mat-grid></div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= FAQ ================= -->
 <section class="block" id="faq">
   <div class="wrap">
@@ -684,12 +925,12 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="logo" style="margin-bottom:12px"><span class="mark">🌾</span> Stratum <span class="grad-text">Agro</span></div>
+        <div class="logo" style="margin-bottom:12px"><span class="mark"><svg class="ic"><use href="#i-wheat"></use></svg></span> Stratum <span class="grad-text">Agro</span></div>
         <p style="color:var(--muted);font-size:.9rem;max-width:330px">Planejamento e Controle Estratégico Agro. Inteligência e consultoria para alocação de capital no agronegócio.</p>
       </div>
       <div>
         <h5>Produto</h5>
-        <a href="#recursos">Recursos</a><a href="#como">Como funciona</a><a href="#planos">Planos</a><a href="#faq">FAQ</a>
+        <a href="#recursos">Recursos</a><a href="#como">Como funciona</a><a href="#materiais">Materiais de apoio</a><a href="#planos">Planos</a><a href="#faq">FAQ</a>
       </div>
       <div>
         <h5>Conta</h5>
@@ -715,12 +956,13 @@
         <div><div class="n" id="appName">Usuário</div><div class="e" id="appEmail">—</div></div>
       </div>
       <nav class="app-nav">
-        <button class="active" data-panel="inicio"><span>🏠</span> Início</button>
-        <button data-panel="perfil"><span>👤</span> Meu perfil</button>
-        <button data-panel="assinatura"><span>💳</span> Assinatura</button>
-        <button data-panel="admin" id="navAdmin" style="display:none"><span>⚙️</span> Admin Master</button>
-        <button data-panel="dev" id="navDev" style="display:none"><span>🧩</span> Editor do site</button>
-        <button id="btnLogout"><span>🚪</span> Sair</button>
+        <button class="active" data-panel="inicio"><svg class="ic"><use href="#i-home"></use></svg> Início</button>
+        <button id="navMateriais" onclick="matAbrirCatalogoFromApp()"><svg class="ic"><use href="#i-book"></use></svg> Materiais de apoio</button>
+        <button data-panel="perfil"><svg class="ic"><use href="#i-user"></use></svg> Meu perfil</button>
+        <button data-panel="assinatura"><svg class="ic"><use href="#i-card"></use></svg> Assinatura</button>
+        <button data-panel="admin" id="navAdmin" style="display:none"><svg class="ic"><use href="#i-sliders"></use></svg> Admin Master</button>
+        <button data-panel="dev" id="navDev" style="display:none"><svg class="ic"><use href="#i-puzzle"></use></svg> Editor do site</button>
+        <button id="btnLogout"><svg class="ic"><use href="#i-logout"></use></svg> Sair</button>
       </nav>
     </aside>
 
@@ -738,7 +980,7 @@
           <a class="btn btn-primary btn-lg" id="btnSim" href="https://kauesn.github.io/boitel-analytics-pro/" target="_blank" rel="noopener">Abrir o Simulador →</a>
           <button class="btn btn-outline btn-lg" onclick="goPanel('assinatura')">Gerenciar assinatura</button>
         </div>
-        <p class="hint" id="simLockMsg" style="display:none;color:#fcd34d">🔒 O simulador é liberado com uma assinatura ativa. Escolha um plano na aba <b>Assinatura</b>.</p>
+        <p class="hint" id="simLockMsg" style="display:none;color:#fcd34d"><svg class="ic"><use href="#i-lock"></use></svg> O simulador é liberado com uma assinatura ativa. Escolha um plano na aba <b>Assinatura</b>.</p>
         <p class="hint">O simulador abre em uma aba dedicada com todos os indicadores, gráficos e relatórios.</p>
       </section>
 
@@ -771,7 +1013,7 @@
 
       <!-- ADMIN MASTER -->
       <section class="panel" id="panel-admin">
-        <h3>⚙️ Admin Master</h3>
+        <h3><svg class="ic"><use href="#i-sliders"></use></svg> Admin Master</h3>
         <p class="sub">Controle de acesso, cargos, assinaturas e pagamentos da plataforma.</p>
 
         <div class="switch" id="paySwitch">
@@ -796,7 +1038,7 @@
 
       <!-- DEV / EDITOR -->
       <section class="panel" id="panel-dev">
-        <h3>🧩 Editor do site</h3>
+        <h3><svg class="ic"><use href="#i-puzzle"></use></svg> Editor do site</h3>
         <p class="sub">Edite os textos da página inicial. As mudanças aparecem para todos os visitantes.</p>
         <div class="field"><label>Título da seção Recursos</label><input id="ctRecTitulo"></div>
         <div class="field"><label>Subtítulo da seção Recursos</label><input id="ctRecSub"></div>
@@ -814,7 +1056,7 @@
   <div class="auth-card">
     <button class="auth-close" onclick="closeAuth()" aria-label="Fechar">×</button>
     <div class="auth-head">
-      <div class="mark">🌾</div>
+      <div class="mark"><svg class="ic"><use href="#i-wheat"></use></svg></div>
       <h2 id="authTitle">Bem-vindo</h2>
       <p id="authSubtitle">Entre para acessar sua conta</p>
     </div>
@@ -852,8 +1094,19 @@
   </div>
 </div>
 
+<!-- ================= LEITOR DE MATERIAIS (overlay) ================= -->
+<div id="matOverlay">
+  <div class="mat-ov-head">
+    <div class="mat-ov-title"><svg class="ic"><use href="#i-book"></use></svg> <span>Materiais de apoio</span></div>
+    <button class="mat-x" onclick="matFechar()"><svg class="ic"><use href="#i-close"></use></svg> Fechar</button>
+  </div>
+  <div class="mat-ov-body" id="matShell"></div>
+</div>
+
 <div id="toasts"></div>
 
+<script src="js/materiais-data.js"></script>
+<script src="js/materiais-site.js"></script>
 <script>
 /* ============================================================
    CONFIGURAÇÃO
