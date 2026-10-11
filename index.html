@@ -954,6 +954,7 @@
           <li><span class="tick">✓</span> DRE, fluxo de caixa e gráficos</li>
           <li><span class="tick">✓</span> Exportação PPT/PDF</li>
           <li><span class="tick">✓</span> Análise de objetivo (Estratégia)</li>
+          <li><span class="tick">✓</span> Materiais de apoio: cursos e quizzes</li>
         </ul>
         <button class="btn btn-primary btn-block" data-plan="mensal" data-billing="Assinar agora">Assinar agora</button>
       </div>
@@ -966,8 +967,10 @@
         <div class="note">Equivale a R$ 8,33/mês · 2 meses grátis</div>
         <ul>
           <li><span class="tick">✓</span> Tudo do plano Acess</li>
-          <li><span class="tick">✓</span> Análise de sensibilidade avançada</li>
-          <li><span class="tick">✓</span> Comparação de cenários salvos</li>
+          <li><span class="tick">✓</span> <b>Cenários salvos</b> e comparador lado a lado (até 4)</li>
+          <li><span class="tick">✓</span> <b>Análise de sensibilidade</b>: impacto de cada variável no lucro</li>
+          <li><span class="tick">✓</span> <b>Simulador de hedge</b> e trava de preço por cenário</li>
+          <li><span class="tick">✓</span> Ponto de virada e amplitude de risco do lote</li>
           <li><span class="tick">✓</span> Suporte prioritário</li>
           <li><span class="tick">✓</span> Selo Pro no perfil</li>
         </ul>
@@ -1010,6 +1013,9 @@
           <tr><td>Spread vs CDI (renda fixa)</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
           <tr><td>Análise de risco (mortalidade e impostos)</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
           <tr><td>Relatórios para investidores (PPT/PDF)</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Cenários salvos e comparador lado a lado</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Análise de sensibilidade e ponto de virada</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Simulador de hedge e trava de preço</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
           <tr><td>Atualizações e melhorias contínuas</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
         </tbody>
       </table>
@@ -1557,6 +1563,7 @@ async function createUserDoc(user){
     email: user.email || '',
     name: (user.displayName || (user.email||'').split('@')[0] || 'Investidor'),
     role: isMaster ? 'admin' : 'user',
+    plan: 'acess',
     status: 'active',
     subscription: 'trial',
     subscriptionStart: now.toISOString(),
@@ -2353,6 +2360,9 @@ async function refreshSubscription(){
         if (info.active){
           currentUserData.subscription = 'premium';
           if (info.currentPeriodEnd) currentUserData.subscriptionEnd = info.currentPeriodEnd;
+          // O plano vem do Stripe: assinatura anual = Pro
+          if (info.plan === 'anual') currentUserData.plan = 'pro';
+          else if (info.plan === 'mensal') currentUserData.plan = 'acess';
         }
       }
     } catch(e){ /* mantém os dados locais */ }
@@ -2423,16 +2433,26 @@ function renderAdminTable(users){
       <td style="color:var(--text)">${u.email || '—'}${self?' <span class="badge b">você</span>':''}</td>
       <td><span class="badge ${roleBadge}">${u.role || 'user'}</span></td>
       <td><span class="badge ${u.status === 'active' ? 'g':'r'}">${u.status || '—'}</span></td>
-      <td><span class="badge ${subBadge}">${u.subscription || '—'}</span></td>
+      <td><span class="badge ${subBadge}">${u.subscription || '—'}</span> <span class="badge ${u.plan === 'pro' ? 'g' : 'b'}">${u.plan === 'pro' ? 'Pro' : 'Acess'}</span></td>
       <td>${fmtDate(u.subscriptionEnd)}</td>
       <td><div class="actions">
+        <button class="mini ok" onclick="setPlan('${u.id}','${u.plan === 'pro' ? 'acess' : 'pro'}')">${u.plan === 'pro' ? '→ Acess' : '→ Pro'}</button>
         <button class="mini" onclick="setRole('${u.id}','${u.role === 'dev' ? 'user':'dev'}')">${u.role === 'dev' ? 'Remover dev':'Tornar dev'}</button>
-        <button class="mini ok" onclick="setRole('${u.id}','admin')">Admin</button>
+        <button class="mini" onclick="setRole('${u.id}','admin')">Admin</button>
         <button class="mini" onclick="setSub('${u.id}','${nextSub}')">${u.subscription === 'premium' ? '→ Trial':'→ Premium'}</button>
         <button class="mini danger" onclick="setSub('${u.id}','expired')">Expirar</button>
       </div></td>
     </tr>`;
   }).join('');
+}
+async function setPlan(uid, plan){
+  if (!isAdminMaster(currentUserData)) return;
+  if (!db) return toast('Ação indisponível no modo demonstração.', 'err');
+  try {
+    await db.collection('users').doc(uid).update({ plan, updatedAt: new Date().toISOString() });
+    toast('Plano atualizado: ' + (plan === 'pro' ? 'Pro' : 'Acess'), 'ok');
+    loadAdmin();
+  } catch(e){ toast('Erro ao atualizar o plano.', 'err'); }
 }
 async function setRole(uid, role){
   if (!isAdminMaster(currentUserData)) return;

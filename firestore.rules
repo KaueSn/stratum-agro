@@ -23,14 +23,17 @@ service cloud.firestore {
       // (ou 'admin' se for o admin master). Assinatura sempre nasce 'trial'.
       allow create: if signedIn() && request.auth.uid == uid
         && request.resource.data.role == (isMaster() ? 'admin' : 'user')
-        && request.resource.data.subscription == 'trial';
+        && request.resource.data.subscription == 'trial'
+        && request.resource.data.plan == 'acess';
 
-      // O dono pode editar apenas dados do perfil (nome, telefone, etc.).
-      // NÃO pode mudar cargo nem assinatura. Admin pode tudo.
+      // O dono pode editar apenas dados do perfil (nome, telefone, cenários…).
+      // NÃO pode mudar cargo, plano, assinatura nem status. Admin pode tudo.
       allow update: if isAdmin() || (
         signedIn() && request.auth.uid == uid
         && request.resource.data.role == resource.data.role
         && request.resource.data.subscription == resource.data.subscription
+        && request.resource.data.plan == resource.data.plan
+        && request.resource.data.status == resource.data.status
       );
 
       allow delete: if isAdmin();
