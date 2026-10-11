@@ -1479,7 +1479,33 @@ function clearAuthMsgs(){ $('authError').classList.remove('show'); $('authOk').c
    ============================================================ */
 window.addEventListener('scroll', () => { $('nav').classList.toggle('scrolled', window.scrollY > 12); });
 $('menuToggle').addEventListener('click', () => $('navLinks').classList.toggle('open'));
-document.querySelectorAll('#navLinks a').forEach(a => a.addEventListener('click', () => $('navLinks').classList.remove('open')));
+
+/* Navegação pelas seções da página inicial.
+   Funciona sempre: se você estiver logado (página inicial oculta), ela volta
+   para o site público antes de rolar até a seção. */
+function irParaSecao(id){
+  const alvo = document.getElementById(id);
+  if (!alvo) return;
+  const pub = $('publicSite');
+  if (document.body.classList.contains('in-app') || !pub || getComputedStyle(pub).display === 'none'){
+    showPublic();
+  }
+  $('navLinks').classList.remove('open');
+  const topo = alvo.getBoundingClientRect().top + window.scrollY - 86;
+  try { window.scrollTo({ top: Math.max(0, topo), behavior: 'smooth' }); }
+  catch(e){ window.scrollTo(0, Math.max(0, topo)); }
+  try { history.replaceState({}, '', '#' + id); } catch(e){}
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  const id = (a.getAttribute('href') || '').slice(1);
+  if (!id || !document.getElementById(id)) return;
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    irParaSecao(id);
+  });
+});
+
 function toggleFaq(btn){ const qa = btn.parentElement; qa.classList.toggle('open'); }
 const io = new IntersectionObserver((entries) => {
   entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
