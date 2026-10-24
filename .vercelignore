@@ -1,0 +1,17 @@
+# Não publicar na Vercel: testes, documentação interna e arquivos de ferramentas.
+# O site servido é index.html + js/ + api/ + lib/ (+ package.json para a Stripe SDK).
+node_modules
+tests
+docs
+graphify-out
+.claude
+.claude-flow
+.swarm
+.ruflo-install-backup
+.devin
+*.md
+*.bat
+firestore.rules
+.env
+.env.*
+.editorconfig

@@ -9,7 +9,8 @@ service cloud.firestore {
 
     function signedIn()   { return request.auth != null; }
     function email()      { return signedIn() ? request.auth.token.email : ''; }
-    function isMaster()   { return signedIn() && email() == 'kauue.neves@gmail.com'; }
+    // Master só com e-mail verificado (login Google já vem verificado)
+    function isMaster()   { return signedIn() && request.auth.token.email_verified == true && email() == 'kauue.neves@gmail.com'; }
     function myData()     { return get(/databases/$(database)/documents/users/$(request.auth.uid)).data; }
     function isAdmin()    { return isMaster() || (signedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && myData().role == 'admin'); }
     function isDev()      { return signedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && myData().role == 'dev'; }
@@ -19,21 +20,33 @@ service cloud.firestore {
       // Cada um lê o próprio perfil; admins leem todos
       allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
 
-      // Criação do próprio documento. Cargo só pode nascer 'user'
-      // (ou 'admin' se for o admin master). Assinatura sempre nasce 'trial'.
-      allow create: if signedIn() && request.auth.uid == uid
-        && request.resource.data.role == (isMaster() ? 'admin' : 'user')
-        && request.resource.data.subscription == 'trial'
-        && request.resource.data.plan == 'acess';
+      // Campos que o próprio usuário pode editar (site + simulador, que usa
+      // o mesmo projeto Firebase). Todo o resto só o admin altera.
+      function campoTexto(d, k, max) { return !(k in d) || (d[k] is string && d[k].size() <= max); }
+      function perfilValido(d) {
+        return campoTexto(d, 'name', 80) && campoTexto(d, 'phone', 30) && campoTexto(d, 'bio', 500)
+          && (!('cenarios' in d) || (d.cenarios is list && d.cenarios.size() <= 50));
+      }
 
-      // O dono pode editar apenas dados do perfil (nome, telefone, cenários…).
-      // NÃO pode mudar cargo, plano, assinatura nem status. Admin pode tudo.
+      // Criação do próprio documento. Só campos conhecidos; o e-mail é o do
+      // token; cargo nasce 'user' (ou 'admin' para o master); assinatura nasce 'trial'.
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['email', 'name', 'role', 'plan', 'status', 'subscription',
+             'subscriptionStart', 'subscriptionEnd', 'createdAt', 'updatedAt'])
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.role == (isMaster() ? 'admin' : 'user')
+        && request.resource.data.status == 'active'
+        && request.resource.data.subscription == 'trial'
+        && request.resource.data.get('plan', 'acess') == 'acess'
+        && perfilValido(request.resource.data);
+
+      // O dono edita apenas nome, telefone, bio e cenários (lista explícita:
+      // não pode mudar e-mail, cargo, plano, assinatura, datas nem status). Admin pode tudo.
       allow update: if isAdmin() || (
         signedIn() && request.auth.uid == uid
-        && request.resource.data.role == resource.data.role
-        && request.resource.data.subscription == resource.data.subscription
-        && request.resource.data.plan == resource.data.plan
-        && request.resource.data.status == resource.data.status
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['name', 'phone', 'bio', 'cenarios', 'updatedAt'])
+        && perfilValido(request.resource.data)
       );
 
       allow delete: if isAdmin();

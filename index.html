@@ -234,6 +234,9 @@
   .field input{width:100%;background:rgba(8,11,18,.75);border:1px solid var(--border);color:var(--text);
     padding:13px 15px;border-radius:12px;font-size:.95rem;outline:none;transition:var(--smooth)}
   .field input:focus{border-color:var(--primary-2);box-shadow:0 0 0 4px rgba(16,185,129,.14)}
+  /* Foco visível para navegação por teclado (WCAG 2.4.7) */
+  a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--primary-2);outline-offset:2px}
+  .mat-search:focus-within{box-shadow:0 0 0 3px rgba(16,185,129,.35)}
   .field input::placeholder{color:var(--muted-2)}
   .divider{display:flex;align-items:center;gap:14px;margin:18px 0;color:var(--muted-2);font-size:.8rem}
   .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -804,7 +807,7 @@
     <div class="nav-actions">
       <button class="btn btn-ghost desk" id="navLogin">Entrar</button>
       <button class="btn btn-primary" id="navStart">Começar grátis</button>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><svg class="ic"><use href="#i-menu"></use></svg></button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks"><svg class="ic"><use href="#i-menu"></use></svg></button>
     </div>
   </div>
 </header>
@@ -1156,9 +1159,9 @@
       <section class="panel" id="panel-perfil">
         <h3>Meu perfil</h3>
         <p class="sub">Mantenha seus dados atualizados.</p>
-        <div class="field"><label>Nome de exibição</label><input id="pfNome" placeholder="Seu nome"></div>
-        <div class="field"><label>E-mail</label><input id="pfEmail" disabled></div>
-        <div class="field"><label>Telefone (opcional)</label><input id="pfTel" placeholder="(00) 00000-0000"></div>
+        <div class="field"><label for="pfNome">Nome de exibição</label><input id="pfNome" autocomplete="name" placeholder="Seu nome"></div>
+        <div class="field"><label for="pfEmail">E-mail</label><input id="pfEmail" disabled></div>
+        <div class="field"><label for="pfTel">Telefone (opcional)</label><input id="pfTel" type="tel" autocomplete="tel" placeholder="(00) 00000-0000"></div>
         <button class="btn btn-primary" id="btnSalvarPerfil">Salvar perfil</button>
       </section>
 
@@ -1335,15 +1338,15 @@
 
 <!-- ================= AUTH ================= -->
 <div class="overlay" id="authOverlay">
-  <div class="auth-card">
+  <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSubtitle">
     <button class="auth-close" onclick="closeAuth()" aria-label="Fechar">×</button>
     <div class="auth-head">
       <div class="mark"><svg class="ic"><use href="#i-wheat"></use></svg></div>
       <h2 id="authTitle">Bem-vindo</h2>
       <p id="authSubtitle">Entre para acessar sua conta</p>
     </div>
-    <div class="err" id="authError"></div>
-    <div class="ok-msg" id="authOk"></div>
+    <div class="err" id="authError" role="alert"></div>
+    <div class="ok-msg" id="authOk" role="status"></div>
 
     <!-- LOGIN -->
     <div class="auth-form active" id="loginForm">
@@ -1453,14 +1456,21 @@ function setLoading(btn, on, label){
   else { btn.disabled = false; if (btn.dataset.orig){ btn.innerHTML = btn.dataset.orig; delete btn.dataset.orig; } }
 }
 function fmtDate(iso){ if(!iso) return '—'; try { return new Date(iso).toLocaleDateString('pt-BR'); } catch { return '—'; } }
+// Escapa texto vindo do banco antes de inserir em innerHTML (evita XSS)
+function esc(v){ return String(v == null ? '' : v).replace(/[&<>"'`]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','`':'&#96;'}[c])); }
 function initials(email){ return (email||'U').charAt(0).toUpperCase(); }
 
-// Cargo efetivo: o e-mail master é SEMPRE admin master, mesmo que o documento
-// no Firestore esteja desatualizado. Depois vêm os cargos gravados.
+// E-mail do usuário logado segundo o token do Firebase (não o campo do documento,
+// que é editável). Só vale se verificado — mesma regra do firestore.rules.
+function tokenEmail(){
+  const u = auth && auth.currentUser;
+  return (u && u.emailVerified && u.email) ? u.email.toLowerCase() : '';
+}
+// Cargo efetivo: o e-mail master (pelo token) é SEMPRE admin master, mesmo que o
+// documento no Firestore esteja desatualizado. Depois vêm os cargos gravados.
 function effectiveRole(data){
   if (!data) return 'user';
-  const email = (data.email || '').toLowerCase();
-  if (email && email === ADMIN_EMAIL) return 'admin';
+  if (tokenEmail() === ADMIN_EMAIL) return 'admin';
   if (data.role === 'master' || data.role === 'admin') return 'admin';
   if (data.role === 'dev') return 'dev';
   return 'user';
@@ -1471,8 +1481,7 @@ function canEditSite(data){ const r = effectiveRole(data); return r === 'admin' 
 // Autocorreção: grava o cargo de master no Firestore quando o e-mail confere
 async function ensureMasterRole(){
   if (!db || !auth || !auth.currentUser || !currentUserData) return;
-  const email = (currentUserData.email || '').toLowerCase();
-  if (email !== ADMIN_EMAIL) return;
+  if (tokenEmail() !== ADMIN_EMAIL) return;
   if (currentUserData.role === 'admin' && currentUserData.master === true) return;
   currentUserData.role = 'admin';
   currentUserData.master = true;
@@ -1491,7 +1500,10 @@ function clearAuthMsgs(){ $('authError').classList.remove('show'); $('authOk').c
    NAV / FAQ / REVEAL
    ============================================================ */
 window.addEventListener('scroll', () => { $('nav').classList.toggle('scrolled', window.scrollY > 12); });
-$('menuToggle').addEventListener('click', () => $('navLinks').classList.toggle('open'));
+$('menuToggle').addEventListener('click', () => {
+  const aberto = $('navLinks').classList.toggle('open');
+  $('menuToggle').setAttribute('aria-expanded', aberto ? 'true' : 'false');
+});
 
 /* Navegação pelas seções da página inicial.
    Funciona sempre: se você estiver logado (página inicial oculta), ela volta
@@ -1519,7 +1531,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-function toggleFaq(btn){ const qa = btn.parentElement; qa.classList.toggle('open'); }
+function toggleFaq(btn){ const qa = btn.parentElement; btn.setAttribute('aria-expanded', qa.classList.toggle('open') ? 'true' : 'false'); }
+document.querySelectorAll('.qa > button').forEach(b => b.setAttribute('aria-expanded', 'false'));
 const io = new IntersectionObserver((entries) => {
   entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
 }, { threshold: .12 });
@@ -1529,8 +1542,19 @@ $('year').textContent = new Date().getFullYear();
 /* ============================================================
    AUTH UI
    ============================================================ */
-function openAuth(mode){ clearAuthMsgs(); setAuthMode(mode || 'login'); $('authOverlay').classList.add('active'); }
-function closeAuth(){ $('authOverlay').classList.remove('active'); }
+let authFocoAnterior = null;
+function openAuth(mode){
+  clearAuthMsgs(); setAuthMode(mode || 'login');
+  authFocoAnterior = document.activeElement;
+  $('authOverlay').classList.add('active');
+  const campo = $(mode === 'register' ? 'regEmail' : 'loginEmail'); if (campo) setTimeout(() => campo.focus(), 50);
+}
+function closeAuth(){
+  if (!$('authOverlay').classList.contains('active')) return;
+  $('authOverlay').classList.remove('active');
+  if (authFocoAnterior && authFocoAnterior.focus) { try { authFocoAnterior.focus(); } catch(e){} }
+  authFocoAnterior = null;
+}
 function setAuthMode(mode){
   const login = mode === 'login';
   $('loginForm').classList.toggle('active', login);
@@ -1564,7 +1588,7 @@ async function loadUserData(uid){
 }
 async function createUserDoc(user){
   const ref = db.collection('users').doc(user.uid);
-  const isMaster = (user.email||'').toLowerCase() === ADMIN_EMAIL;
+  const isMaster = tokenEmail() === ADMIN_EMAIL;
   const now = new Date();
   const doc = {
     email: user.email || '',
@@ -1588,7 +1612,7 @@ async function loadSession(user){
     catch(e){ console.warn('Falha ao carregar perfil:', e); }
   }
   if (!currentUserData){
-    currentUserData = { email: user.email || '', name: (user.email||'').split('@')[0], role: ((user.email||'').toLowerCase()===ADMIN_EMAIL?'admin':'user'), status:'active', subscription:'trial' };
+    currentUserData = { email: user.email || '', name: (user.email||'').split('@')[0], role: 'user', status:'active', subscription:'trial' };
   }
   await ensureMasterRole();
   showApp();
@@ -2330,7 +2354,7 @@ async function assinar(btn){
     try {
       const r = await fetch(API_BASE.replace(/\/$/, '') + '/api/create-checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan, email: currentUserData.email || '', uid: (auth && auth.currentUser && auth.currentUser.uid) || '', idToken: await getIdToken() })
+        body: JSON.stringify({ plan, idToken: await getIdToken() })
       });
       const data = await r.json();
       if (data && data.url){ window.location.href = data.url; return; }
@@ -2359,7 +2383,7 @@ async function refreshSubscription(){
     try {
       const r = await fetch(API_BASE.replace(/\/$/, '') + '/api/subscription', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: currentUserData.email, idToken: await getIdToken() })
+        body: JSON.stringify({ idToken: await getIdToken() })
       });
       const info = await r.json();
       if (info && !info.error){
@@ -2402,11 +2426,11 @@ async function manageSubscription(){
   try {
     const r = await fetch(API_BASE.replace(/\/$/, '') + '/api/portal', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: currentUserData.email })
+      body: JSON.stringify({ idToken: await getIdToken() })
     });
     const data = await r.json();
     if (data && data.url){ window.location.href = data.url; return; }
-    toast((data && data.hint) || 'Não foi possível abrir o portal de cobrança.', 'err');
+    toast((data && data.error) || 'Não foi possível abrir o portal de cobrança.', 'err');
   } catch(e){ toast('Falha ao abrir o portal de cobrança.', 'err'); }
 }
 
@@ -2436,18 +2460,20 @@ function renderAdminTable(users){
     const roleBadge = u.role === 'admin' ? 'g' : (u.role === 'dev' ? 'b' : 'm');
     const subBadge = u.subscription === 'premium' ? 'g' : (u.subscription === 'expired' ? 'r' : 'y');
     const nextSub = u.subscription === 'premium' ? 'trial' : 'premium';
+    // u.id é usado dentro de onclick: só aceita o formato de UID do Firebase
+    const id = /^[A-Za-z0-9_-]{1,128}$/.test(u.id) ? u.id : '';
     return `<tr>
-      <td style="color:var(--text)">${u.email || '—'}${self?' <span class="badge b">você</span>':''}</td>
-      <td><span class="badge ${roleBadge}">${u.role || 'user'}</span></td>
-      <td><span class="badge ${u.status === 'active' ? 'g':'r'}">${u.status || '—'}</span></td>
-      <td><span class="badge ${subBadge}">${u.subscription || '—'}</span> <span class="badge ${u.plan === 'pro' ? 'g' : 'b'}">${u.plan === 'pro' ? 'Pro' : 'Acess'}</span></td>
-      <td>${fmtDate(u.subscriptionEnd)}</td>
+      <td style="color:var(--text)">${esc(u.email || '—')}${self?' <span class="badge b">você</span>':''}</td>
+      <td><span class="badge ${roleBadge}">${esc(u.role || 'user')}</span></td>
+      <td><span class="badge ${u.status === 'active' ? 'g':'r'}">${esc(u.status || '—')}</span></td>
+      <td><span class="badge ${subBadge}">${esc(u.subscription || '—')}</span> <span class="badge ${u.plan === 'pro' ? 'g' : 'b'}">${u.plan === 'pro' ? 'Pro' : 'Acess'}</span></td>
+      <td>${esc(fmtDate(u.subscriptionEnd))}</td>
       <td><div class="actions">
-        <button class="mini ok" onclick="setPlan('${u.id}','${u.plan === 'pro' ? 'acess' : 'pro'}')">${u.plan === 'pro' ? '→ Acess' : '→ Pro'}</button>
-        <button class="mini" onclick="setRole('${u.id}','${u.role === 'dev' ? 'user':'dev'}')">${u.role === 'dev' ? 'Remover dev':'Tornar dev'}</button>
-        <button class="mini" onclick="setRole('${u.id}','admin')">Admin</button>
-        <button class="mini" onclick="setSub('${u.id}','${nextSub}')">${u.subscription === 'premium' ? '→ Trial':'→ Premium'}</button>
-        <button class="mini danger" onclick="setSub('${u.id}','expired')">Expirar</button>
+        <button class="mini ok" onclick="setPlan('${id}','${u.plan === 'pro' ? 'acess' : 'pro'}')">${u.plan === 'pro' ? '→ Acess' : '→ Pro'}</button>
+        <button class="mini" onclick="setRole('${id}','${u.role === 'dev' ? 'user':'dev'}')">${u.role === 'dev' ? 'Remover dev':'Tornar dev'}</button>
+        <button class="mini" onclick="setRole('${id}','admin')">Admin</button>
+        <button class="mini" onclick="setSub('${id}','${nextSub}')">${u.subscription === 'premium' ? '→ Trial':'→ Premium'}</button>
+        <button class="mini danger" onclick="setSub('${id}','expired')">Expirar</button>
       </div></td>
     </tr>`;
   }).join('');

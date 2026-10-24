@@ -1,29 +1,31 @@
 // POST /api/create-checkout  → cria uma sessão de pagamento segura (Stripe Checkout)
-import { stripe, cors, readBody, PRICE_MENSAL, PRICE_ANUAL, SITE_URL } from '../lib/stripe.js';
+// Exige login: o uid e o e-mail vêm do token do Firebase, nunca do corpo da requisição.
+import { stripe, preflight, readBody, requireUser, fail, PRICE_MENSAL, PRICE_ANUAL, SITE_URL } from '../lib/stripe.js';
 
 export default async function handler(req, res) {
-  cors(res);
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: 'Método não permitido' });
-  if (!stripe) return res.status(500).json({ error: 'Stripe não configurado no servidor.' });
+  if (preflight(req, res)) return;
+  const user = await requireUser(req, res);
+  if (!user) return;
 
-  const { plan, email, uid } = readBody(req);
+  const { plan } = readBody(req);
+  if (plan !== 'mensal' && plan !== 'anual') return fail(res, 400, 'Plano inválido.');
   const price = plan === 'anual' ? PRICE_ANUAL : PRICE_MENSAL;
-  if (!price) return res.status(400).json({ error: 'Plano inválido.' });
 
   try {
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       line_items: [{ price, quantity: 1 }],
-      customer_email: email || undefined,
-      client_reference_id: uid || undefined,
+      customer_email: user.email || undefined,
+      client_reference_id: user.uid,
       allow_promotion_codes: true,
-      metadata: { uid: uid || '', plan: plan || 'mensal' },
-      success_url: `${SITE_URL}?assinatura=sucesso&session_id={CHECKOUT_SESSION_ID}`,
+      metadata: { uid: user.uid, plan },
+      // O uid fica gravado na assinatura: é por ele que /api/subscription e /api/portal a encontram
+      subscription_data: { metadata: { uid: user.uid, plan } },
+      success_url: `${SITE_URL}?assinatura=sucesso`,
       cancel_url: `${SITE_URL}?assinatura=cancelada`
     });
-    return res.status(200).json({ url: session.url, id: session.id });
+    return res.status(200).json({ url: session.url });
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    return fail(res, 502, 'Não foi possível iniciar o pagamento.', e);
   }
 }

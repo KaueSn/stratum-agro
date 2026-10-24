@@ -1,19 +1,15 @@
-// POST /api/subscription  → verifica no Stripe se o e-mail tem assinatura ativa
-import { stripe, cors, readBody, emailFromToken, getActiveSubscription } from '../lib/stripe.js';
+// POST /api/subscription  → informa se o usuário logado tem assinatura ativa no Stripe
+// Exige login: só consulta a assinatura do próprio usuário (nunca um e-mail enviado pelo navegador).
+import { preflight, requireUser, fail, getActiveSubscription } from '../lib/stripe.js';
 
 export default async function handler(req, res) {
-  cors(res);
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (!stripe) return res.status(500).json({ error: 'Stripe não configurado no servidor.' });
-
-  const body = readBody(req);
-  const email = (await emailFromToken(body.idToken)) || body.email || '';
-  if (!email) return res.status(400).json({ error: 'Informe o e-mail.' });
+  if (preflight(req, res)) return;
+  const user = await requireUser(req, res);
+  if (!user) return;
 
   try {
-    const info = await getActiveSubscription(email);
-    return res.status(200).json(info);
+    return res.status(200).json(await getActiveSubscription(user));
   } catch (e) {
-    return res.status(500).json({ error: e.message });
+    return fail(res, 502, 'Não foi possível verificar a assinatura.', e);
   }
 }

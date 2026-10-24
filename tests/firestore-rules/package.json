@@ -1,0 +1,14 @@
+{
+  "name": "stratum-agro-firestore-rules-tests",
+  "private": true,
+  "type": "module",
+  "description": "Testes das regras do Firestore no Firebase Emulator (local, projeto fictício demo-stratum).",
+  "scripts": {
+    "test": "firebase emulators:exec --only firestore --project demo-stratum \"node --test rules.test.js\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^6.0.0",
+    "firebase": "^13.1.0",
+    "firebase-tools": "^15.34.1"
+  }
+}
