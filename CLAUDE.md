@@ -10,7 +10,8 @@ Site de vendas + área logada da plataforma Stratum Agro (planejamento de confin
 - `lib/stripe.js` tem rate limit em memória (10/min por IP e por uid), parcial por instância serverless.
 - `firestore.rules`: regras do Firestore. **Publicadas manualmente** no Console do Firebase (projeto `boitel-analytics`, compartilhado com o simulador).
 - O simulador fica em outro repositório: `D:\Devin projetos` → `kauesn/boitel-analytics-pro`. Não confunda os dois repositórios.
-- Publicação: push na `main` atualiza o GitHub Pages (`kauesn.github.io/stratum-agro`) e a Vercel (`stratum-agro.vercel.app`). **Domínio oficial: Vercel** (`SITE_URL`). O redirecionamento do GitHub Pages só pode entrar depois que `stratum-agro.vercel.app` estiver nos domínios autorizados do Firebase Auth.
+- Publicação: push na `main` atualiza o GitHub Pages (`kauesn.github.io/stratum-agro`) e a Vercel (`stratum-agro.vercel.app`). **Domínio oficial: Vercel** (`SITE_URL`, autorizado no Firebase Auth). O GitHub Pages só redireciona para a Vercel (script no início do `<head>`).
+- `firestore.rules` também cobre a comunidade do simulador (`community_posts`, `community_answers`). Regras publicadas em 2026-10-28 a partir deste arquivo.
 - Editor do site: só o master (pelo token) publica o campo `js`; HTML de textos e blocos passa por `limparHtml()` (tags de formatação, sem scripts/eventos).
 - Imagens ficam no próprio repositório (`img/`); não use imagens hospedadas por terceiros.
 - Relatório de riscos em aberto: `docs/AUDITORIA.md`. Atualize ao corrigir ou encontrar um problema. **Fica só no computador do dono** (está em `.git/info/exclude`): o repositório é público, então não o adicione ao git.
