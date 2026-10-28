@@ -69,6 +69,39 @@ service cloud.firestore {
       allow delete: if isMaster();
     }
 
+    // Comunidade do simulador (boitel-analytics-pro → js/community.js).
+    // Só usuários logados leem; cada um publica em seu nome e apaga o que é seu.
+    function textoOk(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
+    match /community_posts/{id} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['uid', 'autor', 'tipo', 'titulo', 'texto', 'criadoEm', 'respostas'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.tipo in ['pergunta', 'artigo']
+        && textoOk(request.resource.data.autor, 80)
+        && textoOk(request.resource.data.titulo, 120)
+        && textoOk(request.resource.data.texto, 5000)
+        && textoOk(request.resource.data.criadoEm, 40)
+        && request.resource.data.respostas == 0;
+      // O único campo que outros alteram é o contador de respostas, de 1 em 1
+      allow update: if signedIn()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['respostas'])
+        && request.resource.data.respostas == resource.data.get('respostas', 0) + 1;
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+    match /community_answers/{id} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['postId', 'uid', 'autor', 'texto', 'criadoEm'])
+        && request.resource.data.uid == request.auth.uid
+        && textoOk(request.resource.data.postId, 128)
+        && exists(/databases/$(database)/documents/community_posts/$(request.resource.data.postId))
+        && textoOk(request.resource.data.autor, 80)
+        && textoOk(request.resource.data.texto, 5000)
+        && textoOk(request.resource.data.criadoEm, 40);
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+
     // Qualquer outro caminho: bloqueado
     match /{document=**} {
       allow read, write: if false;

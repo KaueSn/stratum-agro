@@ -176,5 +176,41 @@ test('site/: só o master publica ou altera o JS personalizado (S4)', async () =
 });
 test('coleções não listadas ficam bloqueadas', async () => {
   await assertFails(setDoc(doc(user('u1', 'a@x.com'), 'qualquer/coisa'), { a: 1 }));
-  await assertFails(getDoc(doc(user('u1', 'a@x.com'), 'community_posts/p1')));
+});
+
+// ---------------- comunidade do simulador ----------------
+const post = (uid) => ({ uid, autor: 'Fulano', tipo: 'pergunta', titulo: 'Frete', texto: 'Quanto custa?', criadoEm: now, respostas: 0 });
+const resp = (uid, postId = 'p1') => ({ postId, uid, autor: 'Ciclano', texto: 'Depende.', criadoEm: now });
+test('comunidade: logado publica em seu nome; anônimo não lê nem publica', async () => {
+  const u1 = user('u1', 'a@x.com');
+  await assertSucceeds(setDoc(doc(u1, 'community_posts/p1'), post('u1')));
+  await assertSucceeds(getDoc(doc(u1, 'community_posts/p1')));
+  const anon = env.unauthenticatedContext().firestore();
+  await assertFails(getDoc(doc(anon, 'community_posts/p1')));
+  await assertFails(setDoc(doc(anon, 'community_posts/p2'), post('u1')));
+  await assertFails(setDoc(doc(u1, 'community_posts/p3'), post('outro')));
+  await assertFails(setDoc(doc(u1, 'community_posts/p4'), { ...post('u1'), tipo: '<img onerror=x>' }));
+  await assertFails(setDoc(doc(u1, 'community_posts/p5'), { ...post('u1'), respostas: 99 }));
+  await assertFails(setDoc(doc(u1, 'community_posts/p6'), { ...post('u1'), titulo: 'x'.repeat(121) }));
+  await assertFails(setDoc(doc(u1, 'community_posts/p7'), { ...post('u1'), extra: 1 }));
+});
+test('comunidade: contador só sobe de 1 em 1; só o autor ou admin apaga', async () => {
+  await seed('community_posts/p1', post('u1'));
+  await seed('users/adm', docSite('adm@x.com', 'admin'));
+  const u2 = user('u2', 'b@x.com');
+  await assertSucceeds(updateDoc(doc(u2, 'community_posts/p1'), { respostas: 1 }));
+  await assertFails(updateDoc(doc(u2, 'community_posts/p1'), { respostas: 10 }));
+  await assertFails(updateDoc(doc(u2, 'community_posts/p1'), { titulo: 'trocado' }));
+  await assertFails(deleteDoc(doc(u2, 'community_posts/p1')));
+  await assertSucceeds(deleteDoc(doc(user('adm', 'adm@x.com'), 'community_posts/p1')));
+});
+test('comunidade: respostas em post existente, em seu nome', async () => {
+  await seed('community_posts/p1', post('u1'));
+  const u2 = user('u2', 'b@x.com');
+  await assertSucceeds(setDoc(doc(u2, 'community_answers/a1'), resp('u2')));
+  await assertFails(setDoc(doc(u2, 'community_answers/a2'), resp('u1')));
+  await assertFails(setDoc(doc(u2, 'community_answers/a3'), resp('u2', 'naoexiste')));
+  await assertFails(updateDoc(doc(u2, 'community_answers/a1'), { texto: 'editado' }));
+  await assertFails(deleteDoc(doc(user('u3', 'c@x.com'), 'community_answers/a1')));
+  await assertSucceeds(deleteDoc(doc(u2, 'community_answers/a1')));
 });

@@ -2,6 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<script>
+  // Domínio oficial: Vercel (cabeçalhos de segurança e API). O GitHub Pages só redireciona.
+  if (location.hostname === 'kauesn.github.io') {
+    location.replace('https://stratum-agro.vercel.app' + location.pathname.replace(/^\/stratum-agro/, '') + location.search + location.hash);
+  }
+</script>
+<link rel="canonical" href="https://stratum-agro.vercel.app/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="description" content="Stratum Agro — Planejamento e Controle Estratégico Agro. Simulações em tempo real, gestão de risco e consultoria para confinamento bovino.">
 <meta name="theme-color" content="#0a0e17">
@@ -832,7 +839,7 @@
       <div class="trust-row">
         <span class="trust"><span class="ic">✓</span> <b>Conta grátis</b></span>
         <span class="trust"><span class="ic">✓</span> Sem fidelidade</span>
-        <span class="trust"><span class="ic">✓</span> Dados ICBC/CEPEA</span>
+        <span class="trust"><span class="ic">✓</span> Referências ICBC/Scot</span>
         <span class="trust"><span class="ic"><svg class="ic"><use href="#i-lock"></use></svg></span> Pagamento seguro via Stripe</span>
       </div>
     </div>
@@ -876,7 +883,7 @@
     <div class="cards">
       <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-chart"></use></svg></div><h3>Simulações em tempo real</h3><p>Compare 5 estados instantaneamente: preço da arroba, custo do boi magro, frete e lucro por cabeça e por lote.</p></div>
       <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-shield"></use></svg></div><h3>Gestão de risco profissional</h3><p>Mortalidade, CDI, impostos e análise de cenários otimista/pessimista para você não ser pego de surpresa.</p></div>
-      <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-target"></use></svg></div><h3>Estratégia personalizada</h3><p>Descreva seu objetivo — lucro, segurança, prazo — e receba um plano de ação sob medida.</p></div>
+      <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-target"></use></svg></div><h3>Estratégia personalizada</h3><p>Descreva seu objetivo — lucro, segurança, prazo — e receba recomendações e um resumo do cenário para o seu caso.</p></div>
       <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-money"></use></svg></div><h3>Indicadores de verdade</h3><p>ROIC, VPL, TIR, payback descontado, ponto de equilíbrio e spread vs CDI no mesmo painel.</p></div>
       <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-doc"></use></svg></div><h3>Relatórios para investidores</h3><p>Exporte apresentações profissionais (PPT/PDF) prontas para levar ao seu sócio ou fundo.</p></div>
       <div class="card reveal"><div class="ico"><svg class="ic"><use href="#i-truck"></use></svg></div><h3>Contratos e logística</h3><p>Checklists de frete, GTA digital, trava de preço e hedge na B3 — tudo no mesmo lugar.</p></div>
@@ -910,7 +917,7 @@
       <ul class="check">
         <li><span class="tick">✓</span><span>Veja em <b>segundos</b> qual estado entrega a melhor margem, já considerando frete e mortalidade.</span></li>
         <li><span class="tick">✓</span><span>Descubra o <b>caixa livre em D0</b> e compare o retorno com a renda fixa (CDI).</span></li>
-        <li><span class="tick">✓</span><span>Evite fechar operação no prejuízo — o sistema avisa e sugere ajustes.</span></li>
+        <li><span class="tick">✓</span><span>Evite fechar operação no prejuízo — o sistema mostra o ponto de virada e o risco do lote.</span></li>
         <li><span class="tick">✓</span><span>Leve <b>relatórios profissionais</b> para investidores e sócios.</span></li>
         <li><span class="tick">✓</span><span>Centralize contratos, frete, tributos e hedge em um só painel.</span></li>
       </ul>
@@ -1067,7 +1074,7 @@
     </div>
     <div class="faq">
       <div class="qa"><button onclick="toggleFaq(this)">Preciso instalar algo?<span class="chev">▾</span></button><div class="a">Não. O Stratum Agro roda 100% no navegador, no computador ou no celular. Basta criar sua conta.</div></div>
-      <div class="qa"><button onclick="toggleFaq(this)">Os dados são confiáveis?<span class="chev">▾</span></button><div class="a">Usamos referências de mercado (ICBC, CEPEA, Scot Consultoria) e você sempre pode ajustar todos os valores para a sua realidade.</div></div>
+      <div class="qa"><button onclick="toggleFaq(this)">Os dados são confiáveis?<span class="chev">▾</span></button><div class="a">Usamos referências de mercado (ICBC e Scot Consultoria, ago/2025) e estimativas regionais, e você sempre pode ajustar todos os valores para a sua realidade.</div></div>
       <div class="qa"><button onclick="toggleFaq(this)">Posso cancelar quando quiser?<span class="chev">▾</span></button><div class="a">Sim. Não há fidelidade: peça o cancelamento a qualquer momento e a assinatura não é renovada no período seguinte.</div></div>
       <div class="qa"><button onclick="toggleFaq(this)">Serve para quem está começando?<span class="chev">▾</span></button><div class="a">Serve. Você começa com parâmetros sugeridos e o próprio sistema te guia com um tutorial interativo.</div></div>
       <div class="qa"><button onclick="toggleFaq(this)">Como funciona a Consultoria Asset?<span class="chev">▾</span></button><div class="a">É uma consultoria de gestão da operação pecuária, com escopo e honorários definidos em proposta. Não inclui recomendação nem gestão de investimentos. Clique em "Solicitar proposta" para conversar.</div></div>
@@ -1113,7 +1120,7 @@
     </div>
     <div class="foot-bottom">
       <span>© <span id="year"></span> Stratum Agro — Inteligência e consultoria agropecuária.</span>
-      <span>Dados de referência (ICBC/CEPEA, 2025) · Não constitui recomendação de investimento.</span>
+      <span>Dados de referência (ICBC/Scot, 2025) · Não constitui recomendação de investimento.</span>
     </div>
   </div>
 </footer>
