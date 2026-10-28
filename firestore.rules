@@ -58,10 +58,15 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
-    // Conteúdo editável do site (via painel do dev/admin)
+    // Conteúdo editável do site (via painel do dev/admin). O campo `js` roda
+    // para todos os visitantes, então só o master o altera (S4); o HTML é
+    // filtrado no navegador (limparHtml).
     match /site/{doc} {
+      function jsAntes() { return resource == null ? '' : resource.data.get('js', ''); }
       allow read: if true;
-      allow write: if isAdmin() || isDev();
+      allow create, update: if isMaster()
+        || ((isAdmin() || isDev()) && request.resource.data.get('js', '') == jsAntes());
+      allow delete: if isMaster();
     }
 
     // Qualquer outro caminho: bloqueado

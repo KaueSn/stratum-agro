@@ -159,6 +159,21 @@ test('site/: admin e dev escrevem; usuário comum não', async () => {
   await assertSucceeds(setDoc(doc(user('dev', 'dev@x.com'), 'site/conteudo'), { css: 'b{}' }));
   await assertFails(setDoc(doc(user('u1', 'a@x.com'), 'site/conteudo'), { js: 'alert(1)' }));
 });
+test('site/: só o master publica ou altera o JS personalizado (S4)', async () => {
+  await seed('users/adm', docSite('adm@x.com', 'admin'));
+  await seed('users/dev', docSite('dev@x.com', 'dev'));
+  const dev = user('dev', 'dev@x.com'), adm = user('adm', 'adm@x.com'), master = user('m', MASTER, true);
+  await assertFails(setDoc(doc(dev, 'site/conteudo'), { js: 'alert(1)' }));
+  await assertFails(setDoc(doc(adm, 'site/conteudo'), { js: 'alert(1)' }));
+  await assertSucceeds(setDoc(doc(master, 'site/conteudo'), { js: 'console.log(1)', css: '' }));
+  // dev edita o resto com merge (como o editor faz) sem tocar no JS
+  await assertSucceeds(setDoc(doc(dev, 'site/conteudo'), { css: 'b{}', htmlTop: '<b>oi</b>' }, { merge: true }));
+  await assertFails(setDoc(doc(dev, 'site/conteudo'), { js: 'alert(2)' }, { merge: true }));
+  await assertFails(setDoc(doc(adm, 'site/conteudo'), { css: 'c{}' }));   // sobrescrever apagaria o JS do master
+  await assertFails(deleteDoc(doc(dev, 'site/conteudo')));
+  await assertFails(setDoc(doc(user('m2', MASTER, false), 'site/conteudo'), { js: 'x' }, { merge: true }));
+  await assertSucceeds(setDoc(doc(master, 'site/conteudo'), { js: '' }, { merge: true }));
+});
 test('coleções não listadas ficam bloqueadas', async () => {
   await assertFails(setDoc(doc(user('u1', 'a@x.com'), 'qualquer/coisa'), { a: 1 }));
   await assertFails(getDoc(doc(user('u1', 'a@x.com'), 'community_posts/p1')));

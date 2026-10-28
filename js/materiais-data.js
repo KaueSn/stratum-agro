@@ -21,7 +21,7 @@ const MATERIAIS = [
     tema: 'Produção',
     nivel: 'Iniciante',
     icone: 'cow',
-    capa: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=wide%20aerial%20photo%20of%20a%20modern%20Brazilian%20cattle%20feedlot%20at%20golden%20hour%2C%20rows%20of%20cattle%20at%20concrete%20troughs%2C%20green%20hills%2C%20professional%20agriculture%20photography&image_size=landscape_16_9',
+    capa: 'img/materiais/fundamentos.webp',
     resumo: 'Entenda o que é confinamento, como funciona o ciclo de 106 dias, o modelo de boitel e os indicadores que realmente decidem o lucro: ganho médio diário, conversão alimentar e rendimento de carcaça.',
     documentario: {
       titulo: 'Do pasto ao cocho: 106 dias que mudam a margem',
@@ -188,7 +188,7 @@ const MATERIAIS = [
     tema: 'Gestão',
     nivel: 'Intermediário',
     icone: 'money',
-    capa: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=hands%20counting%20Brazilian%20real%20banknotes%20beside%20a%20tablet%20showing%20cattle%20price%20charts%20on%20a%20farm%20office%20desk%2C%20warm%20light%2C%20professional%20finance%20photography&image_size=landscape_16_9',
+    capa: 'img/materiais/custos.webp',
     resumo: 'Aprenda a montar o custo real do confinamento, calcular a arroba produzida, entender como o preço da arroba é formado e descobrir o ponto em que a operação começa a dar prejuízo.',
     documentario: {
       titulo: 'A arroba que sobra',
@@ -333,7 +333,7 @@ const MATERIAIS = [
     tema: 'Técnico',
     nivel: 'Avançado',
     icone: 'leaf',
-    capa: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=close%20up%20of%20cattle%20nutritionist%20hands%20mixing%20corn%20grain%20and%20silage%20feed%20ration%20inside%20a%20feedlot%20barn%2C%20warm%20light%2C%20professional%20agriculture%20photography&image_size=landscape_16_9',
+    capa: 'img/materiais/nutricao.webp',
     resumo: 'Entenda o rúmen como fábrica, a diferença entre volumoso e concentrado, como se adapta uma dieta e como formular ração que entrega ganho de peso com o menor custo por quilo.',
     documentario: {
       titulo: 'O rúmen como fábrica',
@@ -501,7 +501,7 @@ const MATERIAIS = [
     tema: 'Técnico',
     nivel: 'Intermediário',
     icone: 'shield',
-    capa: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=veterinarian%20in%20blue%20overalls%20examining%20a%20healthy%20Nelore%20cow%20with%20stethoscope%20inside%20a%20clean%20cattle%20handling%20chute%2C%20bright%20daylight%2C%20professional%20agriculture%20photography&image_size=landscape_16_9',
+    capa: 'img/materiais/sanidade.webp',
     resumo: 'Aprenda o protocolo sanitário de entrada, as doenças que mais dão prejuízo no confinamento, noções de bem-estar animal e como a sanidade se converte diretamente em margem.',
     documentario: {
       titulo: 'Saúde é margem',
@@ -665,7 +665,7 @@ const MATERIAIS = [
     tema: 'Gestão',
     nivel: 'Intermediário',
     icone: 'shield',
-    capa: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=dramatic%20dark%20storm%20clouds%20over%20a%20Brazilian%20cattle%20pasture%20with%20cattle%20grazing%2C%20moody%20light%2C%20professional%20agriculture%20photography&image_size=landscape_16_9',
+    capa: 'img/materiais/riscos.webp',
     resumo: 'Identifique os riscos que podem destruir sua margem e aprenda os instrumentos para se proteger: hedge na B3, contratos a termo, trava de preço e análise de cenários.',
     documentario: {
       titulo: 'Nada de surpresa',
@@ -831,7 +831,7 @@ const MATERIAIS = [
     tema: 'Gestão',
     nivel: 'Intermediário',
     icone: 'clipboard',
-    capa: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=handshake%20between%20a%20farmer%20and%20a%20consultant%20in%20front%20of%20a%20modern%20cattle%20feedlot%20structure%2C%20warm%20sunset%20light%2C%20professional%20business%20agriculture%20photography&image_size=landscape_16_9',
+    capa: 'img/materiais/boitel.webp',
     resumo: 'Domine o modelo de boitel: modalidades de cobrança, cláusulas essenciais do contrato, responsabilidades sobre mortalidade e refugo e como escolher um parceiro de confiança.',
     documentario: {
       titulo: 'O negócio do boitel',
@@ -991,7 +991,7 @@ const MATERIAIS = [
     tema: 'Mercado',
     nivel: 'Intermediário',
     icone: 'compass',
-    capa: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cattle%20truck%20leaving%20a%20Brazilian%20slaughterhouse%20at%20dawn%20with%20shipping%20containers%20in%20the%20background%2C%20logistics%20and%20meat%20export%20concept%2C%20professional%20industrial%20photography&image_size=landscape_16_9',
+    capa: 'img/materiais/mercado.webp',
     resumo: 'Entenda a cadeia da carne, o peso da exportação, os requisitos e o prêmio do Boi China, como funciona a tipificação de carcaça e como negociar melhor com o frigorífico.',
     documentario: {
       titulo: 'O boi que o mundo compra',
@@ -1156,7 +1156,7 @@ const MATERIAIS = [
     tema: 'Tecnologia',
     nivel: 'Iniciante',
     icone: 'cpu',
-    capa: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=farmer%20holding%20a%20tablet%20showing%20a%20data%20dashboard%20next%20to%20a%20digital%20cattle%20scale%20and%20sensors%20in%20a%20modern%20feedlot%2C%20morning%20light%2C%20professional%20agtech%20photography&image_size=landscape_16_9',
+    capa: 'img/materiais/tecnologia.webp',
     resumo: 'Descubra como dados, sensores e software transformam o confinamento em um negócio gerido por números — do controle de pesagem à modelagem financeira no simulador.',
     documentario: {
       titulo: 'O curral digital',

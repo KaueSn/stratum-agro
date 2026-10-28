@@ -381,6 +381,9 @@
   .cmp .col-hi{background:rgba(16,185,129,.08);font-weight:600}
   .cmp .yes{color:var(--primary-2);font-weight:800}
   .cmp .no{color:#f87171;font-weight:800}
+  .cmp .man{opacity:.6;font-size:.85em}
+  .mock-ex{font-size:.7rem;opacity:.6;text-align:right;margin:6px 2px 0}
+  .compare-ex{font-size:.78rem;opacity:.65;margin:10px 4px 0}
 
   .cta-band{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(16,185,129,.16),rgba(99,102,241,.11));
     border:1px solid var(--border-2);border-radius:22px;padding:48px 30px;text-align:center}
@@ -820,15 +823,15 @@
   <div class="wrap hero-grid">
     <div>
       <span class="pill"><span class="dot"></span> Planejamento e Controle Estratégico Agro</span>
-      <h1>Transforme sua operação agro em uma <span class="grad-text">máquina de lucro</span>.</h1>
-      <p class="lead">Simulações em tempo real, gestão de risco profissional e planejamento estratégico para confinamento bovino. Decida com números, não com achismo.</p>
+      <h1>Planeje sua operação agro com <span class="grad-text">números, não com achismo</span>.</h1>
+      <p class="lead">Simulações em tempo real, gestão de risco profissional e planejamento estratégico para confinamento bovino.</p>
       <div class="hero-cta">
         <button class="btn btn-primary btn-lg" id="heroStart">Começar grátis →</button>
         <a href="#planos" class="btn btn-outline btn-lg">Ver planos</a>
       </div>
       <div class="trust-row">
-        <span class="trust"><span class="ic">✓</span> <b>7 dias grátis</b></span>
-        <span class="trust"><span class="ic">✓</span> Cancele quando quiser</span>
+        <span class="trust"><span class="ic">✓</span> <b>Conta grátis</b></span>
+        <span class="trust"><span class="ic">✓</span> Sem fidelidade</span>
         <span class="trust"><span class="ic">✓</span> Dados ICBC/CEPEA</span>
         <span class="trust"><span class="ic"><svg class="ic"><use href="#i-lock"></use></svg></span> Pagamento seguro via Stripe</span>
       </div>
@@ -843,6 +846,7 @@
           <div class="mock-kpi"><div class="l">ROIC do período</div><div class="v g">6,58%</div></div>
           <div class="mock-kpi"><div class="l">Spread vs CDI</div><div class="v g">+3,57%</div></div>
         </div>
+        <div class="mock-ex">Exemplo ilustrativo</div>
         <div class="bars">
           <i style="height:82%"></i><i style="height:54%"></i><i style="height:38%"></i><i style="height:22%"></i><i style="height:9%"></i>
         </div>
@@ -855,9 +859,9 @@
 <div class="strip">
   <div class="wrap strip-grid">
     <div class="strip-item"><div class="n grad-text">5</div><div class="d">Estados comparados</div></div>
-    <div class="strip-item"><div class="n grad-text">100%</div><div class="d">Baseado em dados reais</div></div>
+    <div class="strip-item"><div class="n grad-text">8</div><div class="d">Cursos abertos nos materiais</div></div>
     <div class="strip-item"><div class="n grad-text">Minutos</div><div class="d">Para decidir seu lote</div></div>
-    <div class="strip-item"><div class="n grad-text">-30%</div><div class="d">De risco no fechamento</div></div>
+    <div class="strip-item"><div class="n grad-text">R$ 0</div><div class="d">Para criar conta e estudar</div></div>
   </div>
 </div>
 
@@ -918,6 +922,7 @@
         <div class="row"><span class="lbl">Spread sobre a renda fixa</span><span class="val win">+3,57%</span></div>
         <div class="row"><span class="lbl">Lucro projetado do lote</span><span class="val win">R$ 13.820,40</span></div>
         <div class="row"><span class="lbl">Custo do conteúdo por mês</span><span class="val">menos que uma arroba</span></div>
+        <p class="compare-ex">Exemplo ilustrativo de uma simulação. Os resultados dependem dos seus dados.</p>
       </div>
     </div>
   </div>
@@ -929,10 +934,10 @@
     <div class="band reveal">
       <div class="big"><svg class="ic"><use href="#i-shield"></use></svg></div>
       <div>
-        <h3>Teste sem risco por 7 dias</h3>
-        <p>Comece grátis, use todas as simulações e cancele com um clique se não fizer sentido para a sua operação. Sem fidelidade e sem letras miúdas.</p>
+        <h3>Comece sem risco</h3>
+        <p>Crie sua conta grátis, sem cartão, e estude os Materiais de apoio à vontade. Assine só quando fizer sentido para a sua operação. Sem fidelidade.</p>
       </div>
-      <div class="seal">7 DIAS<small>GRÁTIS PARA TESTAR</small></div>
+      <div class="seal">CONTA<small>GRÁTIS, SEM CARTÃO</small></div>
     </div>
   </div>
 </section>
@@ -947,7 +952,7 @@
     </div>
     <div class="plans">
       <div class="plan reveal">
-        <h3>Stratum Acess</h3>
+        <h3>Stratum Access</h3>
         <div class="desc">Acesso completo ao simulador, ranking de estados e relatórios.</div>
         <div class="price"><span class="cur">R$</span><span class="amt" data-c="precoMensal">9,99</span><span class="per">/mês</span></div>
         <div class="note">Cobrança mensal recorrente · cancele quando quiser</div>
@@ -963,13 +968,13 @@
       </div>
 
       <div class="plan featured reveal">
-        <span class="tag">MAIS ESCOLHIDO</span>
+        <span class="tag">MELHOR CUSTO-BENEFÍCIO</span>
         <h3>Stratum Pro</h3>
-        <div class="desc">Para quem opera forte: tudo do Acess + suporte e análise de cenários.</div>
+        <div class="desc">Para quem opera forte: tudo do Access + suporte e análise de cenários.</div>
         <div class="price"><span class="cur">R$</span><span class="amt" data-c="precoAnual">99,90</span><span class="per">/ano</span></div>
         <div class="note">Equivale a R$ 8,33/mês · 2 meses grátis</div>
         <ul>
-          <li><span class="tick">✓</span> Tudo do plano Acess</li>
+          <li><span class="tick">✓</span> Tudo do plano Access</li>
           <li><span class="tick">✓</span> <b>Cenários salvos</b> e comparador lado a lado (até 4)</li>
           <li><span class="tick">✓</span> <b>Análise de sensibilidade</b>: impacto de cada variável no lucro</li>
           <li><span class="tick">✓</span> <b>Simulador de hedge</b> e trava de preço por cenário</li>
@@ -986,16 +991,15 @@
 
       <div class="plan reveal">
         <h3>Consultoria Asset</h3>
-        <div class="desc">Planejamento estratégico sob medida, com acompanhamento dedicado.</div>
-        <div class="price"><span class="amt grad-text" style="font-size:1.8rem">% sobre patrimônio</span></div>
-        <div class="note">Remuneração por performance sobre o patrimônio assessorado</div>
+        <div class="desc">Consultoria de gestão para a sua operação pecuária, com acompanhamento dedicado.</div>
+        <div class="price"><span class="amt grad-text" style="font-size:1.8rem">Sob proposta</span></div>
+        <div class="note">Escopo e honorários definidos em contrato</div>
         <ul>
-          <li><span class="tick">✓</span> Alocação estratégica de capital</li>
-          <li><span class="tick">✓</span> Gestão de risco e hedge sob medida</li>
+          <li><span class="tick">✓</span> Planejamento financeiro do ciclo</li>
+          <li><span class="tick">✓</span> Plano de gestão de risco da operação</li>
           <li><span class="tick">✓</span> Reuniões e relatórios exclusivos</li>
           <li><span class="tick">✓</span> Acompanhamento contínuo</li>
-          <li><span class="tick">✓</span> Modelo de honorário por performance</li>
-        </ul>
+                  </ul>
         <button class="btn btn-outline btn-block" data-plan="consultoria">Solicitar proposta</button>
       </div>
     </div>
@@ -1015,18 +1019,17 @@
       <table class="cmp">
         <thead><tr><th>Recurso</th><th>Planilha / Excel</th><th class="col-hi">Stratum Agro</th></tr></thead>
         <tbody>
-          <tr><td>Comparação de 5 estados em segundos</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>ROIC, VPL, TIR e payback descontado</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Spread vs CDI (renda fixa)</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Análise de risco (mortalidade e impostos)</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Relatórios para investidores (PPT/PDF)</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Cenários salvos e comparador lado a lado</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Análise de sensibilidade e ponto de virada</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Simulador de hedge e trava de preço</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Dimensionador de lote e capital em D0</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Comparador à vista x acerto no gancho</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Fluxo de caixa do ciclo, mês a mês</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
-          <tr><td>Atualizações e melhorias contínuas</td><td class="no">✕</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Comparação de 5 estados em segundos</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>ROIC, VPL, TIR e payback descontado</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Spread vs CDI (renda fixa)</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Análise de risco (mortalidade e impostos)</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Relatórios para investidores (PPT/PDF)</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Cenários salvos e comparador lado a lado</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Análise de sensibilidade e ponto de virada</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Simulador de hedge e trava de preço</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Dimensionador de lote e capital em D0</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Comparador à vista x acerto no gancho</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
+          <tr><td>Fluxo de caixa do ciclo, mês a mês</td><td class="man">Manual</td><td class="yes col-hi">✓</td></tr>
         </tbody>
       </table>
     </div>
@@ -1065,9 +1068,9 @@
     <div class="faq">
       <div class="qa"><button onclick="toggleFaq(this)">Preciso instalar algo?<span class="chev">▾</span></button><div class="a">Não. O Stratum Agro roda 100% no navegador, no computador ou no celular. Basta criar sua conta.</div></div>
       <div class="qa"><button onclick="toggleFaq(this)">Os dados são confiáveis?<span class="chev">▾</span></button><div class="a">Usamos referências de mercado (ICBC, CEPEA, Scot Consultoria) e você sempre pode ajustar todos os valores para a sua realidade.</div></div>
-      <div class="qa"><button onclick="toggleFaq(this)">Posso cancelar quando quiser?<span class="chev">▾</span></button><div class="a">Sim. Não há fidelidade. Você cancela a assinatura a qualquer momento direto no meio de pagamento.</div></div>
+      <div class="qa"><button onclick="toggleFaq(this)">Posso cancelar quando quiser?<span class="chev">▾</span></button><div class="a">Sim. Não há fidelidade: peça o cancelamento a qualquer momento e a assinatura não é renovada no período seguinte.</div></div>
       <div class="qa"><button onclick="toggleFaq(this)">Serve para quem está começando?<span class="chev">▾</span></button><div class="a">Serve. Você começa com parâmetros sugeridos e o próprio sistema te guia com um tutorial interativo.</div></div>
-      <div class="qa"><button onclick="toggleFaq(this)">Como funciona a Consultoria Asset?<span class="chev">▾</span></button><div class="a">É um modelo de assessoria personalizado, com honorário baseado no patrimônio assessorado. Clique em "Solicitar proposta" e montamos um plano sob medida.</div></div>
+      <div class="qa"><button onclick="toggleFaq(this)">Como funciona a Consultoria Asset?<span class="chev">▾</span></button><div class="a">É uma consultoria de gestão da operação pecuária, com escopo e honorários definidos em proposta. Não inclui recomendação nem gestão de investimentos. Clique em "Solicitar proposta" para conversar.</div></div>
     </div>
   </div>
 </section>
@@ -1308,7 +1311,7 @@
           <textarea id="edHtmlBottom" class="ed-code" rows="6" spellcheck="false" placeholder="&lt;div&gt;Fale com a gente no WhatsApp&lt;/div&gt;"></textarea>
         </div>
         <div class="ed-block">
-          <div class="ed-block-head"><label>JavaScript personalizado</label><span class="ed-hint">Executa depois do site carregar</span></div>
+          <div class="ed-block-head"><label for="edJs">JavaScript personalizado</label><span class="ed-hint" id="edJsHint">Executa depois do site carregar · só o admin master publica</span></div>
           <textarea id="edJs" class="ed-code" rows="8" spellcheck="false" placeholder="// console.log('olá');"></textarea>
         </div>
         <div class="ed-row">
@@ -1409,7 +1412,7 @@ const SIM_URL = "https://kauesn.github.io/boitel-analytics-pro/";
 const API_BASE = "";   // URL da API (Vercel). Ex.: "https://stratum-agro.vercel.app"
 const RETORNO = new URLSearchParams(location.search).get('assinatura');   // sucesso | cancelada | null
 const PLANS = {
-  mensal:      { label: 'Stratum Acess (mensal)', link: 'https://buy.stripe.com/test_14A4gy69P3kO9dqd7hcbC00', dias: 30 },
+  mensal:      { label: 'Stratum Access (mensal)', link: 'https://buy.stripe.com/test_14A4gy69P3kO9dqd7hcbC00', dias: 30 },
   anual:       { label: 'Stratum Pro (anual)',    link: 'https://buy.stripe.com/test_5kQcN4dCh7B4dtGd7hcbC01', dias: 365 },
   consultoria: { label: 'Consultoria Asset',      link: '' } /* contato */
 };
@@ -1841,7 +1844,7 @@ function applyTextos(cfg){
     try { el = document.querySelector(t.path); } catch(e){ el = null; }
     if (!el) return;
     if (t.tag && el.tagName !== t.tag) return;   // estrutura mudou: não escreve no lugar errado
-    try { if (t.html) el.innerHTML = t.valor; else el.textContent = t.valor; } catch(e){}
+    try { if (t.html) el.innerHTML = limparHtml(t.valor); else el.textContent = t.valor; } catch(e){}
   });
 }
 
@@ -1906,6 +1909,34 @@ function applySecoes(cfg){
   });
 }
 
+/* ---- HTML do editor: só tags de formatação, sem scripts nem eventos (S4) ---- */
+const HTML_TAGS_OK = new Set(['A','B','STRONG','I','EM','U','S','SMALL','SUB','SUP','BR','HR','SPAN','DIV','P','UL','OL','LI','H1','H2','H3','H4','BLOCKQUOTE','IMG']);
+const HTML_ATTRS_OK = new Set(['class','style','href','src','alt','title','target','rel']);
+function limparHtml(html){
+  if (!html) return '';
+  const tpl = document.createElement('template');
+  tpl.innerHTML = String(html);
+  const urlOk = v => /^(https?:|mailto:|#|\/(?!\/)|[\w.-]+(\/|$))/i.test(v.trim()) && !/^\s*(javascript|data|vbscript):/i.test(v);
+  const limpar = (pai) => {
+    [...pai.childNodes].forEach(n => {
+      if (n.nodeType === 3) return;
+      if (n.nodeType !== 1 || !HTML_TAGS_OK.has(n.tagName)){
+        if (n.nodeType === 1 && !/^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED|TEMPLATE|SVG|MATH)$/i.test(n.tagName)){ limpar(n); n.replaceWith(...n.childNodes); }
+        else n.remove();
+        return;
+      }
+      [...n.attributes].forEach(a => {
+        const k = a.name.toLowerCase();
+        if (!HTML_ATTRS_OK.has(k) || ((k === 'href' || k === 'src') && !urlOk(a.value))) n.removeAttribute(a.name);
+      });
+      if (n.tagName === 'A' && n.getAttribute('target') === '_blank') n.setAttribute('rel', 'noopener noreferrer');
+      limpar(n);
+    });
+  };
+  limpar(tpl.content);
+  return tpl.innerHTML;
+}
+
 /* ---- código personalizado (CSS, HTML e JS) ---- */
 function applyCodigo(cfg){
   const c = cfg || siteContent;
@@ -1918,8 +1949,8 @@ function applyCodigo(cfg){
     if (!el) return;
     if (el.getAttribute('data-html') !== (html || '')){ el.innerHTML = html || ''; el.setAttribute('data-html', html || ''); }
   };
-  porHtml('slot-top', c.htmlTop);
-  porHtml('slot-bottom', c.htmlBottom);
+  porHtml('slot-top', limparHtml(c.htmlTop));
+  porHtml('slot-bottom', limparHtml(c.htmlBottom));
 
   const antigo = document.getElementById('edCustomJs');
   if (antigo) antigo.remove();
@@ -1941,6 +1972,9 @@ let edHover = null;
 let edNaoPublicado = false;
 
 function edPodeEditar(){ return canEditSite(currentUserData); }
+// JavaScript personalizado roda para todos os visitantes: só o master (pelo token) publica.
+// A regra do Firestore garante isso; aqui é só a interface.
+function edPodeJs(){ return tokenEmail() === ADMIN_EMAIL || !db; }
 function edCopia(o){ return JSON.parse(JSON.stringify(o)); }
 
 function edNormalizarRascunho(){
@@ -1992,6 +2026,7 @@ function edRenderTudo(){
   $('edHtmlTop').value = edRascunho.htmlTop || '';
   $('edHtmlBottom').value = edRascunho.htmlBottom || '';
   $('edJs').value = edRascunho.js || '';
+  $('edJs').disabled = !edPodeJs();
 }
 
 /* ---- escolher texto na página ---- */
@@ -2118,7 +2153,7 @@ function edMudarTexto(i, v){
   edNaoPublicado = true;
   let el = null;
   try { el = document.querySelector(t.path); } catch(e){}
-  if (el && (!t.tag || el.tagName === t.tag)){ try { if (t.html) el.innerHTML = v; else el.textContent = v; } catch(e){} }
+  if (el && (!t.tag || el.tagName === t.tag)){ try { if (t.html) el.innerHTML = limparHtml(v); else el.textContent = v; } catch(e){} }
 }
 
 function edRemoverTexto(i){ edRascunho.textos.splice(i, 1); edNaoPublicado = true; aplicarRascunho(); edRenderTextos(); }
@@ -2279,10 +2314,10 @@ async function edSalvar(){
     css: edRascunho.css,
     htmlTop: edRascunho.htmlTop,
     htmlBottom: edRascunho.htmlBottom,
-    js: edRascunho.js,
     updatedAt: new Date().toISOString(),
     updatedBy: currentUserData.email || ''
   };
+  if (edPodeJs()) payload.js = edRascunho.js;   // sem o campo, o merge mantém o JS já publicado
   siteContent = { ...SITE_DEFAULTS, ...siteContent, ...payload };
   applyAll(siteContent);
   if (!db){ edNaoPublicado = false; edRascunho = edCopia(siteContent); edRenderResumo(); return toast('Salvo localmente (modo demonstração).', 'ok'); }
@@ -2343,7 +2378,7 @@ async function assinar(btn){
   const plan = btn.getAttribute('data-plan');
   if (plan === 'consultoria'){
     const to = 'mailto:kauue.neves@gmail.com?subject=' + encodeURIComponent('Proposta Consultoria Asset — Stratum Agro') +
-      '&body=' + encodeURIComponent('Olá, quero uma proposta de Consultoria Asset (honorário por performance sobre o patrimônio).\n\nPatrimônio aproximado: \nObjetivo: ');
+      '&body=' + encodeURIComponent('Olá, quero uma proposta de Consultoria Asset.\n\nTamanho da operação (cabeças por ciclo): \nObjetivo: ');
     window.location.href = to; return;
   }
   if (!currentUserData){ toast('Faça login para assinar.', 'err'); return openAuth('login'); }
@@ -2466,10 +2501,10 @@ function renderAdminTable(users){
       <td style="color:var(--text)">${esc(u.email || '—')}${self?' <span class="badge b">você</span>':''}</td>
       <td><span class="badge ${roleBadge}">${esc(u.role || 'user')}</span></td>
       <td><span class="badge ${u.status === 'active' ? 'g':'r'}">${esc(u.status || '—')}</span></td>
-      <td><span class="badge ${subBadge}">${esc(u.subscription || '—')}</span> <span class="badge ${u.plan === 'pro' ? 'g' : 'b'}">${u.plan === 'pro' ? 'Pro' : 'Acess'}</span></td>
+      <td><span class="badge ${subBadge}">${esc(u.subscription || '—')}</span> <span class="badge ${u.plan === 'pro' ? 'g' : 'b'}">${u.plan === 'pro' ? 'Pro' : 'Access'}</span></td>
       <td>${esc(fmtDate(u.subscriptionEnd))}</td>
       <td><div class="actions">
-        <button class="mini ok" onclick="setPlan('${id}','${u.plan === 'pro' ? 'acess' : 'pro'}')">${u.plan === 'pro' ? '→ Acess' : '→ Pro'}</button>
+        <button class="mini ok" onclick="setPlan('${id}','${u.plan === 'pro' ? 'acess' : 'pro'}')">${u.plan === 'pro' ? '→ Access' : '→ Pro'}</button>
         <button class="mini" onclick="setRole('${id}','${u.role === 'dev' ? 'user':'dev'}')">${u.role === 'dev' ? 'Remover dev':'Tornar dev'}</button>
         <button class="mini" onclick="setRole('${id}','admin')">Admin</button>
         <button class="mini" onclick="setSub('${id}','${nextSub}')">${u.subscription === 'premium' ? '→ Trial':'→ Premium'}</button>
@@ -2483,7 +2518,7 @@ async function setPlan(uid, plan){
   if (!db) return toast('Ação indisponível no modo demonstração.', 'err');
   try {
     await db.collection('users').doc(uid).update({ plan, updatedAt: new Date().toISOString() });
-    toast('Plano atualizado: ' + (plan === 'pro' ? 'Pro' : 'Acess'), 'ok');
+    toast('Plano atualizado: ' + (plan === 'pro' ? 'Pro' : 'Access'), 'ok');
     loadAdmin();
   } catch(e){ toast('Erro ao atualizar o plano.', 'err'); }
 }
