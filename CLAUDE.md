@@ -12,6 +12,7 @@ Site de vendas + área logada da plataforma Stratum Agro (planejamento de confin
 - O simulador fica em outro repositório: `D:\Devin projetos` → `kauesn/boitel-analytics-pro`. Não confunda os dois repositórios.
 - Publicação: push na `main` atualiza o GitHub Pages (`kauesn.github.io/stratum-agro`) e a Vercel (`stratum-agro.vercel.app`). **Domínio oficial: Vercel** (`SITE_URL`, autorizado no Firebase Auth). O GitHub Pages só redireciona para a Vercel (script no início do `<head>`).
 - `firestore.rules` também cobre a comunidade do simulador (`community_posts`, `community_answers`). Regras publicadas em 2026-10-28 a partir deste arquivo.
+- `firestore.rules` também cobre `users/{uid}/projetos/{pid}` (Plataforma Patrimonial do simulador; só o dono acessa, criar/alterar exige Pro, ids `p00`–`p49`). Regras publicadas no Console em 2026-11-01 a partir deste arquivo (inclui também termos aceitos, pastas e exclusão da conta pelo dono). Testes em `tests/firestore-rules/projetos.test.js`.
 - Editor do site: só o master (pelo token) publica o campo `js`; HTML de textos e blocos passa por `limparHtml()` (tags de formatação, sem scripts/eventos).
 - Imagens ficam no próprio repositório (`img/`); não use imagens hospedadas por terceiros.
 - Relatório de riscos em aberto: `docs/AUDITORIA.md`. Atualize ao corrigir ou encontrar um problema. **Fica só no computador do dono** (está em `.git/info/exclude`): o repositório é público, então não o adicione ao git.
@@ -20,7 +21,8 @@ Site de vendas + área logada da plataforma Stratum Agro (planejamento de confin
 Servidor estático na pasta (ex.: `npx serve .` ou qualquer servidor HTTP) → `http://127.0.0.1:<porta>/index.html`. Sem Firebase, o login entra em modo demonstração. A API só roda com `vercel dev` e as variáveis de ambiente.
 
 ## Testes
-- Regras do Firestore: `cd tests/firestore-rules && npm install && npm test`. Usa o Firebase Emulator local com o projeto fictício `demo-stratum` e precisa de Java 21+ no PATH ou em `JAVA_HOME`. **Rode sempre que mudar `firestore.rules`** e acrescente casos novos em `rules.test.js`.
+- Regras do Firestore: `cd tests/firestore-rules && npm install && npm test`. Usa o Firebase Emulator local com o projeto fictício `demo-stratum` e precisa de Java 21+ no PATH ou em `JAVA_HOME`. **Rode sempre que mudar `firestore.rules`** e acrescente casos novos em `rules.test.js` (ou `projetos.test.js` para os projetos). Os arquivos rodam em sequência (`--test-concurrency=1`) porque compartilham o emulador.
+- Se o CLI do Firebase travar ao iniciar, suba o emulador direto: `java -jar ~/.cache/firebase/emulators/cloud-firestore-emulator-v1.22.0.jar --host 127.0.0.1 --port 8085 --project_id demo-stratum` e rode `FIRESTORE_EMULATOR_HOST=127.0.0.1:8085 node --test --test-concurrency=1 rules.test.js projetos.test.js`.
 - `RULES_FILE=<arquivo> npm test` testa outra versão das regras (ex.: a copiada do Console).
 
 ## Regras de trabalho

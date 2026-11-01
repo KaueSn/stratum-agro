@@ -100,9 +100,26 @@ test('nega editar perfil de outra pessoa', async () => {
   await seed('users/u2', docSite('b@x.com'));
   await assertFails(updateDoc(doc(user('u1', 'a@x.com'), 'users/u2'), { name: 'hack' }));
 });
-test('nega dono apagar o próprio perfil', async () => {
+test('LGPD: dono exclui o próprio perfil; não exclui o de outra pessoa', async () => {
   await seed('users/u1', docSite('a@x.com'));
-  await assertFails(deleteDoc(doc(user('u1', 'a@x.com'), 'users/u1')));
+  await seed('users/u2', docSite('b@x.com'));
+  await assertFails(deleteDoc(doc(user('u1', 'a@x.com'), 'users/u2')));
+  await assertSucceeds(deleteDoc(doc(user('u1', 'a@x.com'), 'users/u1')));
+});
+test('LGPD: cadastro registra o aceite dos termos (campos limitados)', async () => {
+  const u1 = user('u1', 'a@x.com');
+  await assertSucceeds(setDoc(doc(u1, 'users/u1'), { ...docSite('a@x.com'), termosAceitosEm: now, termosVersao: '2026-10-28' }));
+  await assertFails(setDoc(doc(user('u2', 'b@x.com'), 'users/u2'), { ...docSite('b@x.com'), termosVersao: 'x'.repeat(21) }));
+  // depois do cadastro, o dono não reescreve a data do aceite
+  await assertFails(updateDoc(doc(u1, 'users/u1'), { termosAceitosEm: '2020-01-01' }));
+});
+test('pastas de estudo: dono salva até 20 pastas', async () => {
+  await seed('users/u1', docSite('a@x.com'));
+  const u1 = user('u1', 'a@x.com');
+  const pasta = i => ({ id: 'p' + i, nome: 'Pasta ' + i, itens: [{ tipo: 'estudo', id: 'c-juros', titulo: 'Juros' }] });
+  await assertSucceeds(updateDoc(doc(u1, 'users/u1'), { pastas: [pasta(1), pasta(2)], updatedAt: now }));
+  await assertFails(updateDoc(doc(u1, 'users/u1'), { pastas: Array.from({ length: 21 }, (_, i) => pasta(i)) }));
+  await assertFails(updateDoc(doc(user('u2', 'b@x.com'), 'users/u1'), { pastas: [] }));
 });
 
 // ---------------- leitura ----------------

@@ -4,7 +4,7 @@
   "type": "module",
   "description": "Testes das regras do Firestore no Firebase Emulator (local, projeto fictício demo-stratum).",
   "scripts": {
-    "test": "firebase emulators:exec --only firestore --project demo-stratum \"node --test rules.test.js\""
+    "test": "firebase emulators:exec --only firestore --project demo-stratum \"node --test --test-concurrency=1 rules.test.js projetos.test.js\""
   },
   "devDependencies": {
     "@firebase/rules-unit-testing": "^6.0.0",
