@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade | Stratum Agro</title>
+<meta name="description" content="Como o Stratum Agro coleta, usa e protege seus dados pessoais, em conformidade com a LGPD (Lei 13.709/2018).">
+<link rel="canonical" href="https://stratum-agro.vercel.app/privacidade.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="theme-color" content="#06100c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="./" class="logo"><img src="favicon.svg" alt="" width="32" height="32"> Stratum <span class="grad-text">Agro</span></a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="./">Início</a><a href="./#planos">Planos</a><a href="termos.html">Termos</a>
+    </nav>
+    <a href="./" class="btn btn-outline">Voltar ao site</a>
+  </div>
+</header>
+
+<main class="doc">
+  <h1>Política de Privacidade</h1>
+  <p class="meta">Vigente desde 03/11/2026 · Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018)</p>
+
+  <p>Esta política explica quais dados pessoais o <b>Stratum Agro</b> trata quando você usa o site <b>stratum-agro.vercel.app</b>, o simulador e os materiais de apoio, para que servem, com quem são compartilhados e como você exerce seus direitos.</p>
+
+  <h2>1. Quem é o controlador e como falar com ele</h2>
+  <p>O controlador dos dados é o Stratum Agro, responsável por este site. Para qualquer assunto sobre privacidade, inclusive pedidos com base na LGPD, escreva para <a href="mailto:kauue.neves@gmail.com?subject=LGPD%20-%20Stratum%20Agro">kauue.neves@gmail.com</a>, que também atua como canal do encarregado (art. 41).</p>
+
+  <h2>2. Quais dados tratamos</h2>
+  <div style="overflow-x:auto" role="region" aria-label="Tabela de dados tratados" tabindex="0"><table>
+    <tr><th>Situação</th><th>Dados</th><th>Finalidade</th><th>Base legal (art. 7º)</th></tr>
+    <tr><td>Criação de conta e login</td><td>E-mail, senha (guardada pelo Firebase Authentication de forma cifrada; não temos acesso a ela), nome de exibição, foto e nome vindos do Google quando você escolhe esse login</td><td>Identificar você e dar acesso à conta</td><td>Execução de contrato (V)</td></tr>
+    <tr><td>Perfil</td><td>Nome, telefone e bio, se você preencher; plano, cargo, situação da assinatura e datas</td><td>Exibir seu perfil e liberar os recursos do seu plano</td><td>Execução de contrato (V)</td></tr>
+    <tr><td>Uso das ferramentas</td><td>Cenários salvos no simulador, publicações e respostas na comunidade</td><td>Guardar o que você criou e mostrar na sua conta</td><td>Execução de contrato (V)</td></tr>
+    <tr><td>Voz no Triguinho (opcional)</td><td>Áudio captado enquanto o microfone está ligado e o texto transcrito; texto das respostas, se a leitura em voz alta usar uma voz on-line. Veja a seção 3</td><td>Transformar a sua fala em pergunta e ler as respostas em voz alta</td><td>Consentimento (I) para o microfone, dado ao clicar e permitir o acesso; execução de contrato (V) para a leitura em voz alta</td></tr>
+    <tr><td>Pagamento</td><td>E-mail e identificador da assinatura na Stripe. <b>Os dados do cartão são digitados diretamente na Stripe</b> e nunca passam pelo Stratum Agro</td><td>Cobrar e controlar a assinatura</td><td>Execução de contrato (V) e obrigação legal (II)</td></tr>
+    <tr><td>Segurança</td><td>Endereço IP e informações técnicas do navegador, nos registros da hospedagem e dos serviços de login; contagem de requisições por IP por 1 minuto, só na memória do servidor</td><td>Evitar fraude, abuso e ataques automatizados</td><td>Legítimo interesse (IX) e obrigação legal do Marco Civil (II)</td></tr>
+  </table></div>
+  <p>Não vendemos dados, não usamos cookies de publicidade nem ferramentas de rastreamento ou análise de comportamento.</p>
+
+  <h2>3. Voz e microfone no Triguinho</h2>
+  <p>O Triguinho, assistente da Plataforma Patrimonial, aceita perguntas por texto ou por voz. A voz é opcional e usa o reconhecimento de fala do seu navegador (Web Speech API). <b>Esse serviço é do fabricante do navegador, não é operado nem contratado pelo Stratum Agro, e nós não recebemos o seu áudio.</b></p>
+  <p><b>Quando o microfone liga.</b> Só depois que você clica em <i>Falar</i> ou <i>Conversa por voz</i> e o navegador tem a sua permissão. Na <i>Conversa por voz</i>, ele volta a ouvir depois de cada resposta, até você clicar em <i>Parar</i>, dizer "parar" ou ficar um tempo em silêncio. O microfone pode captar outras vozes e sons do ambiente.</p>
+  <p><b>O que vai para o fabricante do navegador</b>, segundo o que cada um declara (documentos consultados em 03/11/2026):</p>
+  <ul>
+    <li><b>Microsoft Edge:</b> o áudio gravado, com um código gerado aleatoriamente, vai por conexão HTTPS para o serviço Azure Cognitive Services da Microsoft. O texto volta para o aparelho e depois para o site. A Microsoft declara que o conteúdo do áudio não é guardado para nenhuma finalidade. Fonte: <a href="https://learn.microsoft.com/en-us/legal/microsoft-edge/privacy" target="_blank" rel="noopener">User data and privacy in Microsoft Edge</a>.</li>
+    <li><b>Google Chrome:</b> uma gravação do áudio vai para o Google, com o domínio do site, o idioma padrão do navegador e as configurações de idioma do site. Cookies não são enviados, e o áudio não vai diretamente para a página. O documento não informa por quanto tempo o áudio é guardado. Fonte: <a href="https://web.archive.org/web/20231228092454/https://www.google.com/chrome/privacy/whitepaper.html" target="_blank" rel="noopener">Google Chrome Privacy Whitepaper</a> (versão de 04/02/2021, cópia arquivada). É a declaração mais recente do Google que encontramos sobre esse recurso e pode não refletir o funcionamento atual.</li>
+  </ul>
+  <p>Em outro navegador que ofereça reconhecimento de fala, valem as regras do respectivo fabricante.</p>
+  <p><b>O que acontece na página.</b> O texto transcrito é tratado como uma pergunta digitada. As perguntas e as respostas ficam só na memória da página: não são enviadas aos nossos servidores, não são salvas e somem quando você fecha ou recarrega a página. Não usamos a voz para identificar você. A exceção são as simulações: se você pedir uma, por voz ou por texto, os novos valores ficam no rascunho da simulação, neste navegador (seção 4).</p>
+  <p><b>Leitura das respostas em voz alta.</b> Essa opção vem ligada, e a voz é produzida pelo navegador. A página dá preferência às vozes mais naturais, que costumam funcionar pela internet. Nesse caso, o texto da resposta, que pode conter números da sua simulação, pode ser enviado ao fabricante do navegador, <b>mesmo que você tenha digitado a pergunta</b>. Sobre o recurso de leitura em voz alta do Edge, a Microsoft declara que as vozes com "Online" no nome enviam o texto com um código aleatório, por conexão cifrada, e que o texto e o áudio gerado são apagados logo após a conversão. O documento do Google citado acima não trata desse ponto.</p>
+  <p><b>Como não usar a voz.</b> O Triguinho funciona normalmente sem ela:</p>
+  <ul>
+    <li><b>Digite a pergunta</b> na caixa de texto: o microfone não é ligado e nenhum áudio é enviado;</li>
+    <li>desmarque <b>Ler as respostas em voz alta</b>: as respostas aparecem só na tela, sem usar as vozes do navegador;</li>
+    <li>negue ou retire a permissão do microfone nas configurações do navegador, a qualquer momento. Isso também revoga o consentimento para o uso do microfone.</li>
+  </ul>
+
+  <h2>4. O que fica guardado no seu navegador</h2>
+  <ul>
+    <li><b>Sessão de login</b> (Firebase, em <i>IndexedDB</i>/<i>localStorage</i>): mantém você conectado.</li>
+    <li><b>Progresso dos cursos e quizzes</b> (<i>localStorage</i>).</li>
+    <li><b>Rascunho da simulação</b> e a <b>voz escolhida para o Triguinho</b> (<i>localStorage</i>).</li>
+  </ul>
+  <p>Esses itens são essenciais ao funcionamento e não identificam você para terceiros. Você pode apagá-los a qualquer momento nas configurações do navegador.</p>
+
+  <h2>5. Com quem compartilhamos</h2>
+  <p>Usamos operadores que tratam dados em nosso nome, com contratos e padrões de segurança próprios:</p>
+  <ul>
+    <li><b>Google (Firebase Authentication e Cloud Firestore)</b>: login e banco de dados. O banco fica na região <i>southamerica-east1</i> (São Paulo).</li>
+    <li><b>Vercel</b>: hospedagem do site e das funções de pagamento (servidores nos Estados Unidos).</li>
+    <li><b>GitHub Pages</b>: hospedagem do simulador, da Plataforma Patrimonial e do Triguinho.</li>
+    <li><b>Stripe</b>: processamento de pagamentos (Estados Unidos e outros países).</li>
+    <li><b>Google Fonts</b>: entrega das fontes do site; o seu navegador se conecta aos servidores do Google para baixá-las.</li>
+  </ul>
+  <p>Quando há transferência internacional (Vercel, GitHub, Stripe, Google), ela ocorre para a execução do contrato com você e com base em cláusulas contratuais e garantias oferecidas por esses fornecedores (art. 33).</p>
+  <p>Se você usar a voz no Triguinho, o <b>Google (no Chrome)</b> ou a <b>Microsoft (no Edge)</b> podem receber áudio e texto, como explica a seção 3. Esse serviço é fornecido pelo navegador que você usa, não por um operador nosso, e segue as regras do fabricante: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidade do Google</a> e <a href="https://www.microsoft.com/pt-br/privacy/privacystatement" target="_blank" rel="noopener">Política de Privacidade da Microsoft</a>. O processamento pode ocorrer fora do Brasil.</p>
+  <p>Podemos também fornecer dados a autoridades quando a lei ou uma ordem judicial exigir.</p>
+
+  <h2>6. Por quanto tempo guardamos</h2>
+  <ul>
+    <li>Dados da conta e do perfil: enquanto a conta existir, ou até você pedir a exclusão pelo e-mail da seção 1.</li>
+    <li>Registros de acesso: pelo menos 6 meses, conforme o Marco Civil da Internet (art. 15), e pelos prazos dos provedores de hospedagem.</li>
+    <li>Dados de pagamento e notas: pelo prazo exigido pela legislação fiscal (em geral, 5 anos).</li>
+    <li>Publicações na comunidade: até você apagá-las ou excluir a conta.</li>
+    <li>Conversa com o Triguinho: não guardamos. Ela fica na memória da página até você fechá-la ou recarregá-la. O que for enviado ao fabricante do navegador segue as regras dele (seção 3).</li>
+  </ul>
+
+  <h2>7. Seus direitos (art. 18)</h2>
+  <p>Você pode, a qualquer momento e sem custo:</p>
+  <ul>
+    <li>confirmar se tratamos seus dados e <b>acessá-los</b>;</li>
+    <li><b>corrigir</b> dados incompletos ou desatualizados (no menu <i>Meu perfil</i>);</li>
+    <li>pedir <b>anonimização, bloqueio ou eliminação</b> de dados desnecessários ou tratados em desconformidade;</li>
+    <li>receber seus dados em formato <b>portável</b>: peça pelo e-mail da seção 1;</li>
+    <li><b>excluir sua conta</b>: peça pelo e-mail da seção 1;</li>
+    <li>saber com quem compartilhamos seus dados e revogar consentimentos, quando for o caso;</li>
+    <li>apresentar reclamação à Autoridade Nacional de Proteção de Dados (<a href="https://www.gov.br/anpd" target="_blank" rel="noopener">ANPD</a>).</li>
+  </ul>
+  <p>Pedidos por e-mail são respondidos em até 15 dias. Podemos pedir confirmação de identidade para proteger a sua conta.</p>
+
+  <h2>8. Segurança</h2>
+  <p>Usamos conexão cifrada (HTTPS com HSTS), política de segurança de conteúdo, regras de acesso no banco de dados (cada pessoa só lê o próprio perfil), validação do login no servidor e limite de requisições. Nenhum sistema é 100% seguro: se ocorrer um incidente com risco relevante, comunicaremos você e a ANPD (art. 48).</p>
+
+  <h2>9. Crianças e adolescentes</h2>
+  <p>O Stratum Agro é destinado a maiores de 18 anos e não coleta intencionalmente dados de menores.</p>
+
+  <h2>10. Mudanças nesta política</h2>
+  <p>Se mudarmos algo relevante, avisaremos no site e, quando necessário, pediremos um novo aceite. A data de vigência fica no topo desta página.</p>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>© <span id="ano"></span> Stratum Agro</span>
+    <div class="foot-links"><a href="./">Início</a><a href="termos.html">Termos de Uso</a><a href="privacidade.html" aria-current="page">Privacidade</a></div>
+  </div>
+</footer>
+<script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+</body>
+</html>
