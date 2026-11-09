@@ -195,6 +195,37 @@ test('coleções não listadas ficam bloqueadas', async () => {
   await assertFails(setDoc(doc(user('u1', 'a@x.com'), 'qualquer/coisa'), { a: 1 }));
 });
 
+// ---------------- minha fazenda ----------------
+const lote = (id, c = {}) => ({ id, nome: 'Curral 3', dataEntrada: '2026-11-01', cabecas: 100, pesoEntrada: 400, custoCabeca: 4000, rendimento: 54, status: 'ativo', eventos: [], criadoEm: 1, atualizadoEm: 2, ...c });
+const item = (id, c = {}) => ({ id, titulo: 'Vermifugação', data: '2026-12-01', repetir: 'nenhuma', loteId: '', nota: '', feito: false, criadoEm: 1, atualizadoEm: 2, ...c });
+test('minha fazenda: só o dono lê e grava lotes e agenda', async () => {
+  const u1 = user('u1', 'a@x.com'), u2 = user('u2', 'b@x.com');
+  await assertSucceeds(setDoc(doc(u1, 'users/u1/campo_lotes/l1'), lote('l1')));
+  await assertSucceeds(getDoc(doc(u1, 'users/u1/campo_lotes/l1')));
+  await assertFails(getDoc(doc(u2, 'users/u1/campo_lotes/l1')));
+  await assertFails(setDoc(doc(u2, 'users/u1/campo_lotes/l2'), lote('l2')));
+  await assertFails(getDoc(doc(env.unauthenticatedContext().firestore(), 'users/u1/campo_lotes/l1')));
+  await assertSucceeds(setDoc(doc(u1, 'users/u1/campo_agenda/a1'), item('a1')));
+  await assertFails(getDoc(doc(u2, 'users/u1/campo_agenda/a1')));
+  await assertSucceeds(deleteDoc(doc(u1, 'users/u1/campo_agenda/a1')));
+});
+test('minha fazenda: admin não lê os dados de outra pessoa', async () => {
+  await seed('users/adm', docSite('adm@x.com', 'admin'));
+  await seed('users/u1/campo_lotes/l1', lote('l1'));
+  await assertFails(getDoc(doc(user('adm', 'adm@x.com'), 'users/u1/campo_lotes/l1')));
+});
+test('minha fazenda: esquema fechado e limites', async () => {
+  const u1 = user('u1', 'a@x.com');
+  await assertFails(setDoc(doc(u1, 'users/u1/campo_lotes/l1'), lote('l1', { extra: 1 })));
+  await assertFails(setDoc(doc(u1, 'users/u1/campo_lotes/l1'), lote('outro')));
+  await assertFails(setDoc(doc(u1, 'users/u1/campo_lotes/l1'), lote('l1', { nome: 'x'.repeat(81) })));
+  await assertFails(setDoc(doc(u1, 'users/u1/campo_lotes/l1'), lote('l1', { eventos: Array(1501).fill({ id: 'e' }) })));
+  await assertFails(setDoc(doc(u1, 'users/u1/campo_agenda/a1'), item('a1', { titulo: 'x'.repeat(121) })));
+  await assertFails(setDoc(doc(u1, 'users/u1/campo_agenda/a1'), item('a1', { atualizadoEm: 'ontem' })));
+  // exclusão que precisa chegar aos outros aparelhos
+  await assertSucceeds(setDoc(doc(u1, 'users/u1/campo_agenda/a1'), { id: 'a1', data: '2026-12-01', titulo: '', excluido: true, atualizadoEm: 3, criadoEm: 1 }));
+});
+
 // ---------------- comunidade do simulador ----------------
 const post = (uid) => ({ uid, autor: 'Fulano', tipo: 'pergunta', titulo: 'Frete', texto: 'Quanto custa?', criadoEm: now, respostas: 0 });
 const resp = (uid, postId = 'p1') => ({ postId, uid, autor: 'Ciclano', texto: 'Depende.', criadoEm: now });

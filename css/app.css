@@ -1,0 +1,129 @@
+/* Área logada: identidade própria.
+   Conceito: "stratum" = camadas. As faixas de terra do rodapé do painel e do menu
+   lembram o perfil do solo, e o início fala com o produtor pelo nome. */
+#app{padding:88px 0 60px}
+.app-grid{grid-template-columns:232px 1fr;gap:26px}
+
+/* ---------- menu ---------- */
+.app-side{padding:16px 12px 0;overflow:hidden;background:var(--card);top:84px}
+.app-user{padding:4px 6px 14px;margin-bottom:8px}
+.app-nav{gap:2px;padding-bottom:12px}
+.rail-label{font-size:.68rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted-2);padding:12px 10px 5px}
+.app-nav button,.app-nav a{display:flex;align-items:center;gap:10px;width:100%;padding:10px;border-radius:10px;color:var(--muted);
+  font-size:.9rem;font-weight:500;text-align:left;transition:var(--smooth);position:relative}
+.app-nav a svg.ic{width:18px;height:18px}
+.app-nav button:hover,.app-nav a:hover{background:rgba(34,197,94,.07);color:var(--text)}
+.app-nav button.active{background:rgba(34,197,94,.13);color:var(--text);font-weight:600}
+.app-nav button.active::before{content:'';position:absolute;left:-12px;top:8px;bottom:8px;width:4px;border-radius:0 4px 4px 0;background:var(--grad)}
+.app-nav .rail-ext{margin-left:auto;font-size:.72rem;color:var(--muted-2)}
+.rail-strata{display:block;width:calc(100% + 24px);margin:0 -12px;height:42px}
+
+/* ---------- painéis ---------- */
+.panel{padding:28px;position:relative}
+.panel>h3{font-size:1.45rem;font-weight:800;letter-spacing:-.02em}
+#panel-inicio{background:none;border:none;padding:0}
+
+/* ---------- início ---------- */
+.lida-hero{position:relative;overflow:hidden;border-radius:22px;padding:32px 32px 62px;color:#f3f7f4;border:1px solid var(--border-2);
+  background:linear-gradient(100deg,rgba(6,16,12,.96) 0%,rgba(6,16,12,.84) 52%,rgba(6,16,12,.42) 100%),url('../img/hero-boiada.webp') 72% 38%/cover no-repeat}
+.lida-data{font-size:.8rem;font-weight:600;color:#e8c35a}
+.lida-data::first-letter{text-transform:uppercase}
+.lida-hero h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin:6px 0 8px}
+.lida-hero p{max-width:540px;color:#d6e2db;font-size:1rem;margin-bottom:20px}
+.lida-acoes{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.lida-hero .btn-outline{color:#f3f7f4;border-color:rgba(243,247,244,.35);background:rgba(6,16,12,.35)}
+.lida-hero .hint{color:#fcd34d;margin-top:12px}
+.lida-strata{position:absolute;left:0;right:0;bottom:0;width:100%;height:46px;display:block}
+
+.conta-faixa{display:flex;flex-wrap:wrap;gap:0;margin:-30px 22px 0;position:relative;z-index:1;background:var(--card);border:1px solid var(--border-2);border-radius:16px;box-shadow:var(--shadow)}
+.conta-item{flex:1 1 150px;padding:13px 18px;border-right:1px solid var(--border);min-width:0}
+.conta-item:last-child{border-right:none}
+.conta-item .l{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-2)}
+.conta-item .v{font-size:1.02rem;font-weight:800;margin-top:2px}
+.conta-item .s{font-size:.76rem;color:var(--muted)}
+
+.lida-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:28px 2px 12px}
+.lida-h h3{font-size:1.1rem;font-weight:800;letter-spacing:-.01em;margin:0}
+.lida-h a,.lida-h button{font-size:.84rem;color:var(--primary-2);font-weight:600}
+[data-theme="light"] .lida-h a{color:var(--primary-d)}
+
+.ferramentas{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.ferramenta{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:6px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;transition:var(--smooth);color:var(--text);width:100%;font-size:1rem;position:relative}
+.ferramenta:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:var(--shadow)}
+.ferramenta .ico{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(34,197,94,.13);color:var(--primary-2);margin-bottom:4px}
+.ferramenta.ouro .ico{background:rgba(212,167,44,.16);color:var(--gold)}
+.ferramenta b{font-size:1rem}
+.ferramenta small{font-size:.84rem;color:var(--muted);line-height:1.4;font-weight:400}
+.ferramenta .selo{position:absolute;top:14px;right:14px;font-size:.66rem;font-weight:800;letter-spacing:.06em;color:#3a2b04;background:linear-gradient(135deg,#e8c35a,#d4a72c);padding:3px 8px;border-radius:999px}
+.barra{width:100%;height:6px;border-radius:99px;background:var(--border);overflow:hidden;margin-top:6px}
+.barra i{display:block;height:100%;width:0;background:var(--grad);border-radius:99px;transition:width .5s ease}
+
+.lida-duas{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;align-items:start}
+.lida-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px}
+.mercado{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 10px}
+.mercado .l{font-size:.72rem;color:var(--muted-2);font-weight:600}
+.mercado .v{font-size:1.08rem;font-weight:800;letter-spacing:-.01em}
+.mercado .r{font-size:.7rem;color:var(--muted-2)}
+.lida-fonte{font-size:.74rem;color:var(--muted-2);margin-top:12px}
+
+.passos{list-style:none;display:grid;gap:4px}
+.passos li{display:flex;align-items:center;gap:10px;padding:7px 2px;font-size:.92rem}
+.passos .tick{width:22px;height:22px;flex:none;border-radius:50%;border:2px solid var(--border-2);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:transparent}
+.passos li.ok .tick{background:var(--primary);border-color:var(--primary);color:#04120d}
+.passos li.ok span.t{color:var(--muted);text-decoration:line-through}
+.passos button,.passos a.ir{margin-left:auto;font-size:.8rem;font-weight:600;color:var(--primary-2);white-space:nowrap}
+[data-theme="light"] .passos button{color:var(--primary-d)}
+.salvos{list-style:none;margin-top:6px}
+.salvos li{border-top:1px solid var(--border);padding:8px 0;font-size:.88rem}
+.salvos a:hover{color:var(--primary-2)}
+
+/* ---------- perfil ---------- */
+.perfil-topo{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.perfil-topo .avatar{width:64px;height:64px;border-radius:18px;font-size:1.5rem}
+.perfil-topo h3{font-size:1.45rem;font-weight:800;letter-spacing:-.02em;margin:0}
+.perfil-topo p{color:var(--muted);font-size:.9rem}
+.perfil-form{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;max-width:640px}
+
+/* ---------- assinatura ---------- */
+.ass-status{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(212,167,44,.1));border:1px solid var(--border-2);border-radius:16px;padding:18px 20px;margin-bottom:18px}
+.ass-status .gr{display:flex;flex-wrap:wrap;gap:26px}
+.ass-status .l{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-2)}
+.ass-status .v{font-size:1.05rem;font-weight:800}
+.ass-planos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ass-plano{border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px;position:relative}
+.ass-plano.dest{border-color:var(--accent)}
+.ass-plano .tag2{position:absolute;top:-10px;left:18px;font-size:.66rem;font-weight:800;letter-spacing:.05em;color:#3a2b04;background:linear-gradient(135deg,#e8c35a,#d4a72c);padding:3px 9px;border-radius:999px}
+.ass-plano h4{font-size:1.02rem}
+.ass-plano .preco{font-size:1.6rem;font-weight:900;letter-spacing:-.02em}
+.ass-plano .preco small{font-size:.82rem;font-weight:500;color:var(--muted)}
+.ass-plano p{color:var(--muted);font-size:.86rem;flex:1;margin-bottom:8px}
+
+.badge.b{color:var(--gold)}
+
+/* ---------- celular: menu vira barra inferior ---------- */
+@media(max-width:960px){
+  #app{padding:78px 0 96px}
+  .app-grid{grid-template-columns:1fr;gap:0}
+  .app-side{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:58;border-radius:0;border-width:1px 0 0;padding:0;background:var(--bg-2)}
+  .app-user,.rail-label,.rail-strata,.app-nav .rail-ext{display:none!important}
+  .app-nav{flex-direction:row;overflow-x:auto;gap:0;padding:4px 4px calc(4px + env(safe-area-inset-bottom));scrollbar-width:none}
+  .app-nav::-webkit-scrollbar{display:none}
+  .app-nav button,.app-nav a{flex:0 0 76px;flex-direction:column;gap:3px;padding:7px 2px;font-size:.68rem;text-align:center;justify-content:center;line-height:1.15}
+  .app-nav button.active::before{left:18px;right:18px;top:-4px;bottom:auto;width:auto;height:3px;border-radius:0 0 3px 3px}
+  body.in-app .lgpd-banner{bottom:76px}
+  .lida-duas{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .lida-hero{padding:24px 20px 56px}
+  .conta-faixa{margin:-28px 10px 0}
+  .conta-item{flex:1 1 40%;border-right:none;border-bottom:1px solid var(--border)}
+  .ferramentas,.ass-planos,.perfil-form{grid-template-columns:1fr}
+  .panel{padding:20px}
+  .mercado{grid-template-columns:1fr 1fr}
+}
+
+/* A frase do início e o botão "Liberar o simulador" já explicam o bloqueio */
+#simLockMsg{display:none!important}
+
+/* Tema claro: a barra do topo acompanha, senão o logo some */
+[data-theme="light"] body.in-app header.nav{background:rgba(255,255,255,.92);border-bottom-color:var(--border)}

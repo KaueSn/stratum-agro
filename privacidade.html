@@ -19,7 +19,7 @@
   <div class="wrap nav-inner">
     <a href="./" class="logo"><img src="favicon.svg" alt="" width="32" height="32"> Stratum <span class="grad-text">Agro</span></a>
     <nav class="nav-links" aria-label="Principal">
-      <a href="./">Início</a><a href="./#planos">Planos</a><a href="termos.html">Termos</a>
+      <a href="./">Início</a><a href="estudos.html">Estudos</a><a href="./#planos">Planos</a><a href="termos.html">Termos</a>
     </nav>
     <a href="./" class="btn btn-outline">Voltar ao site</a>
   </div>
@@ -27,7 +27,7 @@
 
 <main class="doc">
   <h1>Política de Privacidade</h1>
-  <p class="meta">Vigente desde 03/11/2026 · Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018)</p>
+  <p class="meta">Vigente desde 08/11/2026 · Lei Geral de Proteção de Dados Pessoais (Lei 13.709/2018)</p>
 
   <p>Esta política explica quais dados pessoais o <b>Stratum Agro</b> trata quando você usa o site <b>stratum-agro.vercel.app</b>, o simulador e os materiais de apoio, para que servem, com quem são compartilhados e como você exerce seus direitos.</p>
 
@@ -39,8 +39,9 @@
     <tr><th>Situação</th><th>Dados</th><th>Finalidade</th><th>Base legal (art. 7º)</th></tr>
     <tr><td>Criação de conta e login</td><td>E-mail, senha (guardada pelo Firebase Authentication de forma cifrada; não temos acesso a ela), nome de exibição, foto e nome vindos do Google quando você escolhe esse login</td><td>Identificar você e dar acesso à conta</td><td>Execução de contrato (V)</td></tr>
     <tr><td>Perfil</td><td>Nome, telefone e bio, se você preencher; plano, cargo, situação da assinatura e datas</td><td>Exibir seu perfil e liberar os recursos do seu plano</td><td>Execução de contrato (V)</td></tr>
-    <tr><td>Uso das ferramentas</td><td>Cenários salvos no simulador, publicações e respostas na comunidade</td><td>Guardar o que você criou e mostrar na sua conta</td><td>Execução de contrato (V)</td></tr>
+    <tr><td>Uso das ferramentas</td><td>Cenários salvos no simulador, pastas de estudo, caderno de lotes (pesagens, mortes, custos e vendas), agenda da fazenda, publicações e respostas na comunidade</td><td>Guardar o que você criou e mostrar na sua conta</td><td>Execução de contrato (V)</td></tr>
     <tr><td>Voz no Triguinho (opcional)</td><td>Áudio captado enquanto o microfone está ligado e o texto transcrito; texto das respostas, se a leitura em voz alta usar uma voz on-line. Veja a seção 3</td><td>Transformar a sua fala em pergunta e ler as respostas em voz alta</td><td>Consentimento (I) para o microfone, dado ao clicar e permitir o acesso; execução de contrato (V) para a leitura em voz alta</td></tr>
+    <tr><td>Aceite dos termos</td><td>Data e versão dos Termos e desta Política aceitos no cadastro</td><td>Comprovar o aceite</td><td>Cumprimento de obrigação legal e exercício regular de direitos (II e VI)</td></tr>
     <tr><td>Pagamento</td><td>E-mail e identificador da assinatura na Stripe. <b>Os dados do cartão são digitados diretamente na Stripe</b> e nunca passam pelo Stratum Agro</td><td>Cobrar e controlar a assinatura</td><td>Execução de contrato (V) e obrigação legal (II)</td></tr>
     <tr><td>Segurança</td><td>Endereço IP e informações técnicas do navegador, nos registros da hospedagem e dos serviços de login; contagem de requisições por IP por 1 minuto, só na memória do servidor</td><td>Evitar fraude, abuso e ataques automatizados</td><td>Legítimo interesse (IX) e obrigação legal do Marco Civil (II)</td></tr>
   </table></div>
@@ -67,8 +68,9 @@
   <h2>4. O que fica guardado no seu navegador</h2>
   <ul>
     <li><b>Sessão de login</b> (Firebase, em <i>IndexedDB</i>/<i>localStorage</i>): mantém você conectado.</li>
-    <li><b>Progresso dos cursos e quizzes</b> (<i>localStorage</i>).</li>
+    <li><b>Progresso dos cursos e quizzes</b>, <b>pastas de estudo</b>, <b>caderno de lotes e agenda</b> (também sem login, para funcionar sem internet) e a sua resposta ao aviso de privacidade (<i>localStorage</i>).</li>
     <li><b>Rascunho da simulação</b> e a <b>voz escolhida para o Triguinho</b> (<i>localStorage</i>).</li>
+    <li><b>Cópia temporária dos indicadores econômicos</b> (<i>sessionStorage</i>, por 30 minutos), para não repetir consultas ao Banco Central e ao IBGE.</li>
   </ul>
   <p>Esses itens são essenciais ao funcionamento e não identificam você para terceiros. Você pode apagá-los a qualquer momento nas configurações do navegador.</p>
 
@@ -80,6 +82,7 @@
     <li><b>GitHub Pages</b>: hospedagem do simulador, da Plataforma Patrimonial e do Triguinho.</li>
     <li><b>Stripe</b>: processamento de pagamentos (Estados Unidos e outros países).</li>
     <li><b>Google Fonts</b>: entrega das fontes do site; o seu navegador se conecta aos servidores do Google para baixá-las.</li>
+    <li><b>Banco Central do Brasil e IBGE</b>: na página de Estudos, o seu navegador consulta diretamente as APIs públicas desses órgãos. Nenhum dado de cadastro é enviado.</li>
   </ul>
   <p>Quando há transferência internacional (Vercel, GitHub, Stripe, Google), ela ocorre para a execução do contrato com você e com base em cláusulas contratuais e garantias oferecidas por esses fornecedores (art. 33).</p>
   <p>Se você usar a voz no Triguinho, o <b>Google (no Chrome)</b> ou a <b>Microsoft (no Edge)</b> podem receber áudio e texto, como explica a seção 3. Esse serviço é fornecido pelo navegador que você usa, não por um operador nosso, e segue as regras do fabricante: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidade do Google</a> e <a href="https://www.microsoft.com/pt-br/privacy/privacystatement" target="_blank" rel="noopener">Política de Privacidade da Microsoft</a>. O processamento pode ocorrer fora do Brasil.</p>
@@ -87,7 +90,7 @@
 
   <h2>6. Por quanto tempo guardamos</h2>
   <ul>
-    <li>Dados da conta e do perfil: enquanto a conta existir, ou até você pedir a exclusão pelo e-mail da seção 1.</li>
+    <li>Dados da conta e do perfil: enquanto a conta existir. Ao excluir a conta, o perfil é apagado na hora.</li>
     <li>Registros de acesso: pelo menos 6 meses, conforme o Marco Civil da Internet (art. 15), e pelos prazos dos provedores de hospedagem.</li>
     <li>Dados de pagamento e notas: pelo prazo exigido pela legislação fiscal (em geral, 5 anos).</li>
     <li>Publicações na comunidade: até você apagá-las ou excluir a conta.</li>
@@ -100,15 +103,15 @@
     <li>confirmar se tratamos seus dados e <b>acessá-los</b>;</li>
     <li><b>corrigir</b> dados incompletos ou desatualizados (no menu <i>Meu perfil</i>);</li>
     <li>pedir <b>anonimização, bloqueio ou eliminação</b> de dados desnecessários ou tratados em desconformidade;</li>
-    <li>receber seus dados em formato <b>portável</b>: peça pelo e-mail da seção 1;</li>
-    <li><b>excluir sua conta</b>: peça pelo e-mail da seção 1;</li>
+    <li>receber seus dados em formato <b>portável</b>: use <i>Meu perfil → Baixar meus dados</i>;</li>
+    <li><b>excluir sua conta</b>: use <i>Meu perfil → Excluir minha conta</i>;</li>
     <li>saber com quem compartilhamos seus dados e revogar consentimentos, quando for o caso;</li>
     <li>apresentar reclamação à Autoridade Nacional de Proteção de Dados (<a href="https://www.gov.br/anpd" target="_blank" rel="noopener">ANPD</a>).</li>
   </ul>
   <p>Pedidos por e-mail são respondidos em até 15 dias. Podemos pedir confirmação de identidade para proteger a sua conta.</p>
 
   <h2>8. Segurança</h2>
-  <p>Usamos conexão cifrada (HTTPS com HSTS), política de segurança de conteúdo, regras de acesso no banco de dados (cada pessoa só lê o próprio perfil), validação do login no servidor e limite de requisições. Nenhum sistema é 100% seguro: se ocorrer um incidente com risco relevante, comunicaremos você e a ANPD (art. 48).</p>
+  <p>Usamos conexão cifrada (HTTPS com HSTS), política de segurança de conteúdo, regras de acesso no banco de dados (cada pessoa só lê o próprio perfil), validação do login no servidor, limite de requisições e proteção contra robôs no cadastro. Nenhum sistema é 100% seguro: se ocorrer um incidente com risco relevante, comunicaremos você e a ANPD (art. 48).</p>
 
   <h2>9. Crianças e adolescentes</h2>
   <p>O Stratum Agro é destinado a maiores de 18 anos e não coleta intencionalmente dados de menores.</p>
@@ -120,7 +123,7 @@
 <footer class="foot">
   <div class="wrap foot-row">
     <span>© <span id="ano"></span> Stratum Agro</span>
-    <div class="foot-links"><a href="./">Início</a><a href="termos.html">Termos de Uso</a><a href="privacidade.html" aria-current="page">Privacidade</a></div>
+    <div class="foot-links"><a href="./">Início</a><a href="estudos.html">Estudos</a><a href="termos.html">Termos de Uso</a><a href="privacidade.html" aria-current="page">Privacidade</a></div>
   </div>
 </footer>
 <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>

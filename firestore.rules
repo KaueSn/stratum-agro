@@ -98,6 +98,32 @@ service cloud.firestore {
       allow update: if dono() && proAtivo() && projetoValido(request.resource.data)
         && request.resource.data.criadoEm == resource.data.criadoEm;
     }
+
+    // Minha fazenda: caderno do lote e agenda. Dados só do dono; um documento por
+    // lote ou compromisso, com esquema fechado e histórico limitado.
+    function donoCampo() { return signedIn() && request.auth.uid == uid; }
+    function textoAte(d, k, max) { return !(k in d) || (d[k] is string && d[k].size() <= max); }
+    match /campo_lotes/{id} {
+      function loteValido(d) {
+        return d.keys().hasOnly(['id', 'criadoEm', 'atualizadoEm', 'status', 'eventos', 'excluido', 'nome', 'dataEntrada', 'cabecas',
+               'pesoEntrada', 'custoCabeca', 'diasPlan', 'pesoAlvo', 'diariaPlan', 'rendimento', 'precoVenda'])
+          && d.id == id && d.atualizadoEm is number
+          && textoAte(d, 'nome', 80) && textoAte(d, 'dataEntrada', 10) && textoAte(d, 'status', 12)
+          && d.eventos is list && d.eventos.size() <= 1500;
+      }
+      allow read, delete: if donoCampo();
+      allow create, update: if donoCampo() && loteValido(request.resource.data);
+    }
+    match /campo_agenda/{id} {
+      function itemValido(d) {
+        return d.keys().hasOnly(['id', 'criadoEm', 'atualizadoEm', 'feito', 'excluido', 'titulo', 'data', 'repetir', 'loteId', 'nota'])
+          && d.id == id && d.atualizadoEm is number
+          && textoAte(d, 'titulo', 120) && textoAte(d, 'data', 10) && textoAte(d, 'repetir', 12)
+          && textoAte(d, 'loteId', 40) && textoAte(d, 'nota', 300);
+      }
+      allow read, delete: if donoCampo();
+      allow create, update: if donoCampo() && itemValido(request.resource.data);
+    }
     }
 
     // Configurações públicas da plataforma (ex.: habilitar pagamentos)

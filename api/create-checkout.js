@@ -3,12 +3,13 @@
 import { stripe, preflight, readBody, requireUser, fail, PRICE_MENSAL, PRICE_ANUAL, SITE_URL } from '../lib/stripe.js';
 
 export default async function handler(req, res) {
-  if (preflight(req, res)) return;
+  if (await preflight(req, res)) return;
   const user = await requireUser(req, res);
   if (!user) return;
 
   const { plan } = readBody(req);
   if (plan !== 'mensal' && plan !== 'anual') return fail(res, 400, 'Plano inválido.');
+
   const price = plan === 'anual' ? PRICE_ANUAL : PRICE_MENSAL;
 
   try {

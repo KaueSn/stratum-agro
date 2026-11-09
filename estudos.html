@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Estudos: Brasil e agronegócio | Stratum Agro</title>
+<meta name="description" content="Indicadores ao vivo do Banco Central e do IBGE, panorama do agronegócio e como juros, câmbio, safra e ciclo pecuário se ligam à margem do confinamento.">
+<link rel="canonical" href="https://stratum-agro.vercel.app/estudos.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#06100c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Estudos Stratum Agro: o Brasil e o agro em um só painel">
+<meta property="og:description" content="Selic, dólar, inflação, safra e abate ao vivo, com a explicação de como cada um afeta a pecuária.">
+<meta property="og:image" content="https://stratum-agro.vercel.app/img/hero-boiada.webp">
+<meta property="og:url" content="https://stratum-agro.vercel.app/estudos.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/estudos.css">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js" defer></script>
+</head>
+<body>
+<div class="es-progress" id="esProgress" aria-hidden="true"></div>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="./" class="logo"><img src="favicon.svg" alt="" width="32" height="32"> Stratum <span class="grad-text">Agro</span></a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="./">Início</a>
+      <a href="#painel">Ao vivo</a>
+      <a href="#mapa">Correlações</a>
+      <a href="#panorama">Panorama</a>
+      <a href="./#planos">Planos</a>
+    </nav>
+    <button class="btn btn-outline" id="btnPastas" aria-haspopup="dialog" aria-controls="pastasDrawer">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></svg>
+      Minhas pastas <span class="es-count" id="pastasCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="conteudo">
+  <section class="es-hero">
+    <div class="wrap">
+      <span class="es-pill"><span class="es-dot" id="esLiveDot"></span> <span id="esLiveTxt">Conectando às fontes oficiais…</span></span>
+      <h1>O Brasil e o agro <span class="grad-text">em um só painel</span></h1>
+      <p class="es-lead">Indicadores ao vivo do Banco Central e do IBGE, os fatos que movem o setor e, principalmente, <b>como cada número chega à margem do seu confinamento</b>. Salve o que importa em pastas e volte quando quiser.</p>
+      <div class="es-toolbar">
+        <label class="es-search"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+          <input type="search" id="esBusca" placeholder="Buscar: juros, dólar, milho, sanidade…" aria-label="Buscar nos estudos"></label>
+        <div class="es-filtros" id="esFiltros" role="group" aria-label="Filtrar por tema"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="es-block" id="painel" aria-labelledby="tPainel">
+    <div class="wrap">
+      <div class="es-head">
+        <h2 id="tPainel">Painel ao vivo</h2>
+        <p>Valores buscados agora nas APIs públicas oficiais. Cada card mostra a data de referência e o link da fonte.</p>
+      </div>
+      <div class="es-grid-ind" id="esIndicadores"></div>
+      <p class="es-nota">Arroba do boi gordo e bezerro: o CEPEA/Esalq licencia esses indicadores apenas para uso não comercial, por isso não os reproduzimos. Consulte direto: <a href="https://www.cepea.org.br/br/indicador/boi-gordo.aspx" target="_blank" rel="noopener">boi gordo</a> · <a href="https://www.cepea.org.br/br/indicador/bezerro.aspx" target="_blank" rel="noopener">bezerro</a> · <a href="https://www.cepea.org.br/br/indicador/milho.aspx" target="_blank" rel="noopener">milho</a>.</p>
+    </div>
+  </section>
+
+  <section class="es-block" id="mapa" aria-labelledby="tMapa">
+    <div class="wrap">
+      <div class="es-head">
+        <h2 id="tMapa">Mapa de correlações</h2>
+        <p>Tudo converge para a margem da operação. Toque em um fator para entender o efeito e o que acompanhar.</p>
+      </div>
+      <div class="es-mapa" id="esMapa"></div>
+      <div class="es-grid-cor" id="esCorrelacoes"></div>
+    </div>
+  </section>
+
+  <section class="es-block" id="panorama" aria-labelledby="tPanorama">
+    <div class="wrap">
+      <div class="es-head">
+        <h2 id="tPanorama">Panorama: o que aconteceu e por que importa</h2>
+        <p>Fatos recentes com data e fonte oficial. Atualizado em <span id="esAtualizado"></span>.</p>
+      </div>
+      <ol class="es-timeline" id="esPanorama"></ol>
+    </div>
+  </section>
+
+  <section class="es-block">
+    <div class="wrap">
+      <div class="es-cta">
+        <div>
+          <h2>Transforme o cenário em decisão</h2>
+          <p>Com o CDI e o dólar de hoje em mente, simule o seu lote, compare 5 estados e veja se o confinamento supera a renda fixa.</p>
+        </div>
+        <div class="es-cta-btns">
+          <a class="btn btn-primary" href="./#calculadora">Fazer uma conta rápida</a>
+          <a class="btn btn-outline" href="./#planos">Ver planos</a>
+        </div>
+      </div>
+      <p class="es-nota">Conteúdo informativo. Não constitui recomendação de investimento.</p>
+    </div>
+  </section>
+</main>
+
+<!-- Pastas -->
+<div class="es-drawer" id="pastasDrawer" role="dialog" aria-modal="true" aria-labelledby="pastasTitulo" hidden>
+  <div class="es-drawer-card">
+    <div class="es-drawer-head">
+      <h2 id="pastasTitulo">Minhas pastas</h2>
+      <button class="es-x" data-fechar aria-label="Fechar">×</button>
+    </div>
+    <p class="es-sync" id="pastasSync">Salvo neste aparelho.</p>
+    <form class="es-nova" id="formNovaPasta">
+      <label for="novaPastaNome" class="sr">Nome da nova pasta</label>
+      <input id="novaPastaNome" maxlength="40" placeholder="Nova pasta (ex.: Juros e crédito)">
+      <button class="btn btn-primary" type="submit">Criar</button>
+    </form>
+    <div id="pastasLista"></div>
+  </div>
+</div>
+
+<!-- Escolher pasta -->
+<div class="es-drawer" id="salvarDialog" role="dialog" aria-modal="true" aria-labelledby="salvarTitulo" hidden>
+  <div class="es-drawer-card es-small">
+    <div class="es-drawer-head">
+      <h2 id="salvarTitulo">Salvar em…</h2>
+      <button class="es-x" data-fechar aria-label="Fechar">×</button>
+    </div>
+    <p class="es-salvar-item" id="salvarItem"></p>
+    <div id="salvarOpcoes" class="es-opcoes"></div>
+    <form class="es-nova" id="formSalvarNova">
+      <label for="salvarNovaNome" class="sr">Criar pasta e salvar</label>
+      <input id="salvarNovaNome" maxlength="40" placeholder="Ou crie uma pasta nova">
+      <button class="btn btn-outline" type="submit">Criar e salvar</button>
+    </form>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>© <span id="ano"></span> Stratum Agro · Dados: Banco Central do Brasil, IBGE, MAPA</span>
+    <div class="foot-links"><a href="./">Início</a><a href="termos.html">Termos de Uso</a><a href="privacidade.html">Privacidade</a></div>
+  </div>
+</footer>
+<div id="toasts" aria-live="polite"></div>
+
+<script src="js/estudos-data.js" defer></script>
+<script src="js/indicadores.js" defer></script>
+<script src="js/pastas.js" defer></script>
+<script src="js/lgpd.js" defer></script>
+<script src="js/estudos.js" defer></script>
+</body>
+</html>

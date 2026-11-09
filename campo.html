@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Minha fazenda | Stratum Agro</title>
+<meta name="description" content="Caderno do lote, agenda da fazenda e calculadoras de bolso para o dia a dia da pecuária. Funciona sem internet.">
+<link rel="canonical" href="https://stratum-agro.vercel.app/campo.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="manifest" href="manifest-campo.webmanifest">
+<meta name="theme-color" content="#06100c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/campo.css">
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js" defer></script>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="./" class="logo"><img src="favicon.svg" alt="" width="32" height="32"> Stratum <span class="grad-text">Agro</span></a>
+    <div class="cp-topo">
+      <button class="btn btn-outline" id="cpInstalar" type="button" hidden>Instalar no celular</button>
+      <span class="cp-status" id="cpStatus" role="status">Salvo neste aparelho</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap cp-main">
+  <section class="cp-hero">
+    <div>
+      <h1>Minha fazenda</h1>
+      <p id="cpResumo">O caderno do campo: o que aconteceu no lote, o que vem pela frente e as contas do dia.</p>
+    </div>
+    <svg class="cp-strata" viewBox="0 0 900 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 16C150 2 300 26 450 14s300-8 450 3v29H0z" fill="#22c55e" opacity=".3"/><path d="M0 27c170-12 310 12 470 2s290-9 430 1v16H0z" fill="#d4a72c" opacity=".4"/><path d="M0 37c160-8 320 8 480 1s300-5 420 1v7H0z" fill="#7c5a2e" opacity=".8"/></svg>
+  </section>
+
+  <nav class="cp-tabs" role="tablist" aria-label="Seções">
+    <button role="tab" id="tab-lotes" data-aba="lotes" aria-controls="aba-lotes">Lotes</button>
+    <button role="tab" id="tab-agenda" data-aba="agenda" aria-controls="aba-agenda">Agenda <span class="cp-bolha" id="cpBolha" hidden></span></button>
+    <button role="tab" id="tab-calculadoras" data-aba="calculadoras" aria-controls="aba-calculadoras">Calculadoras</button>
+  </nav>
+
+  <section id="aba-lotes" role="tabpanel" aria-labelledby="tab-lotes" tabindex="-1"></section>
+  <section id="aba-agenda" role="tabpanel" aria-labelledby="tab-agenda" tabindex="-1" hidden></section>
+  <section id="aba-calculadoras" role="tabpanel" aria-labelledby="tab-calculadoras" tabindex="-1" hidden></section>
+
+  <p class="cp-aviso">Estimativas feitas com os dados que você informa. Não constituem recomendação de investimento nem orientação veterinária ou zootécnica.</p>
+</main>
+
+<dialog id="cpDialog" aria-labelledby="cpDlgTitulo">
+  <form method="dialog" id="cpForm" novalidate>
+    <div class="cp-dlg-h"><h2 id="cpDlgTitulo"></h2><button type="button" class="cp-x" id="cpFechar" aria-label="Fechar">×</button></div>
+    <div id="cpCampos" class="cp-campos"></div>
+    <p class="cp-erro" id="cpErro" role="alert"></p>
+    <div class="cp-dlg-a"><button type="button" class="btn btn-outline" id="cpCancelar">Cancelar</button><button type="submit" class="btn btn-primary" id="cpEnviar">Salvar</button></div>
+  </form>
+</dialog>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <span>© <span id="ano"></span> Stratum Agro</span>
+    <div class="foot-links"><a href="./">Início</a><a href="estudos.html">Estudos</a><a href="termos.html">Termos de Uso</a><a href="privacidade.html">Privacidade</a></div>
+  </div>
+</footer>
+<div id="toasts" aria-live="polite"></div>
+
+<script src="js/lgpd.js" defer></script>
+<script src="js/campo-calc.js" defer></script>
+<script src="js/campo-dados.js" defer></script>
+<script src="js/campo-ui.js" defer></script>
+<script src="js/campo-lotes.js" defer></script>
+<script src="js/campo-agenda.js" defer></script>
+<script src="js/campo-calculadoras.js" defer></script>
+<script src="js/campo-app.js" defer></script>
+</body>
+</html>

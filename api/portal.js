@@ -3,7 +3,7 @@
 import { stripe, preflight, requireUser, fail, findCustomerId, SITE_URL } from '../lib/stripe.js';
 
 export default async function handler(req, res) {
-  if (preflight(req, res)) return;
+  if (await preflight(req, res)) return;
   const user = await requireUser(req, res);
   if (!user) return;
 
